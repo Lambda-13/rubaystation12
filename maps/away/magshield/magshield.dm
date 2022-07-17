@@ -146,7 +146,7 @@
 	author = "Terraforms Industrial"
 	title = "Standard operating procedures for Planetary Shield Orbital Station"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}

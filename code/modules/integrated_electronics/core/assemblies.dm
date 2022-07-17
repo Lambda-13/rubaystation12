@@ -161,7 +161,7 @@
 
 /obj/item/device/electronic_assembly/proc/closed_interact(mob/user)
 	var/HTML = list()
-	HTML += "<html><head><title>[src.name]</title></head><body>"
+	HTML += "<html><meta charset='utf-8'><head><title>[src.name]</title></head><body>"
 	HTML += "<br><a href='?src=\ref[src];refresh=1'>\[Refresh\]</a>"
 	HTML += "<br><br>"
 
@@ -192,7 +192,7 @@
 	var/total_complexity = return_total_complexity()
 	var/list/HTML = list()
 
-	HTML += "<html><head><title>[name]</title></head><body>"
+	HTML += "<html><meta charset='utf-8'><head><title>[name]</title></head><body>"
 
 	HTML += "<a href='?src=\ref[src]'>\[Refresh\]</a>  |  <a href='?src=\ref[src];rename=1'>\[Rename\]</a><br>"
 	HTML += "[total_part_size]/[max_components] space taken up in the assembly.<br>"

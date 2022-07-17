@@ -38,13 +38,13 @@
 	var/dat
 
 	if (src.operating)
-		dat = {"
+		dat = {"<meta charset='utf-8'>
 <TT>Building [src.being_built.name].<BR>
 Please wait until completion...</TT><BR>
 <BR>
 "}
 	else
-		dat = {"
+		dat = {"<meta charset='utf-8'>
 <B>Metal Amount:</B> [min(150000, src.metal_amount)] cm<sup>3</sup> (MAX: 150,000)<BR><HR>
 <BR>
 <A href='?src=\ref[src];make=1'>Left Arm (25,000 cc metal.)<BR>

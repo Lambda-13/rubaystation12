@@ -249,8 +249,8 @@
 					url = config.wiki_url + "/index.php?title=" + url
 			else	//Or just making full link in url
 				url = config.wiki_url + "?title=" + url
-		dat = {"
-			<html>
+		dat = {"<meta charset='utf-8'>
+			<html><meta charset='utf-8'>
 				<head>
 				</head>
 				<body>

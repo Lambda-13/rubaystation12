@@ -44,7 +44,7 @@ var/global/floorIsLava = 0
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	var/body = "<html><head><title>Options for [M.key]</title></head>"
+	var/body = "<html><meta charset='utf-8'><head><title>Options for [M.key]</title></head>"
 	body += "<body>Options panel for <b>[M]</b>"
 	var/last_ckey = LAST_CKEY(M)
 	if(M.client)
@@ -655,7 +655,7 @@ var/global/floorIsLava = 0
 /datum/admins/proc/Game()
 	if(!check_rights(0))	return
 
-	var/dat = {"
+	var/dat = {"<meta charset='utf-8'>
 		<center><B>Game Panel</B></center><hr>\n
 		<A href='?src=\ref[src];c_mode=1'>Change Game Mode</A><br>
 		"}
@@ -1532,7 +1532,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			data += "[item.name] - <a href='?_src_=holder;AdminFaxView=\ref[item]'>view message</a><br>"
 	else
 		data += "<center>No faxes yet.</center>"
-	show_browser(usr, "<HTML><HEAD><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
+	show_browser(usr, "<html><meta charset='utf-8'><HEAD><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
 
 /datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 

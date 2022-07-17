@@ -30,8 +30,8 @@
 /obj/machinery/computer/area_atmos/attack_hand(mob/user)
 	if(..(user))
 		return
-	var/dat = {"
-	<html>
+	var/dat = {"<meta charset='utf-8'>
+	<html><meta charset='utf-8'>
 		<head>
 			<style type="text/css">
 				a.green:link { color:#00cc00; }

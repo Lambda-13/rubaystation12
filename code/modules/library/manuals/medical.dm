@@ -4,7 +4,7 @@
 	author = "Medical Journal, volume 3"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Cloning Techniques of the 26th Century"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
@@ -100,7 +100,7 @@
 
 /obj/item/book/manual/medical_diagnostics_manual/New()
 	..()
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}

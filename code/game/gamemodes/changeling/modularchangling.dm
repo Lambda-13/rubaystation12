@@ -175,7 +175,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 		for(var/P in powers)
 			powerinstances += new P()
 
-	var/dat = "<html><head><title>Changling Evolution Menu</title></head>"
+	var/dat = "<html><meta charset='utf-8'><head><title>Changling Evolution Menu</title></head>"
 
 	//javascript, the part that does most of the work~
 	dat += {"
@@ -481,4 +481,3 @@ var/global/list/datum/power/changeling/powerinstances = list()
 		call(M.current, Thepower.verbpath)()
 	else if(remake_verbs)
 		M.current.make_changeling()
-

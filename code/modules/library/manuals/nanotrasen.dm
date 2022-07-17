@@ -12,7 +12,7 @@
 	author = "Farmer John"
 	title = "The Diona Harvest - From Seed to Market"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -49,7 +49,7 @@
 	author = "Dr. L. Ight"
 	title = "Research and Development 101"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
@@ -116,7 +116,7 @@
 	icon_state = "excavation"
 	author = "Professor Patrick Mason, Curator of the Antiquities Museum on Ichar VII"
 	title = "Out on the Dig"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -229,7 +229,7 @@
 	icon_state = "analysis"
 	author = "Winton Rice, Chief Mass Spectrometry Technician at the Institute of Applied Sciences on Arcadia"
 	title = "High powered mass spectrometry, a comprehensive guide"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -300,7 +300,7 @@
 	icon_state = "anomaly"
 	author = "Doctor Martin Boyle, Director Research at the Lower Hydrolian Sector Listening Array"
 	title = "Spectroscopy: Analysing the Anomalies of the Cosmos"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -325,7 +325,7 @@
 	icon_state = "chemistry"
 	author = "Jasper Pascal, Senior Lecturer in Materials Analysis at the University of Jol'Nar"
 	title = "Materials Analysis and the Chemical Implications"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -352,7 +352,7 @@
 	icon_state = "triangulate"
 	author = "Norman York, formerly of the Tyrolion Institute on Titan"
 	title = "Anomalous Materials and Energies"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -430,7 +430,7 @@
 	icon_state = "stasis"
 	author = "Elvin Schmidt"
 	title = "Cellular Suspension, the New Cryogenics?"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}

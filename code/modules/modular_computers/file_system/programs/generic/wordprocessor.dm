@@ -40,7 +40,7 @@
 		return TOPIC_HANDLED
 
 	if(href_list["PRG_txtrpeview"])
-		show_browser(usr,"<HTML><HEAD><TITLE>[open_file]</TITLE></HEAD>[digitalPencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
+		show_browser(usr,"<html><meta charset='utf-8'><HEAD><TITLE>[open_file]</TITLE></HEAD>[digitalPencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
 		return TOPIC_HANDLED
 
 	if(href_list["PRG_taghelp"])

@@ -4,7 +4,7 @@
 	author = "Victoria Ponsonby"
 	title = "Chef Recipes"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -63,7 +63,7 @@
 	author = "Sir John Rose"
 	title = "Barman Recipes"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -118,7 +118,7 @@
 	author = "The Company"
 	title = "The Film Noir: Proper Procedures for Investigations"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -161,7 +161,7 @@
 	author = "Syndicate"
 	title = "Fission Mailed: Nuclear Sabotage 101"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
@@ -212,7 +212,7 @@
 	author = "John Titor"
 	title = "Psychonetics"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}

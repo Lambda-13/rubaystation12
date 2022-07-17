@@ -291,7 +291,7 @@
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.real_name
 
-	var/list/header = list("<html><body><center>")
+	var/list/header = list("<html><meta charset='utf-8'><body><center>")
 	header += "<b>Welcome, [name].<br></b>"
 	header += "Round Duration: [roundduration2text()]<br>"
 

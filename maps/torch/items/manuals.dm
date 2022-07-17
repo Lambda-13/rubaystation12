@@ -7,9 +7,9 @@
 
 /obj/item/book/manual/solgov_law/Initialize()
 	. = ..()
-	dat = {"
+	dat = {"<meta charset='utf-8'>
 
-		<html><head>
+		<html><meta charset='utf-8'><head>
 		</head>
 
 		<body>
@@ -30,9 +30,9 @@
 
 /obj/item/book/manual/military_law/Initialize()
 	. = ..()
-	dat = {"
+	dat = {"<meta charset='utf-8'>
 
-		<html><head>
+		<html><meta charset='utf-8'><head>
 		</head>
 
 		<body>
@@ -52,9 +52,9 @@
 
 /obj/item/book/manual/sol_sop/Initialize()
 	. = ..()
-	dat = {"
+	dat = {"<meta charset='utf-8'>
 
-		<html><head>
+		<html><meta charset='utf-8'><head>
 		</head>
 
 		<body>

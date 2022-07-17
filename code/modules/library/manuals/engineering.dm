@@ -11,7 +11,7 @@
 	author = "XISC"
 	title = "Cyborgs for Dummies"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
@@ -302,7 +302,7 @@
 
 /obj/item/book/manual/engineering_particle_accelerator/New()
 	..()
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -368,7 +368,7 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Singularity Safety in Special Circumstances"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -419,7 +419,7 @@
 	author = "Randall Varn, Einstein Engines Senior Mechanic"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "APLU \"Ripley\" Construction and Operation Manual"
 
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -494,7 +494,7 @@
 	icon_state = "pipingbook"
 	author = "Maria Crash, Senior Atmospherics Technician"
 	title = "Pipes and You: Getting To Know Your Scary Tools"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -602,7 +602,7 @@
 	icon_state = "evabook"
 	author = "Maria Crash, Senior Atmospherics Technician"
 	title = "EVA Gear and You: Not Spending All Day Inside"
-	dat = {"<html>
+	dat = {"<meta charset='utf-8'><html><meta charset='utf-8'>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}

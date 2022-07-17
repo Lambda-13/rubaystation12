@@ -27,7 +27,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	send_rsc(usr,'code/js/view_variables.js', "view_variables.js")
 
 	var/html = {"
-		<html>
+		<html><meta charset='utf-8'>
 		<head>
 			<script src='view_variables.js'></script>
 			<title>[D] (\ref[D] - [D.type])</title>

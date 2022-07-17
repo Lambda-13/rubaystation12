@@ -377,7 +377,7 @@ nanoui is used to open and update nano browser uis
 
 	return {"
 <!DOCTYPE html>
-<html>
+<html><meta charset='utf-8'>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
