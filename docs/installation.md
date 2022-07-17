@@ -1,34 +1,34 @@
-### GETTING THE CODE
+### СКАЧИВАЕМ КОД
 
-The simplest way to obtain the code is using Github's .zip feature.
+Самый простой способ получить код — скачать .zip архив.
 
-Click [here](https://github.com/Baystation12/Baystation12/archive/dev.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
+Жми [сюда](https://github.com/Lambda-13/rubaystation12/archive/refs/heads/dev.zip) для скачивания кода с последними изменениями.
 
-The more complicated and easier to update method is using git.  You'll need to download git or some client from [here](http://git-scm.com/).  When that's installed, right click in any folder and click on "Git Bash".  When that opens, type in:
+Более сложный но простой для обновления кода — скачивание через git. Вам нужно скачать git клиент [отсюда](http://git-scm.com/). После установки, жми правой кнопкой мыши на любую папку и выбираете "Git Bash". Затем введите:
 
-    git clone https://github.com/Baystation12/Baystation12.git
+    git clone https://github.com/Lambda-13/rubaystation12.git
 
-(hint: hold down ctrl and press insert to paste into git bash)
+(подсказка: зажмите ctrl и нажмите Insert, чтобы вставить в git bash)
 
-This will take a while to download, but it provides an easier method for updating.
+Tего загрузка займет некоторое время, но он обеспечивает более простой способ обновления.
 
 ---
 
-### INSTALLATION
+### УСТАНАВЛИВАЕМ
 
-First-time installation should be fairly straightforward.  First, you'll need BYOND installed.  You can get it from [here](http://www.byond.com/).
+Первоначальная установка должна быть довольно простой. Во-первых, вам нужно установить BYOND. Нажми [сюда](http://www.byond.com/) для перехода на сайт.
 
-This is a sourcecode-only release, so the next step is to compile the server files.  Open `baystation12.dme` by double-clicking it, open the Build menu, and click compile.  This'll take a little while, and if everything's done right you'll get a message like this:
+Это выпуск только с исходным кодом, поэтому следующим шагом будет компиляция файлов сервера. Откройте «baystation12.dme», дважды щелкнув его, откройте меню "Build" и нажмите "Compile". Это займет некоторое время, и если все сделано правильно, вы получите такое сообщение:
 
     saving baystation12.dmb (DEBUG mode)
     
     baystation12.dmb - 0 errors, 0 warnings
 
-If you see any errors or warnings, something has gone wrong - possibly a corrupt download or the files extracted wrong, or a code issue on the main repo.  Ask on IRC or discord.
+Если вы видите какие-либо ошибки или предупреждения, что-то пошло не так — возможно, поврежденная загрузка или файлы извлечены неправильно, или проблема с кодом в основном репозитории. Спросите в IRC или в дискорде.
 
 ---
 
-### CONFIGURATION
+### НАСТРОЙКА КОНФИГУРАЦИЙ
 
 Copy the contents of the `/config/examples` folder into `/config`. You will now work with everthing contained within `/config`.
 
