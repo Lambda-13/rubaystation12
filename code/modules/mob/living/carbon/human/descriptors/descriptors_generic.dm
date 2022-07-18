@@ -1,50 +1,50 @@
 /datum/mob_descriptor/height
-	name = "height"
+	name = "высота"
 	standalone_value_descriptors = list(
-		"very short",
-		"short",
-		"of average height",
-		"tall",
-		"very tall"
+		"дварф",
+		"маленький",
+		"нормальный",
+		"высокий",
+		"тонкий"
 		)
-	comparative_value_descriptor_equivalent = "around the same height as you"
+	comparative_value_descriptor_equivalent = "примерно такого же роста, как ты"
 	comparative_value_descriptors_smaller = list(
-		"slightly shorter than you",
-		"shorter than you",
-		"much shorter than you",
-		"tiny and insignificant next to you"
+		"немного ниже тебя",
+		"ниже тебя",
+		"намного ниже чем ты",
+		"по сравнению с тобой он очень маленький"
 		)
 	comparative_value_descriptors_larger = list(
-		"slightly taller than you",
-		"taller than you",
-		"much taller than you",
-		"towering over you"
+		"немного выше тебя",
+		"выше тебя",
+		"намного выше чем ты",
+		"по сравнению с тобой он очень большой"
 		)
 	var/list/scale_effect = list(
 		SPECIES_HUMAN = list(-7, -4, 0, 4, 7)
 	)
 
 /datum/mob_descriptor/build
-	name = "build"
-	comparative_value_descriptor_equivalent = "around the same build as you"
+	name = "телосложение"
+	comparative_value_descriptor_equivalent = "примерно такого же телосложения, как ты"
 	standalone_value_descriptors = list(
-		"rail thin",
-		"thin",
-		"of average build",
-		"well-built",
-		"heavily built"
+		"худощавый",
+		"худой",
+		"среднее телосложение",
+		"сложеный",
+		"грузный"
 		)
 	comparative_value_descriptors_smaller = list(
-		"a bit smaller in build than you",
-		"smaller in build than you",
-		"much smaller in build than you",
-		"dwarfed by your bulk"
+		"телосложение немного меньше моего",
+		"телосложение меньше моего",
+		"телосложение намного меньше моего",
+		"я затмеваю его"
 		)
 	comparative_value_descriptors_larger = list(
-		"slightly larger than you in build",
-		"built larger than you",
-		"built much larger than you",
-		"dwarfing you"
+		"телосложение немного больше моего",
+		"телосложение больше моего",
+		"телосложение намного больше моего",
+		"он затмевает меня"
 		)
 	var/list/scale_effect = list(
 		//SPECIES_TAG_DEFINE = list(lowest, low, middle, high, highest)<,>
