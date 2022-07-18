@@ -30,35 +30,36 @@
 	if (!force && !SScharacter_setup.initialized)
 		return
 	var/list/output = list()
+	output += "<meta charset='utf-8'>"
 	output += "<div align='center'>"
 	if (config.wiki_url || config.rules_url || config.lore_url)
 		var/player_age = client?.player_age
 		if (isnum(player_age) && player_age < 7)
-			output += "<b>Welcome! Please check out these links:</b><br>"
+			output += "<b>Привет! Посети следующие страницы: </b><br>"
 		if (config.wiki_url)
-			output += "<a href='byond://?src=\ref[src];show_wiki=1'>Wiki</a>"
+			output += "<a href='byond://?src=\ref[src];show_wiki=1'>Вики</a>"
 		if (config.rules_url)
-			output += "<a href='byond://?src=\ref[src];show_rules=1'>Rules</a>"
+			output += "<a href='byond://?src=\ref[src];show_rules=1'>Правила</a>"
 		if (config.lore_url)
-			output += "<a href='byond://?src=\ref[src];show_lore=1'>Lore</a>"
+			output += "<a href='byond://?src=\ref[src];show_lore=1'>Лор</a>"
 	output += "<hr>"
 	if (GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>Manifest</a>"
-	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Options</a>"
+		output += "<a href='byond://?src=\ref[src];manifest=1'>Манифест</a>"
+	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Настройки</a>"
 	output += "<hr>"
-	output += "<b>Playing As</b><br>"
-	output += "<a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name || "(Random)"]</a><br>"
+	output += "<b>Текущий персонаж</b><br>"
+	output += "<a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name || "(Рандом)"]</a><br>"
 	output += client.prefs.job_high ? "[client.prefs.job_high]" : null
 	output += "<hr>"
-	output += "<a href='byond://?src=\ref[src];observe=1'>Join As Observer</a>"
+	output += "<a href='byond://?src=\ref[src];observe=1'>Наблюдать</a>"
 	if (GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];late_join=1'>Join As Selected</a>"
+		output += "<a href='byond://?src=\ref[src];late_join=1'>Войти</a>"
 	else
-		output += "<a [ready?"class='linkOn'":""] href='byond://?src=\ref[src];ready=[!ready]'>Round Start Join</a>"
+		output += "<a [ready?"class='linkOn'":""] href='byond://?src=\ref[src];ready=[!ready]'>Готов/Не готов</a>"
 	output += "<hr>"
-	output += "<i>[GLOB.using_map.get_map_info()||"No information available for the current map."]</i>"
+	output += "<i>[GLOB.using_map.get_map_info()||"Ничего не известно о данной карте."]</i>"
 	output += "</div>"
-	panel = new (src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 340, src)
+	panel = new (src, "❤","Приветствуем на [GLOB.using_map.full_name]", 560, 340, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(output.Join())
 	panel.open()
@@ -69,17 +70,17 @@
 
 	if(statpanel("Lobby"))
 		if(check_rights(R_INVESTIGATE, 0, src))
-			stat("Game Mode:", "[SSticker.mode ? SSticker.mode.name : SSticker.master_mode] ([SSticker.master_mode])")
+			stat("Режим:", "[SSticker.mode ? SSticker.mode.name : SSticker.master_mode] ([SSticker.master_mode])")
 		else
-			stat("Game Mode:", PUBLIC_GAME_MODE)
+			stat("Режим:", PUBLIC_GAME_MODE)
 		var/extra_antags = list2params(additional_antag_types)
-		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
-		stat("Initial Continue Vote:", "[round(config.vote_autotransfer_initial / 600, 1)] minutes")
-		stat("Additional Vote Every:", "[round(config.vote_autotransfer_interval / 600, 1)] minutes")
+		stat("Антагонисты:", extra_antags ? extra_antags : "Нету")
+		stat("Следующее голосование на продолжение раунда через:", "[round(config.vote_autotransfer_initial / 600, 1)] минут")
+		stat("Следующее голосование на добавление антагониста через:", "[round(config.vote_autotransfer_interval / 600, 1)] минут")
 
 		if(GAME_STATE <= RUNLEVEL_LOBBY)
-			stat("Time To Start:", "[round(SSticker.pregame_timeleft/10)][SSticker.round_progressing ? "" : " (DELAYED)"]")
-			stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
+			stat("Время до начала:", "[round(SSticker.pregame_timeleft/10)][SSticker.round_progressing ? "" : " (ОТЛОЖЕНО)"]")
+			stat("Игроков: [totalPlayers]", "Готово: [totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in GLOB.player_list)
@@ -97,12 +98,12 @@
 								if (role in mode.antag_tags)
 									readied_antag_roles += role
 
-						var/antag_role_text = "[readied_antag_roles.len ? "Readied for ([english_list(readied_antag_roles)])" : ""]"
-						stat("[player.key]", (player.ready && (show_ready || can_see_hidden)?("(Playing[highjob]) [(can_see_hidden && !show_ready) ? "(Hidden)" : ""] [antag_role_text]"):(null)))
+						var/antag_role_text = "[readied_antag_roles.len ? "Готов как ([english_list(readied_antag_roles)])" : ""]"
+						stat("[player.key]", (player.ready && (show_ready || can_see_hidden)?("(Готов[highjob]) [(can_see_hidden && !show_ready) ? "(Скрыт)" : ""] [antag_role_text]"):(null)))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 		else
-			stat("Next Continue Vote:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
+			stat("Следующее голосование на продолжение раунда через:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] минут")
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
 	if (usr != src)
@@ -113,13 +114,13 @@
 		client.prefs.open_setup_window(src)
 		return 1
 	if (href_list["show_wiki"])
-		client.link_url(config.wiki_url, "Wiki", TRUE)
+		client.link_url(config.wiki_url, "Вики", TRUE)
 		return 1
 	if (href_list["show_rules"])
-		client.link_url(config.rules_url, "Rules", TRUE)
+		client.link_url(config.rules_url, "Правила", TRUE)
 		return 1
 	if (href_list["show_lore"])
-		client.link_url(config.lore_url, "Lore", TRUE)
+		client.link_url(config.lore_url, "Лор", TRUE)
 		return 1
 	if (href_list["ready"])
 		ready = GAME_STATE > RUNLEVEL_LOBBY ? 0 : text2num(href_list["ready"])
@@ -129,10 +130,10 @@
 
 	if(href_list["observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+			to_chat(src, "<span class='warning'>Сервер ещё загружается, подождите...</span>")
 			return
 
-		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
+		if(!config.respawn_delay || client.holder || alert(src,"Точно наблюдать? Тебе придётся подождать [config.respawn_delay] минут для возращения в лобби!","Мяу","Yes","No") == "Yes")
 			if(!client)	return 1
 			var/mob/observer/ghost/observer = new()
 
@@ -144,10 +145,10 @@
 			close_spawn_windows()
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
-				to_chat(src, "<span class='notice'>Now teleporting.</span>")
+				to_chat(src, "<span class='notice'>Телепортируемся.</span>")
 				observer.forceMove(O.loc)
 			else
-				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
+				to_chat(src, "<span class='danger'>Точки появления призраков не обнаружено.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			var/should_announce = client.get_preference_value(/datum/client_preference/announce_ghost_join) == GLOB.PREF_YES
@@ -171,12 +172,12 @@
 
 	if(href_list["late_join"])
 		if(GAME_STATE != RUNLEVEL_GAME)
-			to_chat(usr, SPAN_WARNING("The round has either not started yet or already ended."))
+			to_chat(usr, SPAN_WARNING("Раунд не начался или уже закончился."))
 			return
 		if (!client.holder)
 			var/dsdiff = config.respawn_menu_delay MINUTES - (world.time - respawned_time)
 			if (dsdiff > 0)
-				to_chat(usr, SPAN_WARNING("You must wait [time2text(dsdiff, "mm:ss")] before rejoining."))
+				to_chat(usr, SPAN_WARNING("Ты должен подождать [time2text(dsdiff, "mm:ss")] перед этим."))
 				return
 		LateChoices() //show the latejoin job selection menu
 
@@ -208,14 +209,14 @@
 	if(src != usr)
 		return 0
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+		to_chat(usr, "<span class='warning'>Раунд не начался или уже закончился...</span>")
 		return 0
 	if(!config.enter_allowed)
-		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
+		to_chat(usr, "<span class='notice'>Пока что нет.</span>")
 		return 0
 
 	if(!job || !job.is_available(client))
-		alert("[job.title] is not available. Please try another.")
+		alert("[job.title] недоступна для выбора.")
 		return 0
 	if(job.is_restricted(client.prefs, src))
 		return
@@ -231,7 +232,7 @@
 
 	// Just in case someone stole our position while we were waiting for input from alert() proc
 	if(!job || !job.is_available(client))
-		to_chat(src, alert("[job.title] is not available. Please try another."))
+		to_chat(src, alert("[job.title] недоступна для выбора."))
 		return 0
 
 	SSjobs.assign_role(src, job.title, 1)
@@ -256,7 +257,7 @@
 		var/mob/living/silicon/ai/A = character
 		A.on_mob_init()
 
-		AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
+		AnnounceCyborg(character, job.title, "был скачан в пустое ядро в [character.loc.loc]")
 		SSticker.mode.handle_latejoin(character)
 
 		qdel(C)
