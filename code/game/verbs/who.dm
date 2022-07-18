@@ -3,7 +3,7 @@
 	set name = "Who"
 	set category = "OOC"
 
-	var/msg = "<b>Current Players:</b>\n"
+	var/msg = "<b>Текущие игроки:</b>\n"
 
 	var/list/Lines = list()
 
@@ -11,23 +11,23 @@
 		for(var/client/C in GLOB.clients)
 			var/entry = "\t[C.key]"
 			if(!C.mob) //If mob is null, print error and skip rest of info for client.
-				entry += " - <font color='red'><i>HAS NO MOB</i></font>"
+				entry += " - <font color='red'><i>НЕ ИМЕЕТ ТЕЛО</i></font>"
 				Lines += entry
 				continue
 
-			entry += " - Playing as [C.mob.real_name]"
+			entry += " - Играет на [C.mob.real_name]"
 			switch(C.mob.stat)
 				if(UNCONSCIOUS)
-					entry += " - <font color='darkgray'><b>Unconscious</b></font>"
+					entry += " - <font color='darkgray'><b>Без сознания</b></font>"
 				if(DEAD)
 					if(isghost(C.mob))
 						var/mob/observer/ghost/O = C.mob
 						if(O.started_as_observer)
-							entry += " - <span class=\"who_observing\">Observing</span>"
+							entry += " - <span class=\"who_observing\">Наблюдает</span>"
 						else
-							entry += " - <span class=\"who_dead\"><b>DEAD</b></span>"
+							entry += " - <span class=\"who_dead\"><b>МЁРТВ</b></span>"
 					else
-						entry += " - <span class=\"who_dead\"><b>DEAD</b></span>"
+						entry += " - <span class=\"who_dead\"><b>МЁРТВ</b></span>"
 
 			var/age
 			if(isnum(C.player_age))
