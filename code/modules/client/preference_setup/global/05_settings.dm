@@ -2,7 +2,7 @@
 	var/list/preference_values
 
 /datum/category_item/player_setup_item/player_global/settings
-	name = "Settings"
+	name = "Настройки"
 	sort_order = 5
 
 /datum/category_item/player_setup_item/player_global/settings/load_preferences(datum/pref_record_reader/R)
@@ -46,7 +46,7 @@
 
 /datum/category_item/player_setup_item/player_global/settings/content(var/mob/user)
 	. = list()
-	. += "<b>Preferences</b><br>"
+	. += "<b>Настройки</b><br>"
 	. += "<table>"
 
 	var/mob/pref_mob = preference_mob()

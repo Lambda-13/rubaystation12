@@ -5,7 +5,7 @@
 /decl/webhook/custom_event/get_message(var/list/data)
 	. = ..()
 	.["embeds"] = list(list(
-		"title" = "An event is beginning.",
-		"description" = (data && data["text"]) || "undefined",
+		"title" = "Событие начато.",
+		"description" = (data && data["text"]) || "Неизвестно",
 		"color" = COLOR_WEBHOOK_DEFAULT
 	))

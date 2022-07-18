@@ -32,40 +32,40 @@
 	pref.clientfps	    = sanitize_integer(pref.clientfps, CLIENT_MIN_FPS, CLIENT_MAX_FPS, initial(pref.clientfps))
 
 /datum/category_item/player_setup_item/player_global/ui/content(var/mob/user)
-	. += "<b>UI Settings</b><br>"
+	. += "<b>Настройки интерфейса</b><br>"
 	. += "<b>UI Style:</b> <a href='?src=\ref[src];select_style=1'><b>[pref.UI_style]</b></a><br>"
-	. += "<b>Custom UI</b> (recommended for White UI):<br>"
-	. += "-Color: <a href='?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ui'>reset</a><br>"
-	. += "-Alpha(transparency): <a href='?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='?src=\ref[src];reset=alpha'>reset</a><br>"
+	. += "<b>Свой интерфейс</b> (рекомендуется White UI):<br>"
+	. += "-Color: <a href='?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ui'>сброс</a><br>"
+	. += "-Альфа(прозрачность): <a href='?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='?src=\ref[src];reset=alpha'>сброс</a><br>"
 	if(can_select_ooc_color(user))
-		. += "<b>OOC Color:</b> "
+		. += "<b>Цвет внеигрового чата (ООС):</b> "
 		if(pref.ooccolor == initial(pref.ooccolor))
-			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>Using Default</b></a><br>"
+			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>Обычный</b></a><br>"
 		else
-			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>[pref.ooccolor]</b></a> <table style='display:inline;' bgcolor='[pref.ooccolor]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ooc'>reset</a><br>"
-	. += "<b>Client FPS:</b> <a href='?src=\ref[src];select_fps=1'><b>[pref.clientfps]</b></a><br>"
+			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>[pref.ooccolor]</b></a> <table style='display:inline;' bgcolor='[pref.ooccolor]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ooc'>сброс</a><br>"
+	. += "<b>ФПС Клиента:</b> <a href='?src=\ref[src];select_fps=1'><b>[pref.clientfps]</b></a><br>"
 
 /datum/category_item/player_setup_item/player_global/ui/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["select_style"])
-		var/UI_style_new = input(user, "Choose UI style.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.UI_style) as null|anything in all_ui_styles
+		var/UI_style_new = input(user, "Выберите стиль интерфейса.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.UI_style) as null|anything in all_ui_styles
 		if(!UI_style_new || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style = UI_style_new
 		return TOPIC_REFRESH
 
 	else if(href_list["select_color"])
-		var/UI_style_color_new = input(user, "Choose UI color, dark colors are not recommended!", "Global Preference", pref.UI_style_color) as color|null
+		var/UI_style_color_new = input(user, "Выберите цвет интерфейса, тёмные цвета не советуются!", "Global Preference", pref.UI_style_color) as color|null
 		if(isnull(UI_style_color_new) || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style_color = UI_style_color_new
 		return TOPIC_REFRESH
 
 	else if(href_list["select_alpha"])
-		var/UI_style_alpha_new = input(user, "Select UI alpha (transparency) level, between 50 and 255.", "Global Preference", pref.UI_style_alpha) as num|null
+		var/UI_style_alpha_new = input(user, "Выберите альфа-уровень (прозрачность) интерфейса в диапазоне от 50 до 255.", "Global Preference", pref.UI_style_alpha) as num|null
 		if(isnull(UI_style_alpha_new) || (UI_style_alpha_new < 50 || UI_style_alpha_new > 255) || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style_alpha = UI_style_alpha_new
 		return TOPIC_REFRESH
 
 	else if(href_list["select_ooc_color"])
-		var/new_ooccolor = input(user, "Choose OOC color:", "Global Preference") as color|null
+		var/new_ooccolor = input(user, "Выберите цвет ООС:", "Global Preference") as color|null
 		if(new_ooccolor && can_select_ooc_color(user) && CanUseTopic(user))
 			pref.ooccolor = new_ooccolor
 			return TOPIC_REFRESH
@@ -73,10 +73,10 @@
 	else if(href_list["select_fps"])
 		var/version_message
 		if (user.client && user.client.byond_version < 511)
-			version_message = "\nYou need to be using byond version 511 or later to take advantage of this feature, your version of [user.client.byond_version] is too low"
+			version_message = "\nВы должны использовать версию 511 или более позднюю, чтобы воспользоваться этой функцией, ваша версия [user.client.byond_version] слишком низкая"
 		if (world.byond_version < 511)
-			version_message += "\nThis server does not currently support client side fps. You can set now for when it does."
-		var/new_fps = input(user, "Choose your desired fps.[version_message]\n(0 = synced with server tick rate (currently:[world.fps]))", "Global Preference") as num|null
+			version_message += "\nЭтот сервер в настоящее время не поддерживает частоту кадров на стороне клиента. Вы можете установить сейчас, когда это произойдет."
+		var/new_fps = input(user, "Выберите ФПС [version_message]\n(0 = синхронизировано с тикрейтом сервера (тикрейт сервера:[world.fps]))", "Global Preference") as num|null
 		if (isnum(new_fps) && CanUseTopic(user))
 			pref.clientfps = clamp(new_fps, CLIENT_MIN_FPS, CLIENT_MAX_FPS)
 

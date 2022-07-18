@@ -21,7 +21,7 @@ var/global/list/chemical_reaction_logs = list()
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/html = ""
+	var/html = "<meta charset='utf-8'>"
 	for(var/entry in chemical_reaction_logs)
 		html += "[entry]<br>"
 

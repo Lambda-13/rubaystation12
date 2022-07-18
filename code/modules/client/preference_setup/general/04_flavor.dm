@@ -3,7 +3,7 @@
 	var/list/flavour_texts_robot = list()
 
 /datum/category_item/player_setup_item/physical/flavor
-	name = "Flavor"
+	name = "Описание"
 	sort_order = 4
 
 /datum/category_item/player_setup_item/physical/flavor/load_character(datum/pref_record_reader/R)
@@ -43,19 +43,19 @@
 
 /datum/category_item/player_setup_item/physical/flavor/content(var/mob/user)
 	. += "<b>Flavor:</b><br>"
-	. += "<a href='?src=\ref[src];flavor_text=open'>Set Flavor Text</a><br/>"
-	. += "<a href='?src=\ref[src];flavour_text_robot=open'>Set Robot Flavor Text</a><br/>"
+	. += "<a href='?src=\ref[src];flavor_text=open'>Изменить описание персонажа</a><br/>"
+	. += "<a href='?src=\ref[src];flavour_text_robot=open'>Изменить описание киборга</a><br/>"
 
 /datum/category_item/player_setup_item/physical/flavor/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["flavor_text"])
 		switch(href_list["flavor_text"])
 			if("open")
 			if("general")
-				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Дайте общую характеристику своему характеру. Это будет видно независимо от одежды. Не включайте сюда информацию об ООС.","Описание",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavor_texts[href_list["flavor_text"]] = msg
 			else
-				var/msg = sanitize(input(usr,"Set the flavor text for your [href_list["flavor_text"]].","Flavor Text",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Установите описание для вашего [href_list["flavor_text"]].","Текст",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavor_texts[href_list["flavor_text"]] = msg
 		SetFlavorText(user)
@@ -65,11 +65,11 @@
 		switch(href_list["flavour_text_robot"])
 			if("open")
 			if("Default")
-				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(pref.flavour_texts_robot["Default"])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Установите описание по умолчанию для вашего киборга. Описание будет использоваться для любого модуля без индивидуальной настройки.","Текст",html_decode(pref.flavour_texts_robot["Default"])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavour_texts_robot[href_list["flavour_text_robot"]] = msg
 			else
-				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["flavour_text_robot"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(pref.flavour_texts_robot[href_list["flavour_text_robot"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Установите описание для вашего киборга с помощью [href_list["flavour_text_robot"]] модуль. Если вы оставите это поле пустым, для этого модуля будет использоваться текст по умолчанию.","Текст",html_decode(pref.flavour_texts_robot[href_list["flavour_text_robot"]])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavour_texts_robot[href_list["flavour_text_robot"]] = msg
 		SetFlavourTextRobot(user)
@@ -78,7 +78,7 @@
 	return ..()
 
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavorText(mob/user)
-	var/HTML = "<body>"
+	var/HTML = "<body><meta charset='utf-8'>"
 	HTML += "<tt><center>"
 	HTML += "<b>Set Flavour Text</b> <hr />"
 	HTML += "<br></center>"
@@ -115,7 +115,7 @@
 	return
 
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavourTextRobot(mob/user)
-	var/HTML = "<body>"
+	var/HTML = "<body><meta charset='utf-8'>"
 	HTML += "<tt><center>"
 	HTML += "<b>Set Robot Flavour Text</b> <hr />"
 	HTML += "<br></center>"

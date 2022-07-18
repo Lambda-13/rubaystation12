@@ -2,7 +2,7 @@
 	var/list/prefix_keys_by_type
 
 /datum/category_item/player_setup_item/player_global/prefixes
-	name = "Prefixes"
+	name = "Префиксы"
 	sort_order = 2
 
 	var/static/list/prefix_by_name
@@ -45,7 +45,7 @@
 	reset_duplicate_keys()
 
 /datum/category_item/player_setup_item/player_global/prefixes/content(var/mob/user)
-	. += "<b>Prefix Keys:</b><br>"
+	. += "<b>Префиксные ключи:</b><br>"
 	. += "<table>"
 	for(var/prefix_name in prefix_by_name)
 		var/decl/prefix/prefix_instance = prefix_by_name[prefix_name]
@@ -54,17 +54,17 @@
 		. += "<tr><td>[prefix_instance.name]</td><td>[pref.prefix_keys_by_type[prefix_instance.type]]</td><td>"
 
 		if(prefix_instance.is_locked)
-			. += "<span class='linkOff'>Change</span>"
+			. += "<span class='linkOff'>Изменить</span>"
 		else
 
-			. += "<a href='?src=\ref[src];change_prefix=\ref[prefix_instance]'>Change</a>"
+			. += "<a href='?src=\ref[src];change_prefix=\ref[prefix_instance]'>Изменить</a>"
 
 		. += "</td><td>"
 
 		if(prefix_instance.is_locked || current_prefix == prefix_instance.default_key)
-			. += "<span class='linkOff'>Reset</span>"
+			. += "<span class='linkOff'>Сброс</span>"
 		else
-			. += "<a href='?src=\ref[src];reset_prefix=\ref[prefix_instance]'>Reset</a>"
+			. += "<a href='?src=\ref[src];reset_prefix=\ref[prefix_instance]'>Сброс</a>"
 		. += "</td></tr>"
 	. += "</table>"
 
@@ -81,16 +81,16 @@
 					continue
 				keys_in_use += pref.prefix_keys_by_type[prefix_type]
 
-			var/new_key = input(user, "Enter a single special character. The following characters are already in use as prefixes: [jointext(keys_in_use, " ")]", CHARACTER_PREFERENCE_INPUT_TITLE, pref.prefix_keys_by_type[prefix_instance.type]) as null|text
+			var/new_key = input(user, "Введите один специальный символ. Следующие символы уже используются в качестве префиксов: [jointext(keys_in_use, " ")]", CHARACTER_PREFERENCE_INPUT_TITLE, pref.prefix_keys_by_type[prefix_instance.type]) as null|text
 			if(!new_key || new_key == pref.prefix_keys_by_type[prefix_instance.type] || !CanUseTopic(user))
 				return TOPIC_NOACTION
 
 			if(length(new_key) != 1)
-				alert(user, "Only single characters are allowed.", "Error", "Ok")
+				alert(user, "Допускаются только одиночные символы.", "Error", "Ok")
 			else if(contains_az09(new_key))
-				alert(user, "Only special character are allowed.", "Error", "Ok")
+				alert(user, "Допускаются только специальные символы.", "Error", "Ok")
 			else if(new_key == " ")
-				alert(user, "The space character is not allowed.", "Error", "Ok")
+				alert(user, "Пробел не допускается.", "Error", "Ok")
 			else
 				pref.prefix_keys_by_type[prefix_instance.type] = new_key
 
@@ -107,7 +107,7 @@
 				// Then, if the new key was reset it means it matched a default key.
 				// If so the user has to select another key, otherwise the selection was successful
 				if(pref.prefix_keys_by_type[prefix_instance.type] != new_key)
-					alert(user, "The selected key is already the default key for another prefix.", "Error", "Ok")
+					alert(user, "Выбранный ключ уже является ключом по умолчанию для другого префикса.", "Error", "Ok")
 				else
 					return TOPIC_REFRESH
 		while(TRUE)

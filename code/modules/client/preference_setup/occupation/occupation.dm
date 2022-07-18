@@ -18,7 +18,7 @@
 	var/alternate_option = 2
 
 /datum/category_item/player_setup_item/occupation
-	name = "Occupation"
+	name = "Занятие"
 	sort_order = 1
 	var/datum/browser/panel
 

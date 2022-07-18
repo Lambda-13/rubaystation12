@@ -36,29 +36,29 @@
 	var/datum/species/species = all_species[pref.species]
 
 	if(!(species && species.has_organ[BP_POSIBRAIN]))
-		. += "<b>Your Species Has No Laws</b><br>"
+		. += "<b>У твоей расы нет законов</b><br>"
 	else
-		. += "<b>Shackle: </b>"
+		. += "<b>Оковы: </b>"
 		if(!pref.is_shackled)
-			. += "<span class='linkOn'>Off</span>"
+			. += "<span class='linkOn'>Выключено</span>"
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>On</a>"
-			. += "<br>Only shackled positronics have laws in an integrated positronic chassis."
+			. += "<br>Только скованные позитроники имеют законы в интегрированном позитронном шасси."
 			. += "<hr>"
 		else
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
-			. += "<span class='linkOn'>On</span>"
-			. += "<br>You are shackled and have laws that restrict your behaviour."
+			. += "<span class='linkOn'>Включено</span>"
+			. += "<br>Вы скованы и у вас есть законы, которые ограничивают ваше поведение."
 			. += "<hr>"
 
-			. += "<b>Your Current Laws:</b><br>"
+			. += "<b>Твои законы:</b><br>"
 
 			if(!pref.laws.len)
-				. += "<b>You currently have no laws.</b><br>"
+				. += "<b>Пусто!</b><br>"
 			else
 				for(var/i in 1 to pref.laws.len)
 					. += "[i]) [pref.laws[i]]<br>"
 
-			. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"
+			. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Загрузить</a><br>"
 
 	. = jointext(.,null)
 

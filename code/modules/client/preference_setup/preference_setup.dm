@@ -151,6 +151,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		player_setup_item.save_preferences(S)
 
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
+	. = "<meta charset='utf-8'>"
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"
 	var/current = 0
 	var/wrap_index = item_wrap_index || items.len / 2

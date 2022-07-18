@@ -5,7 +5,7 @@
 	var/real_name						//our character's name
 
 /datum/category_item/player_setup_item/physical/basic
-	name = "Basic"
+	name = "Основное"
 	sort_order = 1
 
 /datum/category_item/player_setup_item/physical/basic/load_character(datum/pref_record_reader/R)
@@ -33,13 +33,13 @@
 /datum/category_item/player_setup_item/physical/basic/content()
 	. = list()
 	//. += "[TBTN("spawnpoint", pref.spawnpoint, "Spawn Point")]<br />"
-	. += "[TBTN("rename", pref.real_name, "Name")] [BTN("random_name", "Randomize")]"
+	. += "[TBTN("rename", pref.real_name, "Имя")] [BTN("random_name", "Рандом")]"
 	. = jointext(., null)
 
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["rename"])
-		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
+		var/raw_name = input(user, "Введите имя вашего персонажа:", "Имя персонажа")  as text|null
 		if (!isnull(raw_name) && CanUseTopic(user))
 
 			var/decl/cultural_info/check = SSculture.get_culture(pref.cultural_info[TAG_CULTURE])
@@ -48,7 +48,7 @@
 				pref.real_name = new_name
 				return TOPIC_REFRESH
 			else
-				to_chat(user, "<span class='warning'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</span>")
+				to_chat(user, "<span class='warning'>Ваше имя должно быть от 2 до [MAX_NAME_LEN] символов длиной а так-же в нём должны быть использованы A-Z, a-z, -, ' и . символы.</span>")
 				return TOPIC_NOACTION
 
 	else if(href_list["random_name"])
@@ -59,7 +59,7 @@
 		var/list/spawnkeys = list()
 		for(var/spawntype in spawntypes())
 			spawnkeys += spawntype
-		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
+		var/choice = input(user, "Где бы вы хотели появиться после начала раунда?") as null|anything in spawnkeys
 		if(!choice || !spawntypes()[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH

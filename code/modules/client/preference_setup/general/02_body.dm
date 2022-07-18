@@ -23,7 +23,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 
 /datum/category_item/player_setup_item/physical/body
-	name = "Body"
+	name = "Тело"
 	sort_order = 2
 	var/hide_species = TRUE
 
@@ -127,13 +127,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/physical/body/content(mob/user)
 	. = list()
 	var/datum/species/mob_species = all_species[pref.species]
-	. += "<b>Species</b> [BTN("show_species", "Info")]"
-	. += "<br />[TBTN("set_species", mob_species.name, "Selected")]"
-	. += "<br /><br /><b>Body</b> [BTN("random", "Randomize")]"
-	. += "<br />[TBTN("gender", gender2text(pref.gender), "Gender")]"
-	. += "<br />[TBTN("age", pref.age, "Age")]"
-	. += "<br />[TBTN("blood_type", pref.b_type, "Blood Type")]"
-	. += "<br />[VTBTN("disabilities", NEARSIGHTED, pref.disabilities & NEARSIGHTED ? "Yes" : "No", "Glasses")]"
+	. += "<b>Раса</b> [BTN("show_species", "Инфо")]"
+	. += "<br />[TBTN("set_species", mob_species.name, "Выбрать")]"
+	. += "<br /><br /><b>Body</b> [BTN("random", "Рандом")]"
+	. += "<br />[TBTN("gender", gender2text(pref.gender), "Пол")]"
+	. += "<br />[TBTN("age", pref.age, "Возраст")]"
+	. += "<br />[TBTN("blood_type", pref.b_type, "Тип крови")]"
+	. += "<br />[VTBTN("disabilities", NEARSIGHTED, pref.disabilities & NEARSIGHTED ? "Да" : "Нет", "Нужны очки")]"
 
 	if (length(pref.body_descriptors))
 		for (var/entry in pref.body_descriptors)
@@ -145,14 +145,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	if (has_flag(mob_species, HAS_EYE_COLOR))
 		var/color = pref.eye_color
-		. += "[TBTN("eye_color", "Color", "<br />Eyes")] [COLOR_PREVIEW(color)]"
+		. += "[TBTN("eye_color", "Цвет", "<br />Глаза")] [COLOR_PREVIEW(color)]"
 
 	var/has_head_hair = length(mob_species.get_hair_styles())
 	if (has_head_hair > 1)
 		. += "<br />Hair "
 		if (has_flag(mob_species, HAS_HAIR_COLOR))
 			var/color = pref.head_hair_color
-			. += "[BTN("hair_color", "Color")] [COLOR_PREVIEW(color)] "
+			. += "[BTN("hair_color", "Цвет")] [COLOR_PREVIEW(color)] "
 		. += "[BTN("hair_style=1;dec", "<")][BTN("hair_style=1;inc", ">")][BTN("hair_style", pref.head_hair_style)]"
 
 	var/has_facial_hair = length(mob_species.get_facial_hair_styles(pref.gender))
@@ -160,14 +160,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		. += "<br />Facial Hair "
 		if (has_flag(mob_species, HAS_HAIR_COLOR))
 			var/color = pref.facial_hair_color
-			. += "[BTN("facial_color", "Color")] [COLOR_PREVIEW(color)] "
+			. += "[BTN("facial_color", "Цвет")] [COLOR_PREVIEW(color)] "
 		. += "[BTN("facial_style=1;dec", "<")][BTN("facial_style=1;inc", ">")][BTN("facial_style", pref.facial_hair_style)]"
 
 	if (has_flag(mob_species, HAS_BASE_SKIN_COLOURS))
 		. += TBTN("base_skin", pref.base_skin, "<br />Base Skin")
 	if (has_flag(mob_species, HAS_SKIN_COLOR))
 		var/color = pref.skin_color
-		. += "[TBTN("skin_color", "Color", "<br />Skin Color")] [COLOR_PREVIEW(color)]"
+		. += "[TBTN("skin_color", "Цвет", "<br />Skin Color")] [COLOR_PREVIEW(color)]"
 	else if (has_flag(mob_species, HAS_A_SKIN_TONE))
 		. += "[TBTN("skin_tone", "[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]", "<br />Skin Tone")]"
 
@@ -177,7 +177,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/datum/sprite_accessory/marking/instance = GLOB.body_marking_styles_list[marking]
 		if (instance.do_coloration == DO_COLORATION_USER)
 			var/color = pref.body_markings[marking]
-			. += "[VBTN("marking_color", marking, "Color")] [COLOR_PREVIEW(color)]"
+			. += "[VBTN("marking_color", marking, "Цвет")] [COLOR_PREVIEW(color)]"
 	if (length(pref.body_markings))
 		. += "<br />"
 

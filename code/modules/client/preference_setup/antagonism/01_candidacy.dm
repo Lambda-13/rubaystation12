@@ -3,7 +3,7 @@
 	var/list/be_special_role
 
 /datum/category_item/player_setup_item/antagonism/candidacy
-	name = "Candidacy"
+	name = "Кандидатура"
 	sort_order = 1
 
 /datum/category_item/player_setup_item/antagonism/candidacy/load_character(datum/pref_record_reader/R)
@@ -32,29 +32,29 @@
 
 /datum/category_item/player_setup_item/antagonism/candidacy/content(var/mob/user)
 	. = list()
-	. += "<b>Special Role Availability:</b><br>"
+	. += "<b>Приоритеты:</b><br>"
 	. += "<table>"
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.role_text]: </td><td>"
 		if(jobban_isbanned(preference_mob(), antag.id) || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
-			. += "<span class='danger'>\[BANNED\]</span><br>"
+			. += "<span class='danger'>\[БАН\]</span><br>"
 		else if(antag.id in pref.be_special_role)
-			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
+			. += "<span class='linkOn'>Высокий</span> <a href='?src=\ref[src];add_maybe=[antag.id]'>Низкий</a> <a href='?src=\ref[src];del_special=[antag.id]'>Никогда</a></br>"
 		else if(antag.id in pref.may_be_special_role)
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>Высокий</a> <span class='linkOn'>Низкий</span> <a href='?src=\ref[src];del_special=[antag.id]'>Никогда</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <span class='linkOn'>Never</span></br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>Высокий</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Низкий</a> <span class='linkOn'>Никогда</span></br>"
 
 		. += "</td></tr>"
 
 	// Special handling for pAI role
-	. += "<tr></tr><tr><td>pAI:</td>"
+	. += "<tr></tr><tr><td>пИИ:</td>"
 	if (BE_PAI in pref.be_special_role)
-		. += "<td><span class='linkOn'>Yes</span> <a href='?src=\ref[src];del_special=[BE_PAI]'>No</a></br></td></tr>"
+		. += "<td><span class='linkOn'>Да</span> <a href='?src=\ref[src];del_special=[BE_PAI]'>Нет</a></br></td></tr>"
 	else
-		. += "<td><a href='?src=\ref[src];add_special=[BE_PAI]'>Yes</a> <span class='linkOn'>No</span></br></td></tr>"
+		. += "<td><a href='?src=\ref[src];add_special=[BE_PAI]'>Да</a> <span class='linkOn'>Нет</span></br></td></tr>"
 	. += "</table>"
 	. = jointext(.,null)
 

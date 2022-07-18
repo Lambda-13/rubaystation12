@@ -8,7 +8,7 @@
 	var/email_pass = ""
 
 /datum/category_item/player_setup_item/background/records
-	name = "Records"
+	name = "Записи"
 	sort_order = 3
 
 /datum/category_item/player_setup_item/background/records/load_character(datum/pref_record_reader/R)
@@ -35,9 +35,9 @@
 /datum/category_item/player_setup_item/background/records/content(mob/user)
 	. = list()
 
-	. += "<br><b>Records</b>:"
+	. += "<br><b>Записм</b>:"
 	if (jobban_isbanned(user, "Records"))
-		. += "[SPAN_WARNING("You are banned from using character records.")]"
+		. += "[SPAN_WARNING("Тебе нельзя.")]"
 	else
 		.+= TBTN("set_public_record", TextPreview(pref.public_record, 40), "Public")
 		.+= TBTN("set_medical_records", TextPreview(pref.med_record, 40), "Medical")
@@ -45,7 +45,7 @@
 		.+= TBTN("set_security_records", TextPreview(pref.sec_record, 40), "Security")
 		.+= TBTN("set_memory", TextPreview(pref.memory, 40), "Memory")
 
-	. += "<br><b>Other</b>:"
+	. += "<br><b>Остальное</b>:"
 	var/set_addr_button = TBTN("set_email_addr", pref.email_addr ? pref.email_addr : "(default)", "Email Address")
 	var/list/branches = pref.for_each_selected_branch(CALLBACK(src, .proc/allow_email_branch_check))
 	for (var/name in branches)
