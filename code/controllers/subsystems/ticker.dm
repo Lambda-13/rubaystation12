@@ -49,8 +49,8 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/Initialize(start_uptime)
 	pregame_timeleft = config.pre_game_time SECONDS
 	build_mode_cache()
-	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
-	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+	to_world("<span class='info'><B>Добро пожаловать в пре-игровое лобби!</B></span>")
+	to_world("Приготовьтесь, раунд начнётся через [round(pregame_timeleft/10)] секунд")
 
 
 /datum/controller/subsystem/ticker/fire(resumed, no_mc_tick)
@@ -134,7 +134,7 @@ SUBSYSTEM_DEF(ticker)
 			pregame_timeleft = config.vote_period + 30 SECONDS
 			gamemode_vote_results = null
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
-			to_world("<b>No ready players.</b> Returning to pre-game lobby.")
+			to_world("<b>Нету игроков готовых к игре.</b> Возращаюсь в лобби.")
 			return
 #endif
 
@@ -145,18 +145,18 @@ SUBSYSTEM_DEF(ticker)
 		if(CHOOSE_GAMEMODE_RETRY)
 			pregame_timeleft = 30 SECONDS
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
-			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby to try again.")
+			to_world("<B>Немогу выбрать игровой режим.</B> Возращаюсь в лобби.")
 			return
 		if(CHOOSE_GAMEMODE_REVOTE)
 			revotes_allowed--
 			pregame_timeleft = config.vote_period + 30 SECONDS
 			gamemode_vote_results = null
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
-			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby for a revote.")
+			to_world("<B>Немогу выбрать игровой режим.</B> Возращаюсь в лобби.")
 			return
 		if(CHOOSE_GAMEMODE_RESTART)
-			to_world("<B>Unable to choose playable game mode.</B> Restarting world.")
-			world.Reboot("Failure to select gamemode. Tried [english_list(bad_modes)].")
+			to_world("<B>Немогу выбрать игровой режим.</B> Перезапускаю раунд.")
+			world.Reboot("Ошибка в выборе игрового режима - [english_list(bad_modes)].")
 			return
 	// This means we succeeded in picking a game mode.
 	GLOB.using_map.setup_economy()
@@ -175,14 +175,14 @@ SUBSYSTEM_DEF(ticker)
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
-		to_world("<span class='info'><B>Enjoy the game!</B></span>")
+		to_world("<span class='info'><B>Удачной игры</B></span>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
 
 		for (var/mob/new_player/player in GLOB.player_list)
 			player.new_player_panel()
 
 	if(!GLOB.admins.len)
-		send2adminirc("Round has started with no admins online.")
+		send2adminirc("Раунд начался без игроков.")
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
 	mode.process()
@@ -198,7 +198,7 @@ SUBSYSTEM_DEF(ticker)
 	else if(mode_finished && (end_game_state <= END_GAME_NOT_OVER))
 		end_game_state = END_GAME_MODE_FINISH_DONE
 		mode.cleanup()
-		log_and_message_admins(": All antagonists are deceased or the gamemode has ended.") //Outputs as "Event: All antagonists are deceased or the gamemode has ended."
+		log_and_message_admins(": Все антагонисты без сознания или игровой режим закончился.") //Outputs as "Event: All antagonists are deceased or the gamemode has ended."
 		SSvote.initiate_vote(/datum/vote/transfer, automatic = 1)
 
 /datum/controller/subsystem/ticker/proc/post_game_tick()
@@ -210,11 +210,11 @@ SUBSYSTEM_DEF(ticker)
 			callHook("roundend")
 			if (game_over)
 				if(!delay_end)
-					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
+					to_world("<span class='notice'><b>Раунд будет перезапущен по причине уничтожения [station_name()] через [restart_timeout/10] секунд</b></span>")
 
 			else
 				if(!delay_end)
-					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
+					to_world("<span class='notice'><b>Рестарт через [restart_timeout/10] секунд.</b></span>")
 			handle_tickets()
 		if(END_GAME_ENDING)
 			restart_timeout -= (world.time - last_fire)
@@ -346,16 +346,16 @@ Helpers
 	mode = mode_datum
 	master_mode = mode_to_try
 	if(mode_to_try == "secret")
-		to_world("<B>The current game mode is Secret!</B>")
+		to_world("<B>Выбраный игровой режим Секрет!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
 			var/datum/game_mode/M = mode_cache[mode_tag]
 			if(M)
 				mode_names += M.name
 		if (config.secret_hide_possibilities)
-			message_admins("<B>Possibilities:</B> [english_list(mode_names)]")
+			message_admins("<B>Возможные игровые режимы:</B> [english_list(mode_names)]")
 		else
-			to_world("<B>Possibilities:</B> [english_list(mode_names)]")
+			to_world("<B>Возможные игровые режимы:</B> [english_list(mode_names)]")
 	else
 		mode.announce()
 
@@ -410,7 +410,7 @@ Helpers
 	if(captainless)
 		for(var/mob/M in GLOB.player_list)
 			if(!istype(M,/mob/new_player))
-				to_chat(M, "Captainship not forced on anyone.")
+				to_chat(M, "Нет капитана!")
 
 /datum/controller/subsystem/ticker/proc/attempt_late_antag_spawn(var/list/antag_choices)
 	var/datum/antagonist/antag = antag_choices[1]
@@ -419,7 +419,7 @@ Helpers
 		if (needs_ghost)
 			looking_for_antags = 1
 			antag_pool.Cut()
-			to_world("<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 3 minutes to enter the pool.")
+			to_world("<b>Нужен призрак для появления \a [antag.role_text].</b>\nПризраки могут войти в пул антагов, убедившись, что их [antag.role_text] предпочтение установлено на высокое, а затем использовать toggle-add-antag-candidacy. У вас есть 3 минуты, чтобы проделать данные действия.")
 
 			sleep(3 MINUTES)
 			looking_for_antags = 0
@@ -443,16 +443,16 @@ Helpers
 			return 1
 		else
 			if(antag.initial_spawn_req > 1)
-				to_world("Failed to find enough [antag.role_text_plural].")
+				to_world("Не удалось найти достаточно [antag.role_text_plural].")
 
 			else
-				to_world("Failed to find a [antag.role_text].")
+				to_world("Не могу найти [antag.role_text].")
 
 			antag_choices -= antag
 			if(length(antag_choices))
 				antag = antag_choices[1]
 				if(antag)
-					to_world("Attempting to spawn [antag.role_text_plural].")
+					to_world("Попытка спавна [antag.role_text_plural].")
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
@@ -477,22 +477,22 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/notify_delay()
 	if(!delay_notified)
-		to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
+		to_world("<span class='notice'><b>Конец раунда остановлен.</b></span>")
 	delay_notified = 1
 
 /datum/controller/subsystem/ticker/proc/handle_tickets()
 	for(var/datum/ticket/ticket in tickets)
 		if(ticket.is_active())
 			if(!delay_notified)
-				message_staff("<span class='warning'><b>Automatically delaying restart due to active tickets.</b></span>")
+				message_staff("<span class='warning'><b>Автоматический рестарт остановлен по причине открытых тикетов.</b></span>")
 			notify_delay()
 			end_game_state = END_GAME_AWAITING_TICKETS
 			return
-	message_staff("<span class='warning'><b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b></span>")
+	message_staff("<span class='warning'><b>Открытых или активных тикетов не осталось - рестарт будет произведён через [restart_timeout/10] если конец раунда не остановлен.</b></span>")
 	end_game_state = END_GAME_ENDING
 
 /datum/controller/subsystem/ticker/proc/declare_completion()
-	to_world("<br><br><br><H1>A round of [mode.name] has ended!</H1>")
+	to_world("<br><br><br><H1>Раунд с режимом [mode.name] окончен!</H1>")
 	for(var/client/C)
 		if(!C.credits)
 			C.RollCredits()
@@ -503,14 +503,14 @@ Helpers
 
 	for(var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
 		var/show_ai_key = aiPlayer.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
-		to_world("<b>[aiPlayer.name][show_ai_key ? " (played by [aiPlayer.key])" : ""]'s laws at the [aiPlayer.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
+		to_world("<b>[aiPlayer.name][show_ai_key ? " (он же [aiPlayer.key])" : ""]'s законы [aiPlayer.stat == 2 ? "на момент деактивации" : "в конце раунда"]:</b>")
 		aiPlayer.show_laws(1)
 
 		if (aiPlayer.connected_robots.len)
-			var/minions = "<b>[aiPlayer.name]'s loyal minions were:</b>"
+			var/minions = "<b>[aiPlayer.name]'s помощники:</b>"
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
-				minions += " [robo.name][show_robot_key ? "(played by: [robo.key])" : ""][robo.stat ? " (deactivated)" : ""],"
+				minions += " [robo.name][show_robot_key ? "(он же [robo.key])" : ""][robo.stat ? " (деактивирован)" : ""],"
 			to_world(minions)
 
 	var/dronecount = 0
@@ -523,13 +523,13 @@ Helpers
 
 		if (!robo.connected_ai)
 			var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
-			to_world("<b>[robo.name][show_robot_key ? " (played by [robo.key])" : ""]'s individual laws at the [robo.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
+			to_world("<b>[robo.name][show_robot_key ? " (он же [robo.key])" : ""]'s имел свои законы [robo.stat == 2 ? "на момент отключения" : "в конце раунда"]:</b>")
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
 
 	if(dronecount)
-		to_world("<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>")
+		to_world("<b>Всего [dronecount>1 ? "было" : "был"] [dronecount] [dronecount>1 ? "дронов" : "дрон"] в конце раунда.</b>")
 
 	if(all_money_accounts.len)
 		var/datum/money_account/max_profit = all_money_accounts[1]
@@ -542,8 +542,8 @@ Helpers
 				max_profit = D
 			if(saldo <= max_loss.get_balance())
 				max_loss = D
-		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>[GLOB.using_map.local_currency_name_short][max_profit.get_balance()]</b>.")
-		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
+		to_world("<b>[max_profit.owner_name]</b> сегодня заработал <font color='green'><B>БОЛЬШЕ</B></font> всех, его заработок составил <b>[GLOB.using_map.local_currency_name_short][max_profit.get_balance()]</b>.")
+		to_world("On the other hand, <b>[max_loss.owner_name]</b> сегодня заработал <font color='red'><B>МЕНЬШЕ</B></font> всех, его заработок составил <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
 
 	mode.declare_completion()//To declare normal completion.
 
