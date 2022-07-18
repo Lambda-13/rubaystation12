@@ -129,7 +129,7 @@ SUBSYSTEM_DEF(event)
 
 //Event manager UI
 /datum/controller/subsystem/event/proc/GetInteractWindow()
-	var/html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
+	var/html = "<meta charset='utf-8'><A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
 	html += "<A align='right' href='?src=\ref[src];pause_all=[!config.allow_random_events]'>Pause All - [config.allow_random_events ? "Pause" : "Resume"]</A>"
 
 	if(selected_event_container)

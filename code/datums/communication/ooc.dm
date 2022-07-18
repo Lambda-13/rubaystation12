@@ -42,3 +42,5 @@
 			receive_communication(C, target, "<font color='[ooc_color]'><span class='ooc'>[sent_message]</font></span>")
 		else
 			receive_communication(C, target, "<span class='ooc'><span class='[ooc_style]'>[sent_message]</span></span>")
+
+		SSwebhooks.send(WEBHOOK_OOC, list("text" = "OOC: [C.key]: [message]"))

@@ -7,10 +7,10 @@
 	var/submap_name = data && data["name"]
 	if(submap_name)
 		submap_name = ", [submap_name],"
-	var/desc = "A submap[submap_name] is currently available."
+	var/desc = "Корабль [submap_name] обнаружен в данном секторе."
 
 	.["embeds"] = list(list(
-		"title" = "Submap available.",
+		"title" = "Оповещение дальнего сканирования.",
 		"description" = desc,
 		"color" = COLOR_WEBHOOK_DEFAULT
 	))
