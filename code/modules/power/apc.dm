@@ -74,8 +74,8 @@
 
 // Main APC code
 /obj/machinery/power/apc
-	name = "area power controller"
-	desc = "A control terminal for the area electrical systems."
+	name = "автоматический контролер энергии"
+	desc = "Терминал управления местными электрическими системами."
 
 	icon_state = "apc0"
 	icon = 'icons/obj/apc.dmi'
