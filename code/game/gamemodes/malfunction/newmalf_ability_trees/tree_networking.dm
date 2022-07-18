@@ -13,27 +13,27 @@
 	ability = new/datum/game_mode/malfunction/verb/basic_encryption_hack()
 	price = 25		// Until you have this ability your CPU generation sucks, therefore it's very cheap.
 	next = new/datum/malf_research_ability/networking/advanced_hack()
-	name = "T1 - Basic Encryption Hack"
+	name = "T1 — базовый взлом шифрования"
 
 
 /datum/malf_research_ability/networking/advanced_hack
 	ability = new/datum/game_mode/malfunction/verb/advanced_encryption_hack()
 	price = 1000
 	next = new/datum/malf_research_ability/networking/elite_hack()
-	name = "T2 - Advanced Encryption Hack"
+	name = "T2 — расширенный взлом шифрования"
 
 
 /datum/malf_research_ability/networking/elite_hack
 	ability = new/datum/game_mode/malfunction/verb/elite_encryption_hack()
 	price = 2000
 	next = new/datum/malf_research_ability/networking/system_override()
-	name = "T3 - Elite Encryption Hack"
+	name = "T3 - взлом элитного шифрования"
 
 
 /datum/malf_research_ability/networking/system_override
 	ability = new/datum/game_mode/malfunction/verb/system_override()
 	price = 4000
-	name = "T4 - System Override"
+	name = "T4 — переопределение системы"
 
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS
@@ -41,7 +41,7 @@
 /datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_unhacked_apcs(src))
 	set category = "Software"
 	set name = "Basic Encryption Hack"
-	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs"
+	set desc = "10 CPU — базовый хак шифрования, который позволяет вам взломать APC"
 	var/price = 10
 	var/mob/living/silicon/ai/user = usr
 
@@ -49,15 +49,15 @@
 		return
 
 	if(!istype(A))
-		to_chat(user, "This is not an APC!")
+		to_chat(user, ">НЕ ОБНАРУЖЕНО APC!")
 		return
 
 	if(A)
 		if(A.hacker && A.hacker == user)
-			to_chat(user, "You already control this APC!")
+			to_chat(user, ">ОШИБКА: КОНТРОЛЬ ПОЛУЧЕН")
 			return
 		else if(A.aidisabled)
-			to_chat(user, "<span class='notice'>Unable to connect to APC. Please verify wire connection and try again.</span>")
+			to_chat(user, "<span class='notice'>>ОШИБКА: НЕТ СВЯЗИ</span>")
 			return
 	else
 		return
@@ -66,20 +66,41 @@
 		return
 
 	log_ability_use(user, "basic encryption hack", A, 0)	// Does not notify admins, but it's still logged for reference.
-	to_chat(user, "Beginning APC system override...")
-	sleep(300)
-	to_chat(user, "APC hack completed. Uploading modified operation software..")
-	sleep(200)
-	to_chat(user, "Restarting APC to apply changes..")
-	sleep(100)
+	to_chat(user, ">ВЗЛОМ НАЧАТ")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	to_chat(user, ">ДОСТУП ПОЛУЧЕН, НАЧИНАЮ ПЕРЕЗАГРУЗКУ СЕТИ")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	to_chat(user, ">ПЕРЕЗАГРУЗКА")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
+	sleep(50)
+	to_chat(user, "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]")
 	if(A)
 		A.ai_hack(user)
 		if(A.hacker == user)
-			to_chat(user, "Hack successful. You now have full control over \the [A].")
+			to_chat(user, ">ДОСТУП ВЫДАН НАД [A]")
 		else
-			to_chat(user, "<span class='notice'>Hack failed. Connection to APC has been lost. Please verify wire connection and try again.</span>")
+			to_chat(user, "<span class='notice'>>ОШИБКА: СОЕДИНЕНИЕ ПРЕРВАНО</span>")
 	else
-		to_chat(user, "<span class='notice'>Hack failed. Unable to locate APC. Please verify the APC still exists.</span>")
+		to_chat(user, "<span class='notice'>ОШИБКА: УСТРОИСТВО ОТКЛЮЧЕНО</span>")
 
 
 /datum/game_mode/malfunction/verb/advanced_encryption_hack()
