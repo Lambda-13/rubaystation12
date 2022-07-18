@@ -128,18 +128,18 @@
 	if(!user || !user.client)
 		return
 
-	var/dat = "<center>"
+	var/dat = "<center><meta charset='utf-8'>"
 
 	if(is_guest)
-		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
+		dat += "Привет, не мог бы ты зайти в свой аккаунт? Если у тебя нету аккаунта то создай его."
 	else if(load_failed)
-		dat += "Loading your savefile failed. Please adminhelp for assistance."
+		dat += "Ошибка в загрузке твоего сохранения. Обратись к администратору."
 	else
 		dat += "Slot - "
-		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
+		dat += "<a href='?src=\ref[src];load=1'>Загрузить слот</a> - "
+		dat += "<a href='?src=\ref[src];save=1'>Сохранить слот</a> - "
+		dat += "<a href='?src=\ref[src];resetslot=1'>Очистить слот</a> - "
+		dat += "<a href='?src=\ref[src];reload=1'>Перезагрузить слот</a>"
 
 	dat += "<br>"
 	dat += player_setup.header()
@@ -174,7 +174,7 @@
 		if(config.forum_url)
 			send_link(user, config.forum_url)
 		else
-			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
+			to_chat(user, "<span class='danger'>Ссылку на форум не завезли.</span>")
 			return
 	update_setup_window(usr)
 	return 1
@@ -212,7 +212,7 @@
 		if (href_list["details"])
 			return 1
 	else if(href_list["resetslot"])
-		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
+		if(real_name != input("Введи полностью имя персонажа для УДАЛЕНИЯ слота."))
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()
@@ -368,19 +368,19 @@
 
 /datum/preferences/proc/open_load_dialog(mob/user, details)
 	var/dat  = list()
-	dat += "<body>"
+	dat += "<body><meta charset='utf-8'>"
 	dat += "<tt><center>"
 
-	dat += "<b>Select a character slot to load</b><hr>"
+	dat += "<b>Выберите слот</b><hr>"
 	for(var/i=1, i<= config.character_slots, i++)
-		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
+		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Персонаж [i]"
 		if(i==default_slot)
 			name = "<b>[name]</b>"
 		dat += "<a href='?src=\ref[src];changeslot=[i];[details?"details=1":""]'>[name]</a><br>"
 
 	dat += "<hr>"
 	dat += "</center></tt>"
-	panel = new(user, "Character Slots", "Character Slots", 300, 390, src)
+	panel = new(user, "Персонаж", "Персонаж", 300, 390, src)
 	panel.set_content(jointext(dat,null))
 	panel.open()
 
