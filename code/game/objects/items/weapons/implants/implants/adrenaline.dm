@@ -7,7 +7,7 @@
 
 /obj/item/implant/adrenalin/get_data()
 	return {"
-	<b>Implant Specifications:</b><BR>
+	<meta charset='utf-8'><b>Implant Specifications:</b><BR>
 	<b>Name:</b> Cybersun Industries Adrenalin Implant<BR>
 	<b>Life:</b> Five days.<BR>
 	<b>Important Notes:</b> <font color='red'>Illegal</font><BR>
@@ -20,7 +20,7 @@
 /obj/item/implant/adrenalin/trigger(emote, mob/source)
 	if (emote == "pale")
 		activate()
-		
+
 /obj/item/implant/adrenalin/activate()//this implant is unused but I'm changing it for the sake of consistency
 	if (uses < 1 || malfunction || !imp_in)	return 0
 	uses--

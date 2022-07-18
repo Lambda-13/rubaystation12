@@ -6,7 +6,7 @@
 
 /obj/item/implant/loyalty/get_data()
 	return {"
-	<b>Implant Specifications:</b><BR>
+	<meta charset='utf-8'><b>Implant Specifications:</b><BR>
 	<b>Name:</b> [GLOB.using_map.company_name] Employee Management Implant<BR>
 	<b>Life:</b> Ten years.<BR>
 	<b>Important Notes:</b> Personnel injected with this device tend to be much more loyal to the company.<BR>

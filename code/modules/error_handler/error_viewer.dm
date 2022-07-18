@@ -40,7 +40,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	var/datum/browser/browser = new(user.mob, "error_viewer", null, 600, 400)
 	browser.set_content(html)
 	browser.add_head_content({"
-	<style>
+	<meta charset='utf-8'><style>
 	.runtime
 	{
 		background-color: #171717;

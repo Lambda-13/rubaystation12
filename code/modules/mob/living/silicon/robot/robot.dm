@@ -756,7 +756,7 @@
 		return
 	var/dat = "<HEAD><TITLE>Modules</TITLE></HEAD><BODY>\n"
 	dat += {"
-	<B>Activated Modules</B>
+	<meta charset='utf-8'><B>Activated Modules</B>
 	<BR>
 	Module 1: [module_state_1 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_1]>[module_state_1]<A>" : "No Module"]<BR>
 	Module 2: [module_state_2 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_2]>[module_state_2]<A>" : "No Module"]<BR>

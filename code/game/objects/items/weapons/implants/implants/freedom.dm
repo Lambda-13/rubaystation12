@@ -11,7 +11,7 @@
 
 /obj/item/implant/freedom/get_data()
 	return {"
-	<b>Implant Specifications:</b><BR>
+	<meta charset='utf-8'><b>Implant Specifications:</b><BR>
 	<b>Name:</b> Freedom Beacon<BR>
 	<b>Life:</b> optimum 5 uses<BR>
 	<b>Important Notes:</b> <font color='red'>Illegal</font><BR>

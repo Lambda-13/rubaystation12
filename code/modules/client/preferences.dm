@@ -152,7 +152,7 @@
 		return
 	popup = new (user, "preferences_browser", "Character Setup", 1200, 800, src)
 	var/content = {"
-	<script type='text/javascript'>
+	<meta charset='utf-8'><script type='text/javascript'>
 		function update_content(data){
 			document.getElementById('content').innerHTML = data;
 		}

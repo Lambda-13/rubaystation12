@@ -14,7 +14,7 @@
 
 /obj/item/implant/explosive/get_data()
 	. = {"
-	<b>Implant Specifications:</b><BR>
+	<meta charset='utf-8'><b>Implant Specifications:</b><BR>
 	<b>Name:</b> Robust Corp RX-78 Intimidation Class Implant<BR>
 	<b>Life:</b> Activates upon codephrase.<BR>
 	<b>Important Notes:</b> Explodes<BR>

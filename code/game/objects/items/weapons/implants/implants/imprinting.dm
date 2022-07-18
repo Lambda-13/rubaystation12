@@ -8,7 +8,7 @@
 
 /obj/item/implant/imprinting/get_data()
 	. = {"
-	<b>Implant Specifications:</b><BR>
+	<meta charset='utf-8'><b>Implant Specifications:</b><BR>
 	<b>Name:</b> BB-56 "Educator" Employee Assistance Implant<BR>
 	<b>Life:</b> 1 year.<BR>
 	<HR>

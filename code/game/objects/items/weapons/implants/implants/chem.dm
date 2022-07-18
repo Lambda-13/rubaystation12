@@ -6,7 +6,7 @@
 
 /obj/item/implant/chem/get_data()
 	return {"
-	<b>Implant Specifications:</b><BR>
+	<meta charset='utf-8'><b>Implant Specifications:</b><BR>
 	<b>Name:</b> Robust Corp MJ-420 Prisoner Management Implant<BR>
 	<b>Life:</b> Deactivates upon death but remains within the body.<BR>
 	<b>Important Notes: Due to the system functioning off of nutrients in the implanted subject's body, the subject<BR>

@@ -452,7 +452,7 @@
 		module = new /obj/item/robot_module/drone(src)
 
 	var/window = {"
-	<b>Activated Modules</b><br>
+	<meta charset='utf-8'><b>Activated Modules</b><br>
 	Module 1: [module_state_1 ? "<a href=?src=\ref[src];mod=\ref[module_state_1]>[module_state_1]<a>" : "No Module"]<br>
 	Module 2: [module_state_2 ? "<a href=?src=\ref[src];mod=\ref[module_state_2]>[module_state_2]<a>" : "No Module"]<br>
 	Module 3: [module_state_3 ? "<a href=?src=\ref[src];mod=\ref[module_state_3]>[module_state_3]<a>" : "No Module"]<br>
