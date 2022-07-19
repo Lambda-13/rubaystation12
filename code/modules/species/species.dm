@@ -106,10 +106,10 @@
 	var/dusted_anim =   "dust-h"
 
 	var/death_sound
-	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
-	var/knockout_message = "collapses, having been knocked unconscious."
-	var/halloss_message = "slumps over, too weak to continue fighting..."
-	var/halloss_message_self = "The pain is too severe for you to keep going..."
+	var/death_message = "падает безвольно, его глаза мертвы и безжизненны..."
+	var/knockout_message = "падает, потеряв сознание."
+	var/halloss_message = "падает, ослабленно, чтобы продолжать..."
+	var/halloss_message_self = "Боль слишком сильна, чтобы продолжать..."
 
 	var/limbs_are_nonsolid
 	var/spawns_with_stack = 0

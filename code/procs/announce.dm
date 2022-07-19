@@ -132,8 +132,8 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
 
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
-	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
+/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "прибывает на [station_name()]", var/frequency)
+	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Автоматическая Система Оповещения", frequency)
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	// During red alert all jobs are announced on main frequency.

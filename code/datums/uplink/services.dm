@@ -324,7 +324,7 @@
 		new_record.set_skillset(jointext(skills,"\n"))
 
 	if(istype(job) && job.announced)
-		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "has completed cryogenic revival", get_announcement_frequency(job))
+		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "выходит из криокапсулы", get_announcement_frequency(job))
 	. = ..()
 
 #undef COPY_VALUE

@@ -128,16 +128,16 @@ var/global/list/additional_antag_types = list()
 		usr.client.holder.show_game_mode(usr)
 
 /datum/game_mode/proc/announce() //to be called when round starts
-	to_world("<B>The current game mode is [capitalize(name)]!</B>")
+	to_world("<B>Игровой режим [capitalize(name)]!</B>")
 	if(round_description) to_world("[round_description]")
-	if(round_autoantag) to_world("Antagonists will be added to the round automagically as needed.")
+	if(round_autoantag) to_world("Антагонисты будут добавлены в раунд через некоторое время.")
 	if(antag_templates && antag_templates.len)
-		var/antag_summary = "<b>Possible antagonist types:</b> "
+		var/antag_summary = "<b>Возможные антагонисты:</b> "
 		var/i = 1
 		for(var/datum/antagonist/antag in antag_templates)
 			if(i > 1)
 				if(i == antag_templates.len)
-					antag_summary += " and "
+					antag_summary += " и "
 				else
 					antag_summary += ", "
 			antag_summary += "[antag.role_text_plural]"
@@ -247,36 +247,36 @@ var/global/list/additional_antag_types = list()
 		return
 
 	var/list/reasons = list(
-		"political instability",
-		"quantum fluctuations",
-		"hostile raiders",
-		"derelict station debris",
-		"REDACTED",
-		"ancient alien artillery",
-		"solar magnetic storms",
-		"sentient time-travelling killbots",
-		"gravitational anomalies",
-		"wormholes to another dimension",
-		"a telescience mishap",
-		"radiation flares",
-		"supermatter dust",
-		"leaks into a negative reality",
-		"antiparticle clouds",
-		"residual bluespace energy",
-		"suspected criminal operatives",
-		"malfunctioning von Neumann probe swarms",
-		"shadowy interlopers",
-		"a stranded Vox arkship",
-		"haywire IPC constructs",
-		"rogue Unathi exiles",
-		"artifacts of eldritch horror",
-		"a brain slug infestation",
-		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenofauna specimens",
-		"an emissary for the gestalt requesting a security detail",
-		"radical Skrellian transevolutionaries",
-		"classified security operations",
-		"a gargantuan glowing goat"
+		"политическая нестабильность",
+		"квантовые флуктуации",
+		"враждебные рейдеры",
+		"заброшенные обломки станции",
+		"УДАЛЕНО",
+		"древняя инопланетная артиллерия",
+		"солнечные магнитные бури",
+		"разумные боты-убийцы, путешествующие во времени",
+		"гравитационные аномалии",
+		"червоточины в другое измерение",
+		"теленаучная неудача",
+		"радиационные вспышки",
+		"пыль сверхматерии",
+		"просачивается в негативную реальность",
+		"облака античастиц",
+		"остаточная энергия синего пространства",
+		"подозреваемые в преступной деятельности",
+		"неисправные рои зондов фон Неймана",
+		"теневые нарушители",
+		"застрявший вокс-ковчег",
+		"беспорядочные конструкции IPC",
+		"изгои-изгои Унати",
+		"артефакты сверхъестественного ужаса",
+		"заражение мозговыми слизнями",
+		"жуки-убийцы, откладывающие яйца в шелуху живых",
+		"заброшенный транспорт с представителями ксенофауны",
+		"эмиссар гештальта, запрашивающий охрану",
+		"радикальные скреллианские трансэволюционеры",
+		"секретные операции безопасности",
+		"гигантский светящийся козел"
 		)
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
 

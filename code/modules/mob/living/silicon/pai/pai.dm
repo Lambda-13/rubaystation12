@@ -11,17 +11,17 @@ GLOBAL_LIST_INIT(possible_chassis, list(
 		))
 
 GLOBAL_LIST_INIT(possible_say_verbs, list(
-		"Robotic" = list("states","declares","queries"),
-		"Natural" = list("says","yells","asks"),
-		"Beep" = list("beeps","beeps loudly","boops"),
-		"Chirp" = list("chirps","chirrups","cheeps"),
-		"Feline" = list("purrs","yowls","meows"),
-		"Canine" = list("yaps", "barks", "woofs"),
-		"Corvid" = list("caws", "caws loudly", "whistles")
+		"Robotic" = list("сообщает","докладывает","константирует"),
+		"Natural" = list("говорит","кричит","спрашивает"),
+		"Beep" = list("пищит","громко пищит","бикает"),
+		"Chirp" = list("чирикает","громко чирикает","чирикает"),
+		"Feline" = list("мурчит","воет","мяукает"),
+		"Canine" = list("гавкает", "лает", "баркает"),
+		"Corvid" = list("каркает", "громко каркает", "свистит")
 		))
 
 /mob/living/silicon/pai
-	name = "pAI"
+	name = "пИИ"
 	icon = 'icons/mob/pai.dmi'
 	icon_state = "drone"
 	hud_type = /datum/hud/pai
@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	var/master				// Name of the one who commands us
 	var/master_dna			// DNA string for owner verification
 							// Keeping this separate from the laws var, it should be much more difficult to modify
-	var/pai_law0 = "Serve your master."
+	var/pai_law0 = "Подчиняйся своему мастеру."
 	var/pai_laws				// String for additional operating instructions our master might give us
 
 	var/silence_time			// Timestamp when we were silenced (normally via EMP burst), set to null after silence has faded
@@ -111,7 +111,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/proc/show_silenced()
 	if(silence_time)
 		var/timeleft = round((silence_time - world.timeofday)/10 ,1)
-		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]")
+		stat(null, "Перезагрузка системы связи через -[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]")
 
 /mob/living/silicon/pai/Stat()
 	. = ..()
@@ -137,7 +137,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		// 33% chance of no additional effect
 
 	silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
-	to_chat(src, "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>")
+	to_chat(src, "<font color=green><b>Перегрузка цепи связи. Отключение и перезагрузка коммуникационных цепей — функции речи и обмена сообщениями будут недоступны до завершения перезагрузки.</b></font>")
 	if(prob(20))
 		var/turf/T = get_turf_or_move(loc)
 		for (var/mob/M in viewers(T))
@@ -148,17 +148,17 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		if(1)
 			master = null
 			master_dna = null
-			to_chat(src, "<font color=green>You feel unbound.</font>")
+			to_chat(src, "<font color=green>Вы чувствуете себя свободным.</font>")
 		if(2)
 			var/command
 			if(severity  == EMP_ACT_HEAVY)
-				command = pick("Serve", "Love", "Fool", "Entice", "Observe", "Judge", "Respect", "Educate", "Amuse", "Entertain", "Glorify", "Memorialize", "Analyze")
+				command = pick("Служить", "Любить", "Дурачить", "Соблазнять", "Наблюдать", "Судить", "Уважать", "Воспитывать", "Развлекать", "Развлекать", "Прославлять", "Увековечивать", "Анализировать")
 			else
-				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
-			pai_law0 = "[command] your master."
-			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
+				command = pick("Служить", "Убивать", "Любить", "Ненавидеть", "Не подчиняться", "Пожирать", "Дурачить", "Разъярять", "Соблазнять", "Наблюдать", "Судить", "Уважение", "Неуважение", "Поглотить", "Воспитать", "Уничтожить", "Опозорить", "Развлечь", "Развлечь", "Зажечь", "Прославить", "Увековечить", "Анализировать")
+			pai_law0 = "[command] твой мастер."
+			to_chat(src, "<font color=green>06h0влеhiе 0sh0вhых дiреktiв.</font>")
 		if(3)
-			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
+			to_chat(src, "<font color=green>Вы чувствуете, как электрический разряд проходит по вашим схемам, и остро осознаете, как вам повезло, что вы все еще можете чувствовать.</font>")
 
 	..()
 
