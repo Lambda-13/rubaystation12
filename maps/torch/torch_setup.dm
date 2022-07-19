@@ -5,25 +5,25 @@
 
 /datum/map/torch/get_map_info()
 	. = list()
-	. +=  "You're aboard the " + replacetext("<b>[station_name]</b>", "\improper", "") + ", an Expeditionary Corps starship. Its primary mission is looking for undiscovered sapient alien species, and general exploration along the way."
-	. +=  "The vessel is staffed with a mix of SCG government personnel and hired contractors."
-	. +=  "This area of space is uncharted, away from SCG territory. You might encounter remote outposts or drifting hulks, but no recognized government holds claim on this sector."
+	. +=  "Вы находитесь на " + replacetext("<b>[station_name]</b>", "\improper", "") + ", звездолете экспедиционного корпуса. Его основная миссия - поиск неоткрытых разумных инопланетных видов и общие исследования по пути."
+	. +=  "Судно укомплектовано как государственным персоналом SCG, так и наемными подрядчиками."
+	. +=  "Эта область космоса неизведана, вдали от территории SCG. Вы можете столкнуться с удаленными аванпостами или дрейфующими скитальцами, но ни одно официально признанное правительство не претендует на этот сектор."
 	return jointext(., "<br>")
 
 /datum/map/torch/send_welcome()
 	var/obj/effect/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/effect/overmap/visitable/ship/torch)
 
-	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><br>"
-	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
-	welcome_text += "<hr>Current system:<br /><b>[torch ? system_name : "Unknown"]</b><br /><br>"
+	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>СЭВ Факел</b> Показания датчика:</font><br>"
+	welcome_text += "Отчет создан [stationdate2text()] в [stationtime2text()]</center><br /><br />"
+	welcome_text += "<hr>Текущая система:<br /><b>[torch ? system_name : "Неизвестно"]</b><br /><br>"
 
 	if (torch) //If the overmap is disabled, it's possible for there to be no torch.
 		var/list/space_things = list()
-		welcome_text += "Current Coordinates:<br /><b>[torch.x]:[torch.y]</b><br /><br>"
-		welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br /><br>"
-		welcome_text += "Travel time to Sol:<br /><b>[rand(15,45)] days</b><br /><br>"
-		welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br /><hr>"
-		welcome_text += "Scan results show the following points of interest:<br />"
+		welcome_text += "Текущие координаты:<br /><b>[torch.x]:[torch.y]</b><br /><br>"
+		welcome_text += "Следующая система нацелена на прыжок:<br /><b>[generate_system_name()]</b><br /><br>"
+		welcome_text += "Время в пути до Солнечной Системы:<br /><b>[rand(50,150)] дней</b><br /><br>"
+		welcome_text += "Время с момента последнего посещения порта:<br /><b>[rand(120,240)] дней</b><br /><hr>"
+		welcome_text += "Результаты сканирования показывают следующие интересные места:<br />"
 
 		for(var/zlevel in map_sectors)
 			var/obj/effect/overmap/visitable/O = map_sectors[zlevel]
@@ -36,15 +36,15 @@
 			space_things |= O
 
 		for(var/obj/effect/overmap/visitable/O in space_things)
-			var/location_desc = " at present co-ordinates."
+			var/location_desc = " на данный момент координаты."
 			if(O.loc != torch.loc)
 				var/bearing = round(90 - Atan2(O.x - torch.x, O.y - torch.y),5) //fucking triangles how do they work
 				if(bearing < 0)
 					bearing += 360
-				location_desc = ", bearing [bearing]."
+				location_desc = ", азимут [bearing]."
 			welcome_text += "<li>\A <b>[O.name]</b>[location_desc]</li>"
 
 		welcome_text += "<hr>"
 
-	post_comm_message("SEV Torch Sensor Readings", welcome_text)
-	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
+	post_comm_message("Показания датчика СЭВ Факел", welcome_text)
+	minor_announcement.Announce(message = "Новое Обновление [GLOB.using_map.company_name] доступно на всех коммуникационных консолях.")
