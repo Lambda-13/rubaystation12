@@ -543,7 +543,7 @@ Helpers
 			if(saldo <= max_loss.get_balance())
 				max_loss = D
 		to_world("<b>[max_profit.owner_name]</b> сегодня заработал <font color='green'><B>БОЛЬШЕ</B></font> всех, его заработок составил <b>[GLOB.using_map.local_currency_name_short][max_profit.get_balance()]</b>.")
-		to_world("On the other hand, <b>[max_loss.owner_name]</b> сегодня заработал <font color='red'><B>МЕНЬШЕ</B></font> всех, его заработок составил <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
+		to_world("С другой стороны, <b>[max_loss.owner_name]</b> сегодня заработал <font color='red'><B>МЕНЬШЕ</B></font> всех, его заработок составил <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
 
 	mode.declare_completion()//To declare normal completion.
 
