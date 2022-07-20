@@ -1,11 +1,11 @@
 /datum/computer_file/program/rcon_console
 	filename = "rconconsole"
-	filedesc = "Удалённое управление распределителем (RCON)"
+	filedesc = "RCON Remote Control"
 	nanomodule_path = /datum/nano_module/rcon
 	program_icon_state = "generic"
 	program_key_state = "rd_key"
 	program_menu_icon = "power"
-	extended_desc = "Эта программа позволяет удаленно управлять системами распределения электроэнергии. Эта программа не может быть запущена на планшетных компьютерах."
+	extended_desc = "This program allows remote control of power distribution systems. This program can not be run on tablet computers."
 	required_access = access_engine
 	requires_ntnet = TRUE
 	network_destination = "RCON remote control system"
@@ -15,7 +15,7 @@
 	category = PROG_ENG
 
 /datum/nano_module/rcon
-	name = "Питание распределителя (RCON)"
+	name = "Power RCON"
 	var/list/known_SMESs = null
 	var/list/known_breakers = null
 	// Allows you to hide specific parts of the UI
@@ -57,7 +57,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "rcon.tmpl", "Консоль распределителя", 600, 400, state = state)
+		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Console", 600, 400, state = state)
 		if(host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
@@ -82,12 +82,12 @@
 	if(href_list["smes_in_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_in_set"])
 		if(SMES)
-			var/inputset = (input(usr, "Введите новый уровень зарядки (0-[SMES.input_level_max/1000] kW)", "Контролер СМЭК", SMES.input_level/1000) as num) * 1000
+			var/inputset = (input(usr, "Enter new input level (0-[SMES.input_level_max/1000] kW)", "SMES Input Power Control", SMES.input_level/1000) as num) * 1000
 			SMES.set_input(inputset)
 	if(href_list["smes_out_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_out_set"])
 		if(SMES)
-			var/outputset = (input(usr, "Введите новый уровень разрядки (0-[SMES.output_level_max/1000] kW)", ""Контролер СМЭК", SMES.output_level/1000) as num) * 1000
+			var/outputset = (input(usr, "Enter new output level (0-[SMES.output_level_max/1000] kW)", "SMES Input Power Control", SMES.output_level/1000) as num) * 1000
 			SMES.set_output(outputset)
 
 	if(href_list["toggle_breaker"])
@@ -97,7 +97,7 @@
 				toggle = breaker
 		if(toggle)
 			if(toggle.update_locked)
-				to_chat(usr, "Щиток был недавно выключен. Пожалуйста, подождите, прежде чем снова включить его.")
+				to_chat(usr, "The breaker box was recently toggled. Please wait before toggling it again.")
 			else
 				toggle.auto_toggle()
 	if(href_list["hide_smes"])
