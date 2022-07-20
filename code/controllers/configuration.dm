@@ -434,6 +434,8 @@
 
 	var/static/run_empty_levels = FALSE
 
+	var/static/invitelist = FALSE
+
 
 /datum/configuration/New()
 	load_config()
@@ -849,6 +851,8 @@
 				warn_autoban_duration = max(1, text2num(value))
 			if ("run_empty_levels")
 				run_empty_levels = TRUE
+			if ("useinvitelist")
+				invitelist = TRUE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 

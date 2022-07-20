@@ -614,6 +614,7 @@
 #include "code\game\jobs\_access_defs.dm"
 #include "code\game\jobs\access.dm"
 #include "code\game\jobs\access_datum.dm"
+#include "code\game\jobs\invite.dm"
 #include "code\game\jobs\whitelist.dm"
 #include "code\game\jobs\job\assistant.dm"
 #include "code\game\jobs\job\captain.dm"
