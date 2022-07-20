@@ -1,0 +1,7 @@
+#Сюда добавлять своих друзей для доступа на сервер
+#Требует включёного в конфигах USEINVITELIST
+sanecman
+tinary
+andreykey
+vanotyan
+happypala44
