@@ -148,7 +148,8 @@
 			var/area/A = get_area(src)
 			log_and_message_admins(message + " in [A.name]", null, src)
 			if(send_to_irc)
-				send2adminirc(message + " in [A.name]")
+				send2adminirc(message + " в [A.name]")
+				SSwebhooks.send(WEBHOOK_AHELP, list("text" = message + " в [A.name]"))
 		return TRUE
 	else
 		return FALSE

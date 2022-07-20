@@ -182,7 +182,8 @@ SUBSYSTEM_DEF(ticker)
 			player.new_player_panel()
 
 	if(!GLOB.admins.len)
-		send2adminirc("Раунд начался без игроков.")
+		send2adminirc("Раунд начался без админов.")
+		SSwebhooks.send(WEBHOOK_AHELP, list("text" = "Внимание: Раунд начался без админов."))
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
 	mode.process()

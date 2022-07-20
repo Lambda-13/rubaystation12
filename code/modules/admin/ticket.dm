@@ -43,7 +43,8 @@ var/global/list/ticket_panels = list()
 		src.closed_by = closed_by
 		to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has been closed by [closed_by.key].</b></span>")
 		message_staff("<span class='notice'><b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key]</b>.</span>")
-		send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key].")
+		send2adminirc("Тикет [src.owner.key_name(0)] был закрыт [closed_by.key].")
+		SSwebhooks.send(WEBHOOK_AHELP, list("text" = "Тикет [src.owner.key_name(0)] был закрыт [closed_by.key]."))
 
 	update_ticket_panels()
 
@@ -63,7 +64,8 @@ var/global/list/ticket_panels = list()
 	src.status = TICKET_ASSIGNED
 
 	message_staff("<span class='notice'><b>[assigned_admin.key]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket.</span>")
-	send2adminirc("[assigned_admin.key] has assigned themself to [src.owner.key_name(0)]'s ticket.")
+	send2adminirc("[assigned_admin.key] теперь отвечает на тикет [src.owner.key_name(0)].")
+	SSwebhooks.send(WEBHOOK_AHELP, list("text" = "[assigned_admin.key] теперь отвечает на тикет [src.owner.key_name(0)]."))
 	to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>[assigned_admin.key] has added themself to your ticket and should respond shortly. Thanks for your patience!</b></span>")
 
 	update_ticket_panels()

@@ -20,7 +20,9 @@
 		var/datum/admins/holder = admin_datums[ckey]
 		message_staff("[holder.rank] logout: [key_name(src)]")
 		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
-			send2adminirc("[key_name(src)] logged out - no more admins online.")
+			send2adminirc("[key_name(src)] вышел - теперь админов нет в игре.")
+			SSwebhooks.send(WEBHOOK_AHELP, list("text" = "[key_name(src)] вышел - теперь админов нет в игре."))
 			if(config.delist_when_no_admins && config.hub_visible)
 				world.update_hub_visibility(FALSE)
-				send2adminirc("Updated hub visibility. The server is now invisible.")
+				send2adminirc("Обновляем видимость в хабе. Сервер теперь невидим в хабе.")
+				SSwebhooks.send(WEBHOOK_AHELP, list("text" = "Обновляем видимость в хабе. Сервер теперь невидим в хабе."))

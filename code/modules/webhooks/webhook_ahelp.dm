@@ -1,5 +1,5 @@
 /decl/webhook/ahelp
-	id = WEBHOOK_OOC
+	id = WEBHOOK_AHELP
 
 /decl/webhook/ahelp/get_message(var/list/data)
 	. = ..()

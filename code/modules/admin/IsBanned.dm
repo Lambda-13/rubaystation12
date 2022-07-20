@@ -19,7 +19,7 @@
 		if(ckey(key) in invitelist)
 			log_access("") //Выглядит уёбищно работает ещё хуже
 		else
-			log_access("Ошибка входа: [key] - Не находится в списке разрешённых")
+			log_access("Ошибка входа: [key] - Не находится в списке приглашённых")
 			return list("reason"="не приглашён", "desc"="\nТы не приглашён.")
 
 	if(config.ban_legacy_system)

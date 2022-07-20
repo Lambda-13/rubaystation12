@@ -7,7 +7,6 @@
 	var/desc = "[oocsend]"
 
 	.["embeds"] = list(list(
-		"title" = "Внеигровой чат",
-		"description" = desc,
-		"color" = COLOR_WEBHOOK_DEFAULT
+		"content" = desc,
+		"embeds" = null
 	))
