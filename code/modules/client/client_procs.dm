@@ -156,9 +156,9 @@
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
 	if(byond_version < DM_VERSION)
-		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
-		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
-	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
+		to_chat(src, "<span class='warning'>Вы используете более старую версию BYOND чем та что установлена на сервере.</span>")
+		to_chat(src, "<span class='warning'>Рекомендую обновиться до [DM_VERSION]. Скачать: http://www.byond.com/download/.</span>")
+	to_chat(src, "<span class='warning'>Если титульный экран черный, ресурсы все еще загружаются. Пожалуйста, подождите, пока не появится титульный экран.</span>")
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
@@ -181,8 +181,8 @@
 	GLOB.using_map.map_info(src)
 
 	if (config.event)
-		to_chat(src, "<h1 class='alert'>Event</h1>")
-		to_chat(src, "<h2 class='alert'>An event is taking place. OOC Info:</h2>")
+		to_chat(src, "<h1 class='alert'>Событие</h1>")
+		to_chat(src, "<h2 class='alert'>Информация о событии:</h2>")
 		to_chat(src, "<span class='alert'>[config.event]</span>")
 		to_chat(src, "<br>")
 
@@ -203,13 +203,13 @@
 	send_resources()
 
 	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
+		to_chat(src, "<span class='info'>Вы ещё не прочитали изменения.</span>")
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
 		if(config.aggressive_changelog)
 			src.changes()
 
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
-		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
+		to_chat(src, "<span class='warning'>Не удается получить доступ к браузеру кеша активов, если вы используете пользовательский файл скина, разрешите DreamSeeker-у загрузить обновленную версию, если нет, то сделайте отчет об ошибке. Это не критическая проблема, но может вызвать проблемы со скачиванием ресурсов, так как невозможно узнать, когда к вам поступили дополнительные ресурсы.</span>")
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
@@ -226,7 +226,7 @@
 /client/Destroy()
 	for (var/datum/ticket/T in tickets)
 		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
-			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			message_staff("[key_name_admin(src)] покинул игру с открытым тикетом. Статус: [length(T.assigned_admins) ? "Назначен на: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Не назначен.")]")
 			break
 	if (holder)
 		holder.owner = null
