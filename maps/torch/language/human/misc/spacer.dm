@@ -1,2 +1,2 @@
 /datum/language/spacer
-	warning = "Automatically given if spawning with no languages, except on the Torch."
+	warning = "Этот язык будет известен если вы не знаете других языков, за исключением экипажа Факела."

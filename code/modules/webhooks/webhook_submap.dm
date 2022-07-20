@@ -10,7 +10,7 @@
 	var/desc = "Корабль [submap_name] обнаружен в данном секторе."
 
 	.["embeds"] = list(list(
-		"title" = "Оповещение дальнего сканирования.",
+		"title" = "Оповещение дальнего сканирования",
 		"description" = desc,
 		"color" = COLOR_WEBHOOK_DEFAULT
 	))

@@ -4,9 +4,7 @@
 /decl/webhook/ooc/get_message(var/list/data)
 	. = ..()
 	var/oocsend = data && data["text"]
-	var/desc = "[oocsend]"
-
+	var/desc = replacetext(oocsend,"@","＠")
 	.["embeds"] = list(list(
-		"content" = desc,
-		"embeds" = null
+		"content" = desc
 	))

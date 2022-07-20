@@ -114,7 +114,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	//Options bar:  mob, details ( admin = 2, dev = 3, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 	//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>ПОМОЩЬ: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
@@ -126,11 +126,13 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 				sound_to(X, 'sound/misc/staff_message.ogg')
 			to_chat(X, msg)
 	//show it to the person adminhelping too
-	to_chat(src, "<span class=\"staff_pm\">PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</span>")
+	to_chat(src, "<span class=\"staff_pm\">ЛС <b>Админам</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</span>")
 	var/admin_number_present = GLOB.admins.len - admin_number_afk
-	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
+	log_admin("ПОМОЩЬ: [key_name(src)]: [original_msg] - услышал [admin_number_present] находясь не-АФК.")
 	if(admin_number_present <= 0)
-		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")
+		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "Все админы АФК ([admin_number_afk])" : "Нет админов онлайн"]!!")
+		SSwebhooks.send(WEBHOOK_AHELP, list("text" = "[html_decode(original_msg)] - !![admin_number_afk ? "Все админы АФК ([admin_number_afk])" : "Нет админов онлайн"]!!"))
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
+		SSwebhooks.send(WEBHOOK_AHELP, list("text" = "[html_decode(original_msg)]"))
 	return

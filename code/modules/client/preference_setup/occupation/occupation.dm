@@ -83,10 +83,11 @@
 
 	var/datum/species/S = preference_species()
 	. = list()
+	. += "<meta charset='utf-8'>"
 	. += "<style>.Points,a.Points{background: #cc5555;}</style>"
 	. += "<style>a.Points:hover{background: #55cc55;}</style>"
 	. += "<tt><center>"
-	. += "<font size=3><b>Select and configure your occupation preferences. Unavailable occupations are crossed out.</b></font>"
+	. += "<font size=3><b>Выберите и настройте предпочитаемую работку. Недоступные работки отмечены почему они недоступны.</b></font>"
 	. += "<br>"
 
 	// Display everything.
@@ -153,20 +154,20 @@
 				var/bodytype = S.get_bodytype()
 				var/bad_message = ""
 				if(job.total_positions == 0 && job.spawn_positions == 0)
-					bad_message = "<b>\[UNAVAILABLE]</b>"
+					bad_message = "<b>\[НЕДОСТУПНО]</b>"
 				else if(jobban_isbanned(user, title))
-					bad_message = "<b>\[BANNED]</b>"
+					bad_message = "<b>\[ЗАБЛОКИРОВАНО]</b>"
 				else if (!job.is_species_whitelist_allowed(user.client))
-					bad_message = "\[WHITELIST RESTRICTED ([job.use_species_whitelist])]"
+					bad_message = "\[НУЖЕН ДОСТУП ([job.use_species_whitelist])]"
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
-					bad_message = "\[IN [(available_in_days)] DAYS]"
+					bad_message = "\[ЧЕРЕЗ [(available_in_days)] ДНЕЙ]"
 				else if(LAZYACCESS(job.minimum_character_age, bodytype) && user.client && (user.client.prefs.age < job.minimum_character_age[bodytype]))
-					bad_message = "\[MIN CHAR AGE: [job.minimum_character_age[bodytype]]]"
+					bad_message = "\[МИН ВОЗРАСТ ПЕРСОНАЖА: [job.minimum_character_age[bodytype]]]"
 				else if(!job.is_species_allowed(S))
-					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
+					bad_message = "<b>\[ОГРАНИЧЕНИЕ ПО РАСЕ]</b>"
 				else if(!S.check_background(job, user.client.prefs))
-					bad_message = "<b>\[BACKGROUND RESTRICTED]</b>"
+					bad_message = "<b>\[ОГРАНИЧЕНИЕ ПО БИОГРАФИИ]</b>"
 
 				var/current_level = JOB_LEVEL_NEVER
 				if(pref.job_high == job.title)
@@ -178,9 +179,9 @@
 
 				var/skill_link
 				if(pref.points_by_job[job] && (!job.available_by_default || current_level != JOB_LEVEL_NEVER))
-					skill_link = "<a class = 'Points' href='?src=\ref[src];set_skills=[title]'>Set Skills</a>"
+					skill_link = "<a class = 'Points' href='?src=\ref[src];set_skills=[title]'>Умения</a>"
 				else
-					skill_link = "<a href='?src=\ref[src];set_skills=[title]'>View Skills</a>"
+					skill_link = "<a href='?src=\ref[src];set_skills=[title]'>Умения</a>"
 				skill_link = "<td>[skill_link]</td>"
 
 				// Begin assembling the actual HTML.
@@ -220,18 +221,18 @@
 						no_link = "<font color='#55cc55'>[no_link]</font>"
 					. += "<a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_LOW]'>[yes_link]</a><a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_NEVER]'>[no_link]</a>"
 				else if(!job.available_by_default)
-					. += "<font color = '#cccccc'>Not available at roundstart.</font>"
+					. += "<font color = '#cccccc'>Недоступно с начала раунда.</font>"
 				else
 					var/level_link
 					switch(current_level)
 						if(JOB_LEVEL_LOW)
-							level_link = "<font color='#cc5555'>Low</font>"
+							level_link = "<font color='#cc5555'>Низкий</font>"
 						if(JOB_LEVEL_MEDIUM)
-							level_link = "<font color='#eecc22'>Medium</font>"
+							level_link = "<font color='#eecc22'>Средний</font>"
 						if(JOB_LEVEL_HIGH)
-							level_link = "<font color='#55cc55'>High</font>"
+							level_link = "<font color='#55cc55'>Высокий</font>"
 						else
-							level_link = "<font color=black>Never</font>"
+							level_link = "<font color=black>Никогда</font>"
 					. += "<a href='?src=\ref[src];set_job=[title];inc_level=-1'>[level_link]</a>"
 				. += "</td></tr>"
 			. += "</td></tr></table>"
@@ -239,12 +240,12 @@
 	. += "<hr/>"
 	switch(pref.alternate_option)
 		if(GET_RANDOM_JOB)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u>"
+			. += "<u><a href='?src=\ref[src];job_alternative=1'>Получить случайную работу, если выбраные недоступны</a></u>"
 		if(BE_ASSISTANT)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Be assistant if preference unavailable</a></u>"
+			. += "<u><a href='?src=\ref[src];job_alternative=1'>Получить работу помощника, если выбраная недоступна</a></u>"
 		if(RETURN_TO_LOBBY)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u>"
-	. += "<a href='?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
+			. += "<u><a href='?src=\ref[src];job_alternative=1'>Вернуться в лобби, если выбраная работа недоступна</a></u>"
+	. += "<a href='?src=\ref[src];reset_jobs=1'>\[Сброс\]</a></center>"
 	. += "<hr/>"
 	. += "</tt><br>"
 	. = jointext(.,null)
@@ -311,7 +312,7 @@
 		var/datum/job/job = locate(href_list["select_alt_title"])
 		if (job)
 			var/choices = list(job.title) + job.alt_titles
-			var/choice = input("Choose an title for [job.title].", "Choose Title", pref.GetPlayerAltTitle(job)) as anything in choices|null
+			var/choice = input("Выберите альтернативное название [job.title].", "Выберите альт название", pref.GetPlayerAltTitle(job)) as anything in choices|null
 			if(choice && CanUseTopic(user))
 				SetPlayerAltTitle(job, choice)
 				return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
@@ -335,7 +336,7 @@
 		if(istype(job))
 			var/datum/species/S = preference_species()
 			var/list/options = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
-			var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
+			var/choice = input(user, "Выберите свое отделение обслуживания", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
 			if(choice && CanUseTopic(user) && GLOB.mil_branches.is_spawn_branch(choice, S))
 				pref.branches[job.title] = choice
 				pref.ranks -= job.title
@@ -351,7 +352,7 @@
 			var/datum/species/S = preference_species()
 			var/list/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
 			var/list/options = branch_rank[branch.name] || GLOB.mil_branches.spawn_ranks(branch.name, S)
-			var/choice = input(user, "Choose your rank.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
+			var/choice = input(user, "Выберите себе ранг", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
 			if(choice && CanUseTopic(user) && GLOB.mil_branches.is_spawn_rank(branch.name, choice, preference_species()))
 				pref.ranks[job.title] = choice
 				pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
@@ -399,24 +400,24 @@
 
 		dat += "<p style='background-color: [job.selection_color]'><br><br><p>"
 		if(job.alt_titles)
-			dat += "<i><b>Alternative titles:</b> [english_list(job.alt_titles)].</i>"
+			dat += "<i><b>Альтернативы:</b> [english_list(job.alt_titles)].</i>"
 		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
 		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
 		if(job.department)
-			dat += "<b>Department:</b> [job.department]."
+			dat += "<b>Департамент:</b> [job.department]."
 			if(job.head_position)
-				dat += "You are in charge of this department."
+				dat += "Вы руководите этим отделом."
 
-		dat += "You answer to <b>[job.supervisors]</b> normally."
+		dat += "Вы отвечаете за <b>[job.supervisors]</b>."
 
 		if(job.allowed_branches)
-			dat += "You can be of following ranks:"
+			dat += "Вы слушаетесь следующие ранги:"
 			for(var/T in job.allowed_branches)
 				var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
 		dat += "<hr style='clear:left;'>"
 		if(config.wiki_url)
-			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
+			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Открыть вики в браузере</a>"
 
 		var/description = job.get_description_blurb()
 		if(description)

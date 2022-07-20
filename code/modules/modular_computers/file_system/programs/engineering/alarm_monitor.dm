@@ -1,12 +1,12 @@
 /datum/computer_file/program/alarm_monitor
 	filename = "alarmmonitor"
-	filedesc = "Alarm Monitoring"
+	filedesc = "Монитор тревог"
 	nanomodule_path = /datum/nano_module/alarm_monitor/engineering
 	ui_header = "alarm_green.gif"
 	program_icon_state = "alert-green"
 	program_key_state = "atmos_key"
 	program_menu_icon = "alert"
-	extended_desc = "This program provides visual interface for the alarm system."
+	extended_desc = "Эта программа обеспечивает визуальный интерфейс для системы сигнализации."
 	requires_ntnet = TRUE
 	network_destination = "alarm monitoring network"
 	size = 5
@@ -131,7 +131,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800, state = state)
+		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Консоль мониторинга тревог", 800, 800, state = state)
 		if(host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)

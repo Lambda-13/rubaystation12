@@ -1,2 +1,2 @@
 /datum/language/human/euro
-	warning = "Automatically given if spawning on the Torch."
+	warning = "Этот язык известен всему экипажу Факела."

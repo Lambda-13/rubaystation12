@@ -1,11 +1,11 @@
 /datum/computer_file/program/power_monitor
 	filename = "powermonitor"
-	filedesc = "Power Monitoring"
+	filedesc = "Монитор питания"
 	nanomodule_path = /datum/nano_module/power_monitor
 	program_icon_state = "power_monitor"
 	program_key_state = "power_key"
 	program_menu_icon = "battery-3"
-	extended_desc = "This program connects to sensors to provide information about electrical systems"
+	extended_desc = "Эта программа подключается к датчикам для предоставления информации об электрических системах."
 	ui_header = "power_norm.gif"
 	required_access = access_engine
 	requires_ntnet = TRUE
@@ -31,7 +31,7 @@
 			has_alert = 0
 
 /datum/nano_module/power_monitor
-	name = "Power monitor"
+	name = "Энергомонитор"
 	var/list/grid_sensors
 	var/active_sensor = null	//name_tag of the currently selected sensor
 
@@ -76,7 +76,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "power_monitor.tmpl", "Power Monitoring Console", 800, 500, state = state)
+		ui = new(user, src, ui_key, "power_monitor.tmpl", "Консоль мониторинга питанием", 800, 500, state = state)
 		if(host && host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
@@ -90,7 +90,7 @@
 	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
 		if((S.long_range) || (S.loc.z in connected_z_levels)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
-				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
+				warning("Датчик энергосети с неустановленной идентификационной меткой! [S.x]X [S.y]Y [S.z]Z")
 			else
 				grid_sensors += S
 				GLOB.destroyed_event.register(S, src, /datum/nano_module/power_monitor/proc/remove_sensor)

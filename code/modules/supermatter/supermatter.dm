@@ -25,8 +25,8 @@
 #define WARNING_DELAY 20			//seconds between warnings.
 
 /obj/machinery/power/supermatter
-	name = "supermatter core"
-	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
+	name = "суперматерия"
+	desc = "Странный полупрозрачный переливающийся кристалл. <span class='danger'>От одного взгляда на него начинает болеть голова.</span>"
 	icon = 'icons/obj/supermatter.dmi'
 	icon_state = "supermatter"
 	density = TRUE
@@ -55,13 +55,13 @@
 
 	var/damage = 0
 	var/damage_archived = 0
-	var/safe_alert = "Crystaline hyperstructure returning to safe operating levels."
+	var/safe_alert = "Кристаллическая гиперструктура возвращается к безопасному рабочему уровню."
 	var/safe_warned = 0
 	var/public_alert = 0 //Stick to Engineering frequency except for big warnings when integrity bad
 	var/warning_point = 100
-	var/warning_alert = "Danger! Crystal hyperstructure instability!"
+	var/warning_alert = "Опасность! Нестабильность кристаллической гиперструктуры!"
 	var/emergency_point = 700
-	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
+	var/emergency_alert = "КРИСТАЛЛИЧЕСКИЙ РАСПАД НЕИЗБЕЖЕН."
 	var/explosion_point = 1000
 
 	light_color = "#927a10"
@@ -125,18 +125,18 @@
 		return
 
 	// Generic checks, similar to checks done by supermatter monitor program.
-	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised", FALSE)
-	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage", FALSE)
-	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%", TRUE)
-	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%", FALSE)
-	aw_delam = status_adminwarn_check(SUPERMATTER_DELAMINATING, aw_delam, "CRIT: Supermatter is delaminating", TRUE)
+	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "ИНФОРМАЦИЯ: Кристалл Суперматерии был запущен", FALSE)
+	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "ПРЕДУПРЕЖДЕНИЕ: Кристалл Суперматерии повреждается", FALSE)
+	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "ПРЕДУПРЕЖДЕНИЕ: целостность сверхматерии ниже 50%", TRUE)
+	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "КРИТ: целостность сверхматерии ниже 25%", FALSE)
+	aw_delam = status_adminwarn_check(SUPERMATTER_DELAMINATING, aw_delam, "КРИТ: Суперматерия сейчас ебанет", TRUE)
 
 	// EPR check. Only runs when supermatter is energised. Triggers when there is very low amount of coolant in the core (less than one standard canister).
 	// This usually means a core breach or deliberate venting.
 	if(get_status() && (get_epr() < 0.5))
 		if(!aw_EPR)
 			var/area/A = get_area(src)
-			log_and_message_admins("WARN: Supermatter EPR value low. Possible core breach detected in [A.name]", null, src)
+			log_and_message_admins("ПРЕДУПРЕЖДЕНИЕ: низкое значение ЭПР суперматерии. Возможное нарушение ядра обнаружено в [A.name]", null, src)
 		aw_EPR = TRUE
 	else
 		aw_EPR = FALSE
@@ -146,7 +146,7 @@
 	if(status >= min_status)
 		if(!current_state)
 			var/area/A = get_area(src)
-			log_and_message_admins(message + " in [A.name]", null, src)
+			log_and_message_admins(message + " в [A.name]", null, src)
 			if(send_to_irc)
 				send2adminirc(message + " в [A.name]")
 				SSwebhooks.send(WEBHOOK_AHELP, list("text" = message + " в [A.name]"))
@@ -194,7 +194,7 @@
 	if(exploded)
 		return
 
-	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
+	log_and_message_admins("Сверхамерия взорвалась [x] [y] [z]")
 	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
@@ -217,7 +217,7 @@
 			continue
 
 		mob.Weaken(DETONATION_MOB_CONCUSSION)
-		to_chat(mob, SPAN_DANGER("An invisible force slams you against the ground!"))
+		to_chat(mob, SPAN_DANGER("Невидимая сила прижимает вас к земле!"))
 
 	// Effect 2: Z-level wide electrical pulse
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
@@ -262,17 +262,17 @@
 		var/integrity_message
 		switch(get_integrity())
 			if(0 to 30)
-				integrity_message = SPAN_DANGER("It looks highly unstable!")
+				integrity_message = SPAN_DANGER("Выглядит очень нестабильно!")
 			if(31 to 70)
-				integrity_message = "It appears to be losing cohesion!"
+				integrity_message = "Кажется, он теряет целостность!"
 			else
-				integrity_message = "At a glance, it seems to be in sound shape."
+				integrity_message = "На первый взгляд кажется, что он в хорошей форме."
 		to_chat(user, integrity_message)
 		if(user.skill_check(SKILL_ENGINES, SKILL_PROF))
 			var/display_power = power
 			display_power *= (0.85 + 0.3 * rand())
 			display_power = round(display_power, 20)
-			to_chat(user, "Eyeballing it, you place the relative EER at around [display_power] MeV/cm3.")
+			to_chat(user, "Оценивая это на глаз, вы определяете относительный EER около [display_power] MeV/cm3.")
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
@@ -288,7 +288,7 @@
 
 /obj/machinery/power/supermatter/proc/announce_warning()
 	var/integrity = get_integrity()
-	var/alert_msg = " Integrity at [integrity]%"
+	var/alert_msg = " Стабильность [integrity]%"
 
 	if(damage > emergency_point)
 		alert_msg = emergency_alert + alert_msg
@@ -304,10 +304,10 @@
 	else
 		alert_msg = null
 	if(alert_msg)
-		GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		GLOB.global_announcer.autosay(alert_msg, "Датчик суперматерии", "Engineering")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
-			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
+			GLOB.global_announcer.autosay("ПРЕДУПРЕЖДЕНИЕ: КРИСТАЛ СУПЕРМАТЕРИИ РАСПАДАЕТСЯ И РАССЛАИВАЕТСЯ! БЕЗОПАСНЫЕ КОМНАТЫ ОТБОЛТИРОВАНЫ.", "Датчик суперматерии")
 			public_alert = 1
 			GLOB.using_map.unbolt_saferooms() // torch
 			for(var/mob/M in GLOB.player_list)
@@ -315,7 +315,7 @@
 				if(T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
-			GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor")
+			GLOB.global_announcer.autosay(alert_msg, "Датчик суперматерии")
 			public_alert = 0
 
 /obj/machinery/power/supermatter/Process()
@@ -402,8 +402,8 @@
 		var/thermal_power = thermal_release_modifier * device_energy
 		if (debug)
 			var/heat_capacity_new = removed.heat_capacity()
-			visible_message("[src]: Releasing [round(thermal_power)] W.")
-			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
+			visible_message("[src]: Отдаёт [round(thermal_power)] W.")
+			visible_message("[src]: Отдаёт дополнительно [round((heat_capacity_new - heat_capacity)*removed.temperature)] W с выбросами.")
 
 		removed.add_thermal_energy(thermal_power)
 		removed.temperature = clamp(removed.temperature, 0, 10000)
@@ -478,9 +478,9 @@
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
 	user.visible_message(
-		SPAN_WARNING("\The [user] reaches out and touches \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
-		SPAN_DANGER(FONT_LARGE("You reach out and touch \the [src]. Instantly, you feel a curious sensation as your body turns into new and exciting forms of plasma. That was not a wise decision.")),
-		SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
+		SPAN_WARNING("\The [user] касается \the [src], вызывая резонанс во всём теле. На короткое мгновение, \his тело ярко светится, а затем превращается в пепел."),
+		SPAN_DANGER(FONT_LARGE("Касаюсь \the [src]. Чувствую как я сливаюсь со вселенной. Кажется я~~")),
+		SPAN_WARNING("Слышу неземной звон, потом что-то похожее на свист, а затем меня омывает волна тепла.")
 	)
 	Consume(user)
 
@@ -506,7 +506,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "supermatter_crystal.tmpl", "Supermatter Crystal", 500, 300)
+		ui = new(user, src, ui_key, "supermatter_crystal.tmpl", "Кристал суперматерии", 500, 300)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -514,14 +514,14 @@
 
 /obj/machinery/power/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
 	if(istype(W, /obj/item/tape_roll))
-		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src] with \the [W]."))
+		to_chat(user, SPAN_NOTICE("Вы устраняете некоторые повреждения \the [src] с помощью \the [W]."))
 		damage = max(damage - 10, 0)
 		playsound(src, 'sound/effects/tape.ogg', 25)
 
 	user.visible_message(
-		SPAN_WARNING("\The [user] touches \a [W] to \the [src], then flinches away as it flashes instantly into dust. Silence blankets the air."),
-		SPAN_DANGER("You touch \the [W] to \the [src]. Everything suddenly goes silent as it flashes into dust, and you flinch away."),
-		SPAN_WARNING("For a brief moment, you hear an oppressive, unnatural silence.")
+		SPAN_WARNING("\The [user] касается \a [W] с помощью \the [src], которое мгновенно превращаясь в пыль."),
+		SPAN_DANGER("Я касаюсь \the [W] с помощью \the [src], которое мгновенно превращается в пыль."),
+		SPAN_WARNING("На короткое мгновение вы слышите гнетущую, неестественную тишину.")
 	)
 
 	user.drop_from_inventory(W)
@@ -535,14 +535,14 @@
 		return
 	if(istype(AM, /mob/living))
 		AM.visible_message(
-			SPAN_WARNING("\The [AM] slams into \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
-			SPAN_DANGER(FONT_LARGE("You slam into \the [src], and your mind fills with unearthly shrieking. Your vision floods with light as your body instantly dissolves into dust.")),
-			SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
+			SPAN_WARNING("\The [AM] врезается в \the [src], вызывая резонанс во всём теле. На короткое мгновение, \his тело ярко светится, а затем превращается в пепел."),
+			SPAN_DANGER(FONT_LARGE("Врезаюсь в \the [src] и О БОЖЕБЛЯ~~")),
+			SPAN_WARNING("Слышу неземной звон, потом что-то похожее на свист, а затем меня омывает волна тепла.")
 		)
 	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
 		AM.visible_message(
-			SPAN_WARNING("\The [AM] smacks into \the [src] and rapidly flashes to ash."),
-			SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat.")
+			SPAN_WARNING("\The [AM] попадает в \the [src] и превращается в пепел."),
+			SPAN_WARNING("Слышу громкий треск.")
 		)
 
 	Consume(AM)
@@ -560,9 +560,9 @@
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
 		if(l in view())
-			to_chat(l, SPAN_WARNING("As \the [src] slowly stops resonating, you feel an intense wave of heat wash over you."))
+			to_chat(l, SPAN_WARNING("\the [src] медленно перестает резонировать, и я чувствую, как интенсивная волна тепла омывает меня."))
 		else
-			to_chat(l, SPAN_WARNING("You hear a muffled, shrill ringing as an intense wave of heat washes over you."))
+			to_chat(l, SPAN_WARNING("Слышу приглушенный пронзительный звон, когда меня накатывает интенсивная волна тепла."))
 	var/rads = 500
 	SSradiation.radiate(src, rads)
 
@@ -586,11 +586,11 @@
 			power *= 3
 		if(EX_ACT_LIGHT)
 			power *= 2
-	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
+	log_and_message_admins("ВНИМАНИЕ: Взрыв возле Суперматерии! Новый ЕЕР:[power].")
 
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
-	name = "supermatter shard"
-	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
+	name = "осколок суперматерии"
+	desc = "Странный полупрозрачный переливающийся кристалл, который выглядит так, будто когда-то был частью более крупной структуры. <span class='danger'>От одного взгляда на это у вас начинает болеть голова.</span>"
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
 
@@ -608,7 +608,7 @@
 
 
 /obj/machinery/power/supermatter/randomsample
-	name = "experimental supermatter sample"
+	name = "экспериментальный образец суперматерии"
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
 
@@ -647,7 +647,7 @@
 	emergency_color = RGB
 
 /obj/machinery/power/supermatter/inert
-	name = "experimental supermatter sample"
+	name = "экспериментальный образец суперматерии"
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
 	thermal_release_modifier = 0 //Basically inert
@@ -656,8 +656,8 @@
 	radiation_release_modifier = 1
 
 /obj/structure/closet/crate/secure/large/phoron/experimentalsm
-	name = "experimental supermatter crate"
-	desc = "Are you sure you want to open this?"
+	name = "ящик эксперементальной суперматерии"
+	desc = "Уверен, что хочешь открыть это?"
 
 /obj/structure/closet/crate/secure/large/phoron/experimentalsm/WillContain()
 	return list(/obj/machinery/power/supermatter/randomsample)
@@ -674,8 +674,8 @@
 
 //Warning lights
 /obj/machinery/rotating_alarm/supermatter
-	name = "Supermatter alarm"
-	desc = "An industrial rotating alarm light. This one is used to monitor supermatter engines."
+	name = "тревожная лампочка"
+	desc = "Промышленная вращающаяся сигнальная лампочка. Используется для предупреждения в случае дестабилизации суперматерии."
 
 	frame_type = /obj/item/frame/supermatter_alarm
 	construct_state = /decl/machine_construction/default/item_chassis

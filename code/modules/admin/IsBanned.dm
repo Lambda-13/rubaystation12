@@ -22,6 +22,8 @@
 			log_access("Ошибка входа: [key] - Не находится в списке приглашённых")
 			return list("reason"="не приглашён", "desc"="\nТы не приглашён.")
 
+//		world.Export("http://ip-api.com/json/[client.address]?fields=proxy,hosting")
+
 	if(config.ban_legacy_system)
 
 		//Ban Checking

@@ -1,11 +1,11 @@
 /datum/computer_file/program/atmos_control
 	filename = "atmoscontrol"
-	filedesc = "Atmosphere Control"
+	filedesc = "Контролер атмосферы"
 	nanomodule_path = /datum/nano_module/atmos_control
 	program_icon_state = "atmos_control"
 	program_key_state = "atmos_key"
 	program_menu_icon = "shuffle"
-	extended_desc = "This program allows remote control of air alarms. This program can not be run on tablet computers."
+	extended_desc = "Эта программа позволяет дистанционно управлять воздушной сигнализацией. Эта программа не может быть запущена на планшетных компьютерах."
 	required_access = access_atmospherics
 	requires_ntnet = TRUE
 	network_destination = "atmospheric control system"
@@ -15,7 +15,7 @@
 	size = 17
 
 /datum/nano_module/atmos_control
-	name = "Atmospherics Control"
+	name = "Контролер атмосферы"
 	var/obj/access = new()
 	var/emagged = FALSE
 	var/ui_ref
@@ -27,7 +27,7 @@
 	if(istype(req_access))
 		access.req_access = req_access
 	else if(req_access)
-		log_debug("\The [src] was given an unepxected req_access: [req_access]")
+		log_debug("\The [src] получил неожиданный сломаный код доступа req_access: [req_access]")
 
 	if(monitored_alarm_ids)
 		for(var/obj/machinery/alarm/alarm in SSmachines.machinery)

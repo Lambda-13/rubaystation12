@@ -1,11 +1,11 @@
 /datum/computer_file/program/shields_monitor
 	filename = "shieldsmonitor"
-	filedesc = "Shield Generators Monitoring"
+	filedesc = "Монитор генератора щита"
 	nanomodule_path = /datum/nano_module/shields_monitor
 	program_icon_state = "shield"
 	program_key_state = "generic_key"
 	program_menu_icon = "radio-on"
-	extended_desc = "This program connects to shield generators and monitors their statuses."
+	extended_desc = "Эта программа подключается к генераторам щитов и следит за их состоянием."
 	ui_header = "shield.gif"
 	requires_ntnet = TRUE
 	network_destination = "shields monitoring system"
@@ -13,7 +13,7 @@
 	category = PROG_ENG
 
 /datum/nano_module/shields_monitor
-	name = "Shields monitor"
+	name = "Монитор щита"
 	var/obj/machinery/power/shield_generator/active = null
 
 /datum/nano_module/shields_monitor/Destroy()
@@ -77,7 +77,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "shields_monitor.tmpl", "Shield Generators Monitoring", 400, 500, state = state)
+		ui = new(user, src, ui_key, "shields_monitor.tmpl", "Монитор генератора щита", 400, 500, state = state)
 		if(host.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)

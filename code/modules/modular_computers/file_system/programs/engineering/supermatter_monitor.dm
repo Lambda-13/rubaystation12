@@ -4,12 +4,12 @@
 
 /datum/computer_file/program/supermatter_monitor
 	filename = "supmon"
-	filedesc = "Supermatter Monitoring"
+	filedesc = "Монитор Суперматерии"
 	nanomodule_path = /datum/nano_module/supermatter_monitor
 	program_icon_state = "smmon_0"
 	program_key_state = "tech_key"
 	program_menu_icon = "notice"
-	extended_desc = "This program connects to specially calibrated supermatter sensors to provide information on the status of supermatter-based engines."
+	extended_desc = "Эта программа подключается к специально откалиброванным датчикам суперматерии, чтобы предоставлять информацию о состоянии двигателей на основе суперматерии."
 	ui_header = "smmon_0.gif"
 	required_access = access_engine
 	requires_ntnet = TRUE
@@ -29,7 +29,7 @@
 		update_computer_icon()
 
 /datum/nano_module/supermatter_monitor
-	name = "Supermatter monitor"
+	name = "Датчик суперматерии"
 	var/list/supermatters
 	var/obj/machinery/power/supermatter/active = null		// Currently selected supermatter crystal.
 	var/screen = SM_MONITOR_SCREEN_MAIN // Which screen the monitor is currently on
@@ -154,7 +154,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "supermatter_monitor.tmpl", "Supermatter Monitoring", 600, 400, state = state)
+		ui = new(user, src, ui_key, "supermatter_monitor.tmpl", "Датчик суперматерии", 600, 400, state = state)
 		if(host.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
@@ -178,7 +178,7 @@
 		screen = SM_MONITOR_SCREEN_MAIN
 		return 1
 	if (href_list["set_threshhold"])
-		var/new_value = input(usr, "Select a new threshhold, or set to -1 to disable:", "Threshhold", href_list["value"]) as null|num
+		var/new_value = input(usr, "Выберите новый порог или установите значение -1, чтобы отключить:", "Порог", href_list["value"]) as null|num
 		if (new_value != null)
 			set_threshhold_value(href_list["threshhold"], href_list["category"], new_value)
 		return 1
