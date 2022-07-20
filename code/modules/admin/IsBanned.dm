@@ -1,25 +1,25 @@
 //Blocks an attempt to connect before even creating our client datum thing.
 /world/IsBanned(key,address,computer_id)
 
-	if(config.configinvitelist && ckey(key) in !invitelist)
-		return list("reason"="не приглашён", "desc"="\nТы не приглашён.")
-
 	if(ckey(key) in admin_datums)
 		return ..()
 
 	//Guest Checking
 	if(!config.guests_allowed && IsGuestKey(key))
-		log_access("Failed Login: [key] - Guests not allowed")
-		message_admins("<span class='notice'>Failed Login: [key] - Guests not allowed</span>")
-		return list("reason"="guest", "desc"="\nReason: Guests not allowed. Please sign in with a byond account.")
+		log_access("Ошибка входа: [key] - Гостевой аккаунт")
+		message_admins("<span class='notice'>Ошибка входа: [key] - Гостевой аккаунт</span>")
+		return list("reason"="гостевой аккаунт", "desc"="\nПричина: гостевой аккаунт. Зарегестрируйся или войди в уже существующий.")
+
+	if(config.configinvitelist && ckey(key) in !invitelist)
+		return list("reason"="не приглашён", "desc"="\nТы не приглашён.")
 
 	if(config.ban_legacy_system)
 
 		//Ban Checking
 		. = CheckBan( ckey(key), computer_id, address )
 		if(.)
-			log_access("Failed Login: [key] [computer_id] [address] - Banned [.["reason"]]")
-			message_admins("<span class='notice'>Failed Login: [key] id:[computer_id] ip:[address] - Banned [.["reason"]]</span>")
+			log_access("Ошибка входа: [key] [computer_id] [address] - Блокировка [.["reason"]]")
+			message_admins("<span class='notice'>Ошибка входа: [key] id:[computer_id] ip:[address] - Блокировка [.["reason"]]</span>")
 			return .
 
 		return ..()	//default pager ban stuff
@@ -37,8 +37,8 @@
 		var/failedip = 1
 
 		if (config.minimum_player_age && get_player_age(key) < config.minimum_player_age)
-			message_admins("[key] tried to join but did not meet the configured minimum player age.")
-			return list("reason"="player age", "desc"="This server is not currently allowing accounts with a low number of days since first connection to join.")
+			message_admins("[key] пытался присоединиться, но не достиг установленного минимального возраста игрока.")
+			return list("reason"="возраст аккаунта", "desc"="Этот сервер в настоящее время не разрешает присоединяться учетным записям с небольшим количеством дней с момента создания.")
 
 		var/ipquery = ""
 		var/cidquery = ""
@@ -67,14 +67,14 @@
 
 			var/expires = ""
 			if(text2num(duration) > 0)
-				expires = " The ban is for [minutes_to_readable(duration)] and expires on [expiration] (server time)."
+				expires = "  Блокировка выдана на [minutes_to_readable(duration)] и истекает [expiration] (по времени сервера)."
 
-			var/desc = "\nReason: You, or another user of this computer or connection ([pckey]) is banned from playing here. The ban reason is:\n[reason]\nThis ban was applied by [ackey] on [bantime], [expires]"
+			var/desc = "\nПричина: ([pckey]) не имеет права играть на данном сервере. Описание: \n[reason]\nБлокировка выдана [ackey] в [bantime].\n[expires]"
 
 			return list("reason"="[bantype]", "desc"="[desc]")
 
 		if (failedcid)
-			message_admins("[key] has logged in with a blank computer id in the ban check.")
+			message_admins("[key] зашёл на сервер с пустым cid в проверке бана.")
 		if (failedip)
-			message_admins("[key] has logged in with a blank ip in the ban check.")
+			message_admins("[key] зашел на сервер с пустым ip в проверке бана.")
 		return ..()	//default pager ban stuff
