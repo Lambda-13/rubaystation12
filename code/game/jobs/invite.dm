@@ -1,19 +1,16 @@
-#define INVITELISTFILE "config/invite.txt"
-
 var/global/list/invitelist = list()
 
 /hook/startup/proc/loadInvitelist()
 	if(config.configinvitelist)
 		load_invitelist()
-	return 1
+	else
+		return 1
 
 /proc/load_invitelist()
-	invitelist = file2list(INVITELISTFILE)
-	if(!invitelist.len)	invitelist = null
-
-/proc/check_invitelist(mob/M /*, var/rank*/)
-	if(!invitelist)
+	var/text = file2text("config/invite.txt")
+	if (!text)
+		log_misc("Failed to load config/invite.txt")
 		return 0
-	return ("[M.ckey]" in invitelist)
-
-#undef INVITELISTFILE
+	else
+		invitelist = splittext(text, "\n")
+		return 1

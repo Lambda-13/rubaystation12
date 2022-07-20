@@ -1,6 +1,11 @@
 //Blocks an attempt to connect before even creating our client datum thing.
 /world/IsBanned(key,address,computer_id)
 
+	if(computer_id == "0")
+		log_access("Ошибка входа: [key] - Нулевой cid")
+		message_admins("<span class='notice'>Ошибка входа: [key] - Нулевой cid</span>")
+		return list("reason"="нулевой cid", "desc"="\n⠄⠄⠄⠄⢀⡤⣖⣞⣮⢾⢽⣳⢯⢿⢷⣦⣄⠄⠄⠐⠄\n⠐⠄⠄⣴⣯⣯⢷⣻⣺⢽⣫⢾⣝⡵⡯⣾⣽⢷⣄⠄⠄\n⠄⢀⣼⢿⡽⣾⢯⣷⣻⣽⢽⣳⣳⢽⡺⡮⣫⢯⢿⣦⠄\n⠄⣼⣿⢽⡯⣿⡽⣾⡿⣞⣯⢷⢯⢯⢯⢯⡺⡪⡳⣻⠄\n⣴⣿⣿⣽⣟⣷⣟⣯⣿⡽⣞⣯⢿⡽⡽⡵⣝⢮⣫⣺⠄\n⠄⠄⠉⠉⠛⠛⠛⠛⠛⠻⠿⠿⠿⣿⣿⡿⣿⣽⣾⣾⡀\n⠐⡀⠢⠄⡀⠄⢀⣄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢀⠣\n⡀⠂⠈⣪⣌⡤⢾⠿⠕⢤⣤⣨⣠⢤⠡⠄⠄⡌⠄⡐⡐\n⠐⠈⠄⠱⣻⡻⠶⢦⠶⠯⠟⢟⢯⢳⢩⡂⡆⡇⡐⡐⢌\n⢁⠐⠄⠈⣾⣓⢝⣛⡛⡗⣞⣗⢕⡕⢕⠕⡸⡀⠂⠌⡂\n⡀⠂⡁⠄⡿⣕⢷⣻⢽⢝⢞⢮⢳⠑⠅⢑⢜⠜⣬⢐⢈\n⠄⢁⣀⣴⠋⠪⠳⠹⠵⠹⠘⠈⠂⠁⡐⡸⡘⣠⡳⡣⣪\n⣽⢟⣿⡣⠄⢸⡄⠠⠠⡠⢠⢐⠨⡐⣴⣹⡨⣞⣎⢎⢺\n⠏⠟⠛⠃⠄⠘⠛⠊⠊⠘⠐⠅⠇⠻⠛⠓⠛⠛⠪⠓⠹")
+
 	if(ckey(key) in admin_datums)
 		return ..()
 
@@ -10,8 +15,12 @@
 		message_admins("<span class='notice'>Ошибка входа: [key] - Гостевой аккаунт</span>")
 		return list("reason"="гостевой аккаунт", "desc"="\nПричина: гостевой аккаунт. Зарегестрируйся или войди в уже существующий.")
 
-	if(config.configinvitelist && ckey(key) in !invitelist)
-		return list("reason"="не приглашён", "desc"="\nТы не приглашён.")
+	if(config.configinvitelist == TRUE)
+		if(ckey(key) in invitelist)
+			log_access("") //Выглядит уёбищно работает ещё хуже
+		else
+			log_access("Ошибка входа: [key] - Не находится в списке разрешённых")
+			return list("reason"="не приглашён", "desc"="\nТы не приглашён.")
 
 	if(config.ban_legacy_system)
 
