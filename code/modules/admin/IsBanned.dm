@@ -1,5 +1,9 @@
 //Blocks an attempt to connect before even creating our client datum thing.
 /world/IsBanned(key,address,computer_id)
+
+	if(config.configinvitelist && ckey(key) in !invitelist)
+		return list("reason"="не приглашён", "desc"="\nТы не приглашён.")
+
 	if(ckey(key) in admin_datums)
 		return ..()
 

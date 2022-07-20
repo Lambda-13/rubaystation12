@@ -434,7 +434,7 @@
 
 	var/static/run_empty_levels = FALSE
 
-	var/static/invitelist = FALSE
+	var/static/configinvitelist = FALSE
 
 
 /datum/configuration/New()
@@ -852,7 +852,7 @@
 			if ("run_empty_levels")
 				run_empty_levels = TRUE
 			if ("useinvitelist")
-				invitelist = TRUE
+				configinvitelist = TRUE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
