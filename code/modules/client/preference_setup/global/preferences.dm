@@ -347,7 +347,7 @@ var/global/list/_client_preferences_by_type
 
 
 /datum/client_preference/staff/show_runtime_logs
-	description = "❤Рантайм логи❤
+	description = "❤Рантайм логи❤"
 	key = "CHAT_RUNTIMELOGS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 	default_value = GLOB.PREF_HIDE
