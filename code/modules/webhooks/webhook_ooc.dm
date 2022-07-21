@@ -7,6 +7,5 @@
 	var/desc = replacetext(oocsend,"@","＠")
 	.["embeds"] = list(list(
 		"title" = desc,
-		"embeds" = null,
-		"attachments" = []
+		"embeds" = null
 	))
