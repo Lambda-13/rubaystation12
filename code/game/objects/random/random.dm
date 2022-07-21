@@ -63,7 +63,7 @@
 /obj/random/technology_scanner
 	name = "random scanner"
 	desc = "This is a random technology scanner."
-	icon = 'icons/obj/atmos_analyzer.dmi'
+	icon = 'lambda/icons/obj/atmos_analyzer.dmi'
 	icon_state = "atmos"
 
 /obj/random/technology_scanner/spawn_choices()
@@ -543,7 +543,7 @@
 /obj/random/material //Random materials for building stuff
 	name = "random material"
 	desc = "This is a random material."
-	icon = 'icons/obj/materials.dmi'
+	icon = 'lambda/icons/obj/materials.dmi'
 	icon_state = "sheet"
 
 /obj/random/material/spawn_choices()

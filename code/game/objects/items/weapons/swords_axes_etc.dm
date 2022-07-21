@@ -55,7 +55,7 @@
 	else
 		user.visible_message("<span class='notice'>\The [user] collapses their telescopic baton.</span>",\
 		"<span class='notice'>You collapse the baton.</span>",\
-		"You hear a click.")
+		"Слышу щёлканье.")
 		w_class = ITEM_SIZE_SMALL
 		force = 3//not so robust now
 		attack_verb = list("hit", "punched")

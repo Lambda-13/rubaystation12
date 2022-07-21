@@ -18,7 +18,7 @@
 #define TURF_FIRE_STATE_MAX 4
 
 /obj/effect/turf_fire
-	icon = 'icons/effects/turf_fire.dmi'
+	icon = 'lambda/icons/effects/turf_fire.dmi'
 	icon_state = "red_small"
 	layer = BELOW_DOOR_LAYER
 	anchored = TRUE

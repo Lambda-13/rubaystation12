@@ -12,15 +12,15 @@
  * DATA CARDS - Used for the IC data card reader
  */
 /obj/item/card
-	name = "card"
-	desc = "Does card things."
-	icon = 'icons/obj/card.dmi'
+	name = "карта"
+	desc = "Обычная карточка."
+	icon = 'lambda/icons/obj/card.dmi'
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
 /obj/item/card/union
-	name = "union card"
-	desc = "A card showing membership in the local worker's union."
+	name = "карта союза"
+	desc = "Эта карта показывает что данный владелец состоит в профсоюзе рабочих."
 	icon_state = "union"
 	slot_flags = SLOT_ID
 	var/signed_by
@@ -28,25 +28,25 @@
 /obj/item/card/union/examine(mob/user)
 	. = ..()
 	if(signed_by)
-		to_chat(user, "It has been signed by [signed_by].")
+		to_chat(user, "Виднеется подпись [signed_by].")
 	else
-		to_chat(user, "It has a blank space for a signature.")
+		to_chat(user, "Не вижу ничего.")
 
 /obj/item/card/union/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/pen))
 		if(signed_by)
-			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
+			to_chat(user, SPAN_WARNING("\The [src] уже подписана."))
 		else
-			var/signature = sanitizeSafe(input("What do you want to sign the card as?", "Union Card") as text, MAX_NAME_LEN)
+			var/signature = sanitizeSafe(input("Как вы хотите подписать карту?", "карта союза") as text, MAX_NAME_LEN)
 			if(signature && !signed_by && !user.incapacitated() && Adjacent(user))
 				signed_by = signature
-				user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with a flourish."))
+				user.visible_message(SPAN_NOTICE("\The [user] подписывает \the [src]."))
 		return
 	..()
 
 /obj/item/card/data
-	name = "data card"
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has a stripe running down the middle."
+	name = "дата диск"
+	desc = "Пластиковая карта с магнитной полосой для простого и быстрого хранения и передачи данных. У этого есть полоса, идущая по середине."
 	icon_state = "data_1"
 	var/detail_color = COLOR_ASSEMBLY_ORANGE
 	var/function = "storage"
@@ -60,7 +60,7 @@
 
 /obj/item/card/data/on_update_icon()
 	overlays.Cut()
-	var/image/detail_overlay = image('icons/obj/card.dmi', src,"[icon_state]-color")
+	var/image/detail_overlay = image('lambda/icons/obj/card.dmi', src,"[icon_state]-color")
 	detail_overlay.color = detail_color
 	overlays += detail_overlay
 
@@ -72,11 +72,11 @@
 	return ..()
 
 /obj/item/card/data/full_color
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has the entire card colored."
+	desc = "Пластиковая карта с магнитной полосой для простого и быстрого хранения и передачи данных. В этом случае вся карта окрашена."
 	icon_state = "data_2"
 
 /obj/item/card/data/disk
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicibly looks like a floppy disk."
+	desc = "Пластиковая карта с магнитной полосой для простого и быстрого хранения и передачи данных. Этот необъяснимо похож на дискету."
 	icon_state = "data_3"
 
 /*
@@ -84,8 +84,8 @@
  */
 
 /obj/item/card/emag_broken
-	desc = "It's a blank ID card with a magnetic strip and some odd circuitry attached."
-	name = "identification card"
+	desc = "Это пустое удостоверение личности с магнитной полосой и какой-то странной схемой."
+	name = "карточка"
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
@@ -93,19 +93,19 @@
 /obj/item/card/emag_broken/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_ADEPT) || player_is_antag(user.mind)))
-		to_chat(user, SPAN_WARNING("You can tell the components are completely fried; whatever use it may have had before is gone."))
+		to_chat(user, SPAN_WARNING("Схема внутри карты сгорела!"))
 
 /obj/item/card/emag_broken/get_antag_info()
 	. = ..()
-	. += "You can use this cryptographic sequencer in order to subvert electronics or forcefully open doors you don't have access to. These actions are irreversible and the card only has a limited number of charges!"
+	. += "Вы можете использовать этот криптографический секвенсор, чтобы разрушить электронику или силой открыть двери, к которым у вас нет доступа. Эти действия необратимы, а количество использований карты ограничено!"
 
 /obj/item/card/emag
-	desc = "It's a blank ID card with a magnetic strip and some odd circuitry attached."
-	name = "identification card"
+	desc = "Это пустое удостоверение личности с магнитной полосой и какой-то странной схемой."
+	name = "карточка"
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
-	var/uses = 10
+	var/uses = 20
 
 var/global/const/NO_EMAG_ACT = -50
 
@@ -120,7 +120,7 @@ var/global/const/NO_EMAG_ACT = -50
 		log_and_message_admins("emagged \an [A].")
 
 	if(uses<1)
-		user.visible_message("<span class='warning'>\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent.</span>")
+		user.visible_message("<span class='warning'>Плата внутри \The [src] сгорает!</span>")
 		var/obj/item/card/emag_broken/junk = new(user.loc)
 		junk.add_fingerprint(user)
 		qdel(src)
@@ -133,11 +133,11 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/emag/get_antag_info()
 	. = ..()
-	. += "You can use this cryptographic sequencer in order to subvert electronics or forcefully open doors you don't have access to. These actions are irreversible and the card only has a limited number of charges!"
+	. += "Вы можете использовать этот криптографический секвенсор, чтобы разрушить электронику или силой открыть двери, к которым у вас нет доступа. Эти действия необратимы, а количество использований карты ограничено!"
 
 /obj/item/card/id
-	name = "identification card"
-	desc = "A card used to provide ID and determine access."
+	name = "карточка"
+	desc = "Карта, используемая для предоставления удостоверения личности и определения доступа."
 	icon_state = "base"
 	item_state = "card-id"
 	slot_flags = SLOT_ID
@@ -271,28 +271,28 @@ var/global/const/NO_EMAG_ACT = -50
 		id_card.military_rank = char_rank
 
 /obj/item/card/id/proc/dat()
-	var/list/dat = list("<table><tr><td>")
-	dat += text("Name: []</A><BR>", "[formal_name_prefix][registered_name][formal_name_suffix]")
-	dat += text("Sex: []</A><BR>\n", sex)
-	dat += text("Age: []</A><BR>\n", age)
+	var/list/dat = list("<table><meta charset='ut-8'><tr><td>")
+	dat += text("Имя: []</A><BR>", "[formal_name_prefix][registered_name][formal_name_suffix]")
+	dat += text("Пол: []</A><BR>\n", sex)
+	dat += text("Возраст: []</A><BR>\n", age)
 
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
+		dat += text("Работает на: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
+		dat += text("Ранг: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
 
-	dat += text("Assignment: []</A><BR>\n", assignment)
-	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
-	dat += text("Blood Type: []<BR>\n", blood_type)
-	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
+	dat += text("Должность: []</A><BR>\n", assignment)
+	dat += text("Отпечатки: []</A><BR>\n", fingerprint_hash)
+	dat += text("Тип крови: []<BR>\n", blood_type)
+	dat += text("Хэш ДНК []<BR><BR>\n", dna_hash)
 	if(front && side)
 		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
 	dat += "</tr></table>"
 	return jointext(dat,null)
 
 /obj/item/card/id/attack_self(mob/user as mob)
-	user.visible_message("\The [user] shows you: [icon2html(src, viewers(get_turf(src)))] [src.name]. The assignment on the card: [src.assignment]",\
-		"You flash your ID card: [icon2html(src, viewers(get_turf(src)))] [src.name]. The assignment on the card: [src.assignment]")
+	user.visible_message("\The [user] показывает мне: [icon2html(src, viewers(get_turf(src)))] [src.name]. На карте написано: [src.assignment]",\
+		"Показываю карту: [icon2html(src, viewers(get_turf(src)))] [src.name]. На карте написано: [src.assignment]")
 
 	src.add_fingerprint(user)
 	return
@@ -308,10 +308,10 @@ var/global/const/NO_EMAG_ACT = -50
 	set category = "Object"
 	set src in usr
 
-	to_chat(usr, text("[icon2html(src, usr)] []: The current assignment on the card is [].", src.name, src.assignment))
-	to_chat(usr, "The blood type on the card is [blood_type].")
-	to_chat(usr, "The DNA hash on the card is [dna_hash].")
-	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
+	to_chat(usr, text("[icon2html(src, usr)] []: Должность [].", src.name, src.assignment))
+	to_chat(usr, "Группа крови [blood_type].")
+	to_chat(usr, "Хэш ДНК [dna_hash].")
+	to_chat(usr, "Отпечатки [fingerprint_hash].")
 	return
 
 /decl/vv_set_handler/id_card_military_branch
@@ -338,7 +338,7 @@ var/global/const/NO_EMAG_ACT = -50
 				id.military_rank = null
 			return
 
-	to_chat(client, SPAN_WARNING("Input, must be an existing branch - [var_value] is invalid"))
+	to_chat(client, SPAN_WARNING("Ввод, должен быть существующей корпорацией - [var_value] несуществует"))
 
 /decl/vv_set_handler/id_card_military_rank
 	handled_type = /obj/item/card/id
@@ -350,7 +350,7 @@ var/global/const/NO_EMAG_ACT = -50
 		return
 
 	if(!id.military_branch)
-		to_chat(client, SPAN_WARNING("military_branch not set - No valid ranks available"))
+		to_chat(client, SPAN_WARNING("military_branch не введён"))
 		return
 
 	if(ispath(var_value, /datum/mil_rank))
@@ -370,21 +370,21 @@ var/global/const/NO_EMAG_ACT = -50
 	to_chat(client, SPAN_WARNING("Input must be an existing rank belonging to military_branch - [var_value] is invalid"))
 
 /obj/item/card/id/silver
-	name = "identification card"
-	desc = "A silver card which shows honour and dedication."
+	name = "карточка"
+	desc = "Серебряная, с повышеным доступом."
 	item_state = "silver_id"
 	job_access_type = /datum/job/hop
 
 /obj/item/card/id/gold
-	name = "identification card"
-	desc = "A golden card which shows power and might."
+	name = "карточка"
+	desc = "Золотая, с полным доступом."
 	job_access_type = /datum/job/captain
 	color = "#d4c780"
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/syndicate_command
-	name = "syndicate ID card"
-	desc = "An ID straight from the Syndicate."
+	name = "карточка"
+	desc = "Принадлежит агентам Синдиката."
 	registered_name = "Syndicate"
 	assignment = "Syndicate Overlord"
 	access = list(access_syndicate, access_external_airlocks)
@@ -392,8 +392,8 @@ var/global/const/NO_EMAG_ACT = -50
 	detail_color = COLOR_GRAY40
 
 /obj/item/card/id/captains_spare
-	name = "captain's spare ID"
-	desc = "The spare ID of the High Lord himself."
+	name = "карточка"
+	desc = "Запасная карта капитана."
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"
@@ -404,8 +404,8 @@ var/global/const/NO_EMAG_ACT = -50
 	..()
 
 /obj/item/card/id/synthetic
-	name = "\improper Synthetic ID"
-	desc = "Access module for lawed synthetics."
+	name = "\improper карточка"
+	desc = "Модуль доступа к легальной синтетике."
 	icon_state = "robot_base"
 	assignment = "Synthetic"
 	detail_color = COLOR_AMBER
@@ -415,8 +415,8 @@ var/global/const/NO_EMAG_ACT = -50
 	..()
 
 /obj/item/card/id/centcom
-	name = "\improper CentCom. ID"
-	desc = "An ID straight from Cent. Com."
+	name = "\improper карточка ЦК"
+	desc = "Прямиком с Центрального Командования."
 	registered_name = "Central Command"
 	assignment = "General"
 	color = COLOR_GRAY40
@@ -432,7 +432,7 @@ var/global/const/NO_EMAG_ACT = -50
 	access |= get_all_station_access()
 
 /obj/item/card/id/centcom/ERT
-	name = "\improper Emergency Response Team ID"
+	name = "\improper карточка ОБР"
 	assignment = "Emergency Response Team"
 
 /obj/item/card/id/centcom/ERT/New()
@@ -440,16 +440,16 @@ var/global/const/NO_EMAG_ACT = -50
 	access |= get_all_station_access()
 
 /obj/item/card/id/foundation_civilian
-	name = "operant registration card"
-	desc = "A registration card in a faux-leather case. It marks the named individual as a registered, law-abiding psionic."
+	name = "карточка оператора"
+	desc = "Регистрационная карточка в футляре из искусственной кожи. Он помечает названного человека как зарегистрированного законопослушного псионика."
 	icon_state = "warrantcard_civ"
 
 /obj/item/card/id/foundation_civilian/on_update_icon()
 	return
 
 /obj/item/card/id/foundation
-	name = "\improper Foundation warrant card"
-	desc = "A warrant card in a handsome leather case."
+	name = "\improper карточка Фонда"
+	desc = "Ордерная карточка в красивом кожаном футляре."
 	assignment = "Field Agent"
 	icon_state = "warrantcard"
 
@@ -494,8 +494,8 @@ var/global/const/NO_EMAG_ACT = -50
 
 // Department-flavor IDs
 /obj/item/card/id/medical
-	name = "identification card"
-	desc = "A card issued to medical staff."
+	name = "карточка"
+	desc = "Карта, выдаваемая медицинскому персоналу."
 	job_access_type = /datum/job/doctor
 	detail_color = COLOR_PALE_BLUE_GRAY
 
@@ -512,14 +512,14 @@ var/global/const/NO_EMAG_ACT = -50
 	job_access_type = /datum/job/Paramedic
 
 /obj/item/card/id/medical/head
-	name = "identification card"
-	desc = "A card which represents care and compassion."
+	name = "карточка"
+	desc = "Карта, символизирующая заботу и сострадание."
 	job_access_type = /datum/job/cmo
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/security
-	name = "identification card"
-	desc = "A card issued to security staff."
+	name = "карточка"
+	desc = "Карта, выдаваемая сотрудникам службы безопасности."
 	job_access_type = /datum/job/officer
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_MAROON
@@ -531,26 +531,26 @@ var/global/const/NO_EMAG_ACT = -50
 	job_access_type = /datum/job/detective
 
 /obj/item/card/id/security/head
-	name = "identification card"
-	desc = "A card which represents honor and protection."
+	name = "карточка"
+	desc = "Карта, которая представляет честь и защиту."
 	job_access_type = /datum/job/hos
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/engineering
-	name = "identification card"
-	desc = "A card issued to engineering staff."
+	name = "карточка"
+	desc = "Карточка, выдаваемая инженерно-техническому персоналу."
 	job_access_type = /datum/job/engineer
 	detail_color = COLOR_SUN
 
 /obj/item/card/id/engineering/head
-	name = "identification card"
-	desc = "A card which represents creativity and ingenuity."
+	name = "карточка"
+	desc = "Карта, олицетворяющая творчество и изобретательность."
 	job_access_type = /datum/job/chief_engineer
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/science
-	name = "identification card"
-	desc = "A card issued to science staff."
+	name = "карточка"
+	desc = "Карточка, выдаваемая научному персоналу."
 	job_access_type = /datum/job/scientist
 	detail_color = COLOR_PALE_PURPLE_GRAY
 
@@ -561,14 +561,14 @@ var/global/const/NO_EMAG_ACT = -50
 	job_access_type = /datum/job/roboticist
 
 /obj/item/card/id/science/head
-	name = "identification card"
-	desc = "A card which represents knowledge and reasoning."
+	name = "карточка"
+	desc = "Карта, которая представляет знания и рассуждения."
 	job_access_type = /datum/job/rd
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/cargo
-	name = "identification card"
-	desc = "A card issued to cargo staff."
+	name = "карточка"
+	desc = "Карточка, выдаваемая персоналу карго."
 	job_access_type = /datum/job/cargo_tech
 	detail_color = COLOR_BROWN
 
@@ -576,14 +576,14 @@ var/global/const/NO_EMAG_ACT = -50
 	job_access_type = /datum/job/mining
 
 /obj/item/card/id/cargo/head
-	name = "identification card"
-	desc = "A card which represents service and planning."
+	name = "карточка"
+	desc = "Карта, которая представляет служение и планирование."
 	job_access_type = /datum/job/qm
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/civilian
-	name = "identification card"
-	desc = "A card issued to civilian staff."
+	name = "карточка"
+	desc = "Карточка, выдаваемая гражданскому персоналу."
 	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
@@ -607,13 +607,13 @@ var/global/const/NO_EMAG_ACT = -50
 	job_access_type = /datum/job/chaplain
 
 /obj/item/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.
-	name = "identification card"
-	desc = "A card which represents common sense and responsibility."
+	name = "карточка"
+	desc = "Карта, которая представляет здравый смысл и ответственность."
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/merchant
-	name = "identification card"
-	desc = "A card issued to Merchants, indicating their right to sell and buy goods."
+	name = "карточка"
+	desc = "Карточка, выдаваемая Торговцам, с указанием их права на продажу и покупку товаров."
 	access = list(access_merchant)
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_BEIGE

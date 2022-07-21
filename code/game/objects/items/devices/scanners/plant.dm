@@ -1,8 +1,8 @@
 
 /obj/item/device/scanner/plant
-	name = "plant analyzer"
-	desc = "A hand-held botanical scanner used to analyze plants."
-	icon = 'icons/obj/plant_analyzer.dmi'
+	name = "анализатор растений"
+	desc = "Любимый друг ботаника и дионей."
+	icon = 'lambda/icons/obj/plant_analyzer.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'
@@ -54,9 +54,10 @@
 	var/list/dat = list()
 
 	var/form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
-	dat += "<h3>Plant data for [form_title]</h3>"
+	dat += "<meta charset='utf-8'>
+	dat += "<h3>Анализ [form_title]</h3>"
 
-	dat += "<h2>General Data</h2>"
+	dat += "<h2>Информация</h2>"
 
 	dat += "<table>"
 	dat += "<tr><td><b>Endurance</b></td><td>[grown_seed.get_trait(TRAIT_ENDURANCE)]</td></tr>"
@@ -67,13 +68,13 @@
 	dat += "</table>"
 
 	if(grown_reagents && grown_reagents.reagent_list && grown_reagents.reagent_list.len)
-		dat += "<h2>Reagent Data</h2>"
+		dat += "<h2>Реагенты</h2>"
 
 		dat += "<br>This sample contains: "
 		for(var/datum/reagent/R in grown_reagents.reagent_list)
 			dat += "<br>- [R.name], [grown_reagents.get_reagent_amount(R.type)] unit(s)"
 
-	dat += "<h2>Other Data</h2>"
+	dat += "<h2>Прочее</h2>"
 
 	if(grown_seed.get_trait(TRAIT_HARVEST_REPEAT))
 		dat += "This plant can be harvested repeatedly.<br>"

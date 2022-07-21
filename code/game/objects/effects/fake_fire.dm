@@ -1,6 +1,6 @@
 /obj/effect/fake_fire
 	blend_mode = BLEND_ADD
-	icon = 'icons/effects/fire.dmi'
+	icon = 'lambda/icons/effects/fire.dmi'
 	icon_state = "3"
 	layer = FIRE_LAYER
 	var/lifetime = 10 SECONDS //0 for infinite

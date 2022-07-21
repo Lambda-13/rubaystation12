@@ -1,5 +1,5 @@
 /obj/item/sample
-	name = "forensic sample"
+	name = "судебный образец"
 	icon = 'icons/obj/forensics.dmi'
 	item_flags = ITEM_FLAG_NO_PRINT
 	w_class = ITEM_SIZE_TINY
@@ -16,7 +16,7 @@
 /obj/item/sample/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && object)
-		to_chat(user, "The label says: '[object]'")
+		to_chat(user, "Тут написано: '[object]'")
 
 /obj/item/sample/print/New(var/newloc, var/atom/supplied)
 	..(newloc, supplied)
@@ -32,9 +32,9 @@
 	if(!supplied.evidence || !supplied.evidence.len)
 		return 0
 	evidence |= supplied.evidence
-	SetName("[initial(name)] (combined)")
+	SetName("[initial(name)] (обьединёный)")
 	object = supplied.object + ", " + object
-	to_chat(user, "<span class='notice'>You transfer the contents of \the [supplied] into \the [src].</span>")
+	to_chat(user, "<span class='notice'>Перенёс содержимое из \the [supplied] в \the [src].</span>")
 	return 1
 
 /obj/item/sample/print/merge_evidence(var/obj/item/sample/supplied, var/mob/user)
@@ -45,9 +45,9 @@
 			evidence[print] = stringmerge(evidence[print],supplied.evidence[print])
 		else
 			evidence[print] = supplied.evidence[print]
-	SetName("[initial(name)] (combined)")
+	SetName("[initial(name)] (обьединёный)")
 	object = supplied.object + ", " + object
-	to_chat(user, "<span class='notice'>You overlay \the [src] and \the [supplied], combining the print records.</span>")
+	to_chat(user, "<span class='notice'>Накладываю \the [src] и \the [supplied], обьединяя записи.</span>")
 	return 1
 
 /obj/item/sample/resolve_attackby(atom/A, mob/user, var/click_params)
@@ -62,14 +62,14 @@
 	return ..()
 
 /obj/item/sample/fibers
-	name = "fiber bag"
-	desc = "Used to hold fiber evidence for the detective."
+	name = "мешок для фибры"
+	desc = "Используется для хранения волоконных улик для детектива."
 	icon_state = "fiberbag"
 
 /obj/item/sample/print
-	name = "fingerprint card"
-	desc = "Records a set of fingerprints."
-	icon = 'icons/obj/card.dmi'
+	name = "карточка"
+	desc = "Записывает отпечатки."
+	icon = 'lambda/icons/obj/card.dmi'
 	icon_state = "fingerprint0"
 	item_state = "paper"
 
@@ -80,10 +80,10 @@
 		return
 	var/mob/living/carbon/human/H = user
 	if(H.gloves)
-		to_chat(user, "<span class='warning'>Take \the [H.gloves] off first.</span>")
+		to_chat(user, "<span class='warning'>Надо снять \the [H.gloves] для записи.</span>")
 		return
 
-	to_chat(user, "<span class='notice'>You firmly press your fingertips onto the card.</span>")
+	to_chat(user, "<span class='notice'>Крепко нажимаю пальцами на карту.</span>")
 	var/fullprint = H.get_full_print()
 	evidence[fullprint] = fullprint
 	SetName("[initial(name)] (\the [H])")
@@ -100,11 +100,11 @@
 	var/mob/living/carbon/human/H = M
 
 	if(H.gloves)
-		to_chat(user, "<span class='warning'>\The [H] is wearing gloves.</span>")
+		to_chat(user, "<span class='warning'>\The [H] в перчатках.</span>")
 		return 1
 
 	if(user != H && H.a_intent != I_HELP && !H.lying)
-		user.visible_message("<span class='danger'>\The [user] tries to take prints from \the [H], but they move away.</span>")
+		user.visible_message("<span class='danger'>\The [user] пытается снять отпечатки с \the [H], но не может.</span>")
 		return 1
 
 	if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
@@ -117,9 +117,9 @@
 			if(istype(O) && !O.is_stump())
 				has_hand = 1
 		if(!has_hand)
-			to_chat(user, "<span class='warning'>They don't have any hands.</span>")
+			to_chat(user, "<span class='warning'>Рук нет.</span>")
 			return 1
-		user.visible_message("[user] takes a copy of \the [H]'s fingerprints.")
+		user.visible_message("[user] берёт копию отпечатков \the [H].")
 		var/fullprint = H.get_full_print()
 		evidence[fullprint] = fullprint
 		copy_evidence(src)
@@ -138,8 +138,8 @@
 	item_flags = ITEM_FLAG_NO_PRINT
 
 /obj/item/forensics/sample_kit
-	name = "fiber collection kit"
-	desc = "A magnifying glass and tweezers. Used to lift suit fibers."
+	name = "ящик для сборки фибры"
+	desc = "Увеличительное стекло и пинцет. Используется для подъема волокон костюма."
 	icon_state = "m_glass"
 	w_class = ITEM_SIZE_SMALL
 	var/evidence_type = "fiber"
@@ -150,7 +150,7 @@
 
 /obj/item/forensics/sample_kit/proc/take_sample(var/mob/user, var/atom/supplied)
 	var/obj/item/sample/S = new evidence_path(get_turf(user), supplied)
-	to_chat(user, "<span class='notice'>You transfer [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S].</span>")
+	to_chat(user, "<span class='notice'>Перенёс [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]" : "[evidence_type]"] в \the [S].</span>")
 
 /obj/item/forensics/sample_kit/resolve_attackby(atom/A, mob/user, click_params)
 	if (user.a_intent != I_HELP) // Prevents putting sample kits in bags, on racks/tables, etc when trying to take samples
@@ -165,7 +165,7 @@
 		take_sample(user,A)
 		. = 1
 	else
-		to_chat(user, "<span class='warning'>You are unable to locate any [evidence_type]s on \the [A].</span>")
+		to_chat(user, "<span class='warning'>Не могу найти [evidence_type] в \the [A].</span>")
 		. = ..()
 
 /obj/item/forensics/sample_kit/MouseDrop(atom/over)
@@ -173,8 +173,8 @@
 		afterattack(over, usr, TRUE)
 
 /obj/item/forensics/sample_kit/powder
-	name = "fingerprint powder"
-	desc = "A jar containing alumiinum powder and a specialized brush."
+	name = "банка"
+	desc = "AБаночка с алюминиевой пудрой и специальной кисточкой."
 	icon_state = "dust"
 	evidence_type = "fingerprint"
 	evidence_path = /obj/item/sample/print

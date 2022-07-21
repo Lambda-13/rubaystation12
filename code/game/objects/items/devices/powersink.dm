@@ -1,9 +1,9 @@
 // Powersink - used to drain station power
 
 /obj/item/device/powersink
-	name = "power sink"
-	desc = "A nulling power sink which drains energy from electrical systems."
-	icon = 'icons/obj/power_sink.dmi'
+	name = "энергонасос"
+	desc = "Поедает энергию через провод к которому он подключён."
+	icon = 'lambda/icons/obj/power_sink.dmi'
 	icon_state = "powersink0"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_LARGE
@@ -71,21 +71,21 @@
 			if(isturf(T) && !!T.is_plating())
 				attached = locate() in T
 				if(!attached)
-					to_chat(user, "<span class='warning'>This device must be placed over an exposed, powered cable node!</span>")
+					to_chat(user, "<span class='warning'>Надо разместить его над проводом что не прикрыт плиткой и подключён к энергосети!</span>")
 				else
 					set_mode(CLAMPED_OFF)
 					user.visible_message( \
-						"[user] attaches \the [src] to the cable.", \
-						"<span class='notice'>You attach \the [src] to the cable.</span>",
-						"<span class='italics'>You hear some wires being connected to something.</span>")
+						"[user] прицепляет \the [src] к проводу.", \
+						"<span class='notice'>Прицепил \the [src] к проводу.</span>",
+						"<span class='italics'>Слышу как что-то прикрутили.</span>")
 			else
-				to_chat(user, "<span class='warning'>This device must be placed over an exposed, powered cable node!</span>")
+				to_chat(user, "<span class='warning'>Надо разместить его над проводом что не прикрыт плиткой и подключён к энергосети!</span>")
 		else
 			set_mode(DISCONNECTED)
 			user.visible_message( \
-				"[user] detaches \the [src] from the cable.", \
-				"<span class='notice'>You detach \the [src] from the cable.</span>",
-				"<span class='italics'>You hear some wires being disconnected from something.</span>")
+				"[user] отсоеденил \the [src] от провода.", \
+				"<span class='notice'>Отсоеденил \the [src] от провода.</span>",
+				"<span class='italics'>Слышу как что-то открутили.</span>")
 	else
 		return ..()
 
@@ -103,8 +103,8 @@
 		if(CLAMPED_OFF)
 			user.visible_message( \
 				"[user] activates \the [src]!", \
-				"<span class='notice'>You activate \the [src].</span>",
-				"<span class='italics'>You hear a click.</span>")
+				"<span class='notice'>Включаю \the [src].</span>",
+				"<span class='italics'>Слышу щёлканье.</span>")
 			message_admins("Power sink activated by [key_name_admin(user)] at (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 			log_game("Power sink activated by [key_name(user)] at [get_area_name(src)]")
 			set_mode(OPERATING)
@@ -112,8 +112,8 @@
 		if(OPERATING)
 			user.visible_message( \
 				"[user] deactivates \the [src]!", \
-				"<span class='notice'>You deactivate \the [src].</span>",
-				"<span class='italics'>You hear a click.</span>")
+				"<span class='notice'>Отключаю \the [src].</span>",
+				"<span class='italics'>Слышу щёлканье.</span>")
 			set_mode(CLAMPED_OFF)
 
 /obj/item/device/powersink/pwr_drain()

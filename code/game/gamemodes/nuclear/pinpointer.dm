@@ -1,6 +1,6 @@
 /obj/item/pinpointer
-	name = "pinpointer"
-	icon = 'icons/obj/pinpointer.dmi'
+	name = "пинпоитер"
+	icon = 'lambda/icons/obj/pinpointer.dmi'
 	icon_state = "pinoff"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
@@ -21,7 +21,7 @@
 
 /obj/item/pinpointer/proc/toggle(mob/user)
 	active = !active
-	to_chat(user, "You [active ? "" : "de"]activate [src].")
+	to_chat(user, "[active ? "Включаю" : "Выключаю"] [src].")
 	if(!active)
 		STOP_PROCESSING(SSobj,src)
 	else
@@ -37,10 +37,10 @@
 
 	if(beeping >= 0)
 		beeping = -1
-		to_chat(usr, "You mute [src].")
+		to_chat(usr, "Выключаю пищалку [src].")
 	else
 		beeping = 0
-		to_chat(usr, "You enable the sound indication on [src].")
+		to_chat(usr, "Включаю пищалку [src].")
 
 /obj/item/pinpointer/proc/acquire_target()
 	var/obj/item/disk/nuclear/the_disk = locate()
@@ -126,7 +126,7 @@
 		new_mode = "Authentication Disk Locator"
 	if(new_mode)
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
-		visible_message("<span class='notice'>[new_mode] active.</span>")
+		visible_message("<span class='notice'>[new_mode] активен.</span>")
 		target = acquire_target()
 	..()
 
@@ -144,42 +144,42 @@
 	set name = "Toggle Pinpointer Mode"
 	set src in view(1)
 
-	var/selection = input(usr, "Please select the type of target to locate.", "Mode" , "") as null|anything in list("Location", "Disk Recovery", "DNA", "Other Signature")
+	var/selection = input(usr, "Пожалуйста, выберите тип цели для обнаружения.", "Mode" , "") as null|anything in list("Место", "Диск", "ДНК", "Прочее")
 	switch(selection)
-		if("Disk Recovery")
+		if("Диск")
 			var/obj/item/disk/nuclear/the_disk = locate()
 			target = weakref(the_disk)
 
-		if("Location")
-			var/locationx = input(usr, "Please input the x coordinate to search for.", "Location?" , "") as num
+		if("Место")
+			var/locationx = input(usr, "Введите x координату.", "Место?" , "") as num
 			if(!locationx || !(usr in view(1,src)))
 				return
-			var/locationy = input(usr, "Please input the y coordinate to search for.", "Location?" , "") as num
+			var/locationy = input(usr, "Введите y координату.", "Место?" , "") as num
 			if(!locationy || !(usr in view(1,src)))
 				return
 
 			var/turf/Z = get_turf(src)
 			var/turf/location = locate(locationx,locationy,Z.z)
 
-			to_chat(usr, "You set the pinpointer to locate [locationx],[locationy]")
+			to_chat(usr, "Настроил пинпоитер на поиск координат [locationx],[locationy]")
 
 			target = weakref(location)
 
-		if("Other Signature")
+		if("Прочее")
 			var/datum/objective/steal/itemlist
 			itemlist = itemlist // To supress a 'variable defined but not used' error.
-			var/targetitem = input("Select item to search for.", "Item Mode Select","") as null|anything in itemlist.possible_items
+			var/targetitem = input("Выберите элемент для поиска.", "Предмет","") as null|anything in itemlist.possible_items
 			if(!targetitem)
 				return
 			var/obj/item = locate(itemlist.possible_items[targetitem])
 			if(!item)
-				to_chat(usr, "Failed to locate [targetitem]!")
+				to_chat(usr, "Пинпоитер не может найти [targetitem]!")
 				return
-			to_chat(usr, "You set the pinpointer to locate [targetitem]")
+			to_chat(usr, "Настроил пинпоитер на поиск [targetitem]")
 			target = weakref(item)
 
-		if("DNA")
-			var/DNAstring = input("Input DNA string to search for." , "Please Enter String." , "")
+		if("ДНК")
+			var/DNAstring = input("Введите ДНК шифр." , "ДНК." , "")
 			if(!DNAstring)
 				return
 			for(var/mob/living/carbon/M in SSmobs.mob_list)

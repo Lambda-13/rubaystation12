@@ -176,6 +176,7 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 
 /obj/effect/overmap/event/Initialize()
 	. = ..()
+	icon = pick['icons/obj/overmap.dmi','lambda/icons/obj/overmap.dmi']
 	icon_state = pick(event_icon_states)
 	overmap_event_handler.update_hazards(loc)
 

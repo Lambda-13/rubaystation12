@@ -1,9 +1,9 @@
 /obj/item/device/binoculars
 
-	name = "binoculars"
-	desc = "A pair of binoculars."
+	name = "бинокль"
+	desc = "Смотря в них можно увидеть что происходит вдалеке."
 	zoomdevicename = "eyepieces"
-	icon = 'icons/obj/binoculars.dmi'
+	icon = 'lambda/icons/obj/binoculars.dmi'
 	icon_state = "binoculars"
 
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

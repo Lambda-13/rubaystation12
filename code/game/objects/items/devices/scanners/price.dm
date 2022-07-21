@@ -1,7 +1,7 @@
 /obj/item/device/scanner/price
-	name = "price scanner"
-	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
-	icon = 'icons/obj/price_scanner.dmi'
+	name = "сканер цен"
+	desc = "Используя актуальную базу данных различных затрат и цен, это устройство оценивает рыночную цену товара с точностью до 0,001%."
+	icon = 'lambda/icons/obj/price_scanner.dmi'
 	icon_state = "price_scanner"
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	scan_sound = 'sound/effects/checkout.ogg'
@@ -10,7 +10,7 @@
 	return !!get_value(target)
 
 /obj/item/device/scanner/price/scan(atom/movable/target, mob/user)
-	scan_title = "Price estimations"
+	scan_title = "Оценки цен"
 	var/data = "\The [target]: [get_value(target)] [GLOB.using_map.local_currency_name]"
 	if(!scan_data)
 		scan_data = data

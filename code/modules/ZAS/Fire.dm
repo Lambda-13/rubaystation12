@@ -95,7 +95,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	blend_mode = BLEND_ADD
 
-	icon = 'icons/effects/fire.dmi'
+	icon = 'lambda/icons/effects/fire.dmi'
 	icon_state = "1"
 	light_color = "#ed9200"
 	layer = FIRE_LAYER

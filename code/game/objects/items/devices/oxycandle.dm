@@ -1,7 +1,7 @@
 /obj/item/device/oxycandle
-	name = "oxygen candle"
-	desc = "A steel tube with the words 'OXYGEN - PULL CORD TO IGNITE' stamped on the side.\nA small label reads <span class='warning'>'WARNING: NOT FOR LIGHTING USE. WILL IGNITE FLAMMABLE GASSES'</span>"
-	icon = 'icons/obj/oxygen_candle.dmi'
+	name = "кислородный флаер"
+	desc = "На стальной трубке написано 'ДЁРНИ ЗА ВЕРЁВОЧКУ И КИСЛОРОД ПОЙДЁТ'.\nМелким шрифтом написано <span class='warning'>'ВНИМАНИЕ: НЕ РЕКОМЕНДУЕТСЯ ИСПОЛЬЗОВАТЬ КАК ОСВЕЩЕНИЕ И ЗАПРЕЩЕНО ИСПОЛЬЗОВАНИЕ В ОПАСНОЙ СРЕДЕ.'</span>"
+	icon = 'lambda/icons/obj/oxygen_candle.dmi'
 	icon_state = "oxycandle"
 	item_state = "oxycandle"
 	w_class = ITEM_SIZE_SMALL // Should fit into internal's box or maybe pocket
@@ -27,7 +27,7 @@
 
 /obj/item/device/oxycandle/attack_self(mob/user)
 	if(!on)
-		to_chat(user, "<span class='notice'>You pull the cord and [src] ignites.</span>")
+		to_chat(user, "<span class='notice'>Дёргаю за верёвочку у [src].</span>")
 		on = 1
 		update_icon()
 		playsound(src.loc, activation_sound, 75, 1)
@@ -48,8 +48,8 @@
 		on = 2
 		update_icon()
 		update_held_icon()
-		SetName("burnt oxygen candle")
-		desc += "This tube has exhausted its chemicals."
+		SetName("сгоревший кислородный флаер")
+		desc += "Внутри не осталось химикатов для выработки кислорода."
 		return
 	if(pos)
 		pos.hotspot_expose(1500, 5)
