@@ -48,27 +48,28 @@
 		return
 
 	var/list/output = list()
+	output += "<meta charset='utf-8'>"
 	var/last_owner_name
 	// We pretend that memories are stored in some semblance of an order
 	for(var/mem in memories)
 		var/datum/memory/M = mem
 		var/owner_name = M.OwnerName()
 		if(owner_name != last_owner_name && current)
-			output += "<B>[current.real_name]'s Memories</B><HR>"
+			output += "<B>Память [current.real_name]</B><HR>"
 			last_owner_name = owner_name
-		output += "[M.memory] <a href='?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"
+		output += "[M.memory] <a href='?src=\ref[src];remove_memory=\ref[M]'>\[Забыть\]</a>"
 
 	if(objectives.len > 0)
-		output += "<HR><B>Objectives:</B>"
+		output += "<HR><B>Задачи:</B>"
 
 		var/obj_count = 1
 		for(var/datum/objective/objective in objectives)
-			output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			output += "<B>Задача #[obj_count]</B>: [objective.explanation_text]"
 			obj_count++
 
 	if(SSgoals.ambitions[src])
 		var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
-		output += "<HR><B>Ambitions:</B> [ambition.summarize()]"
+		output += "<HR><B>Амбиции:</B> [ambition.summarize()]"
 
 	show_browser(recipient, replacetext(jointext(output, "<BR>"),"\n","<BR>"),"window=memory")
 
@@ -127,7 +128,7 @@
 
 /decl/memory_options/proc/Validate(var/datum/mind/target)
 	if(!target.current)
-		return "Mind is detached from mob."
+		return "Слишком тупой."
 
 /decl/memory_options/proc/MemoryTags(var/datum/mind/target)
 	return
@@ -165,7 +166,7 @@
 			relevant_memories++
 
 	if(relevant_memories > memory_limit)
-		return "Memory limit reached. A maximum of [memory_limit] user added memories allowed."
+		return "Лимит того что запомнить достигнут. Всего разрешено [memory_limit] символов."
 
 // System memory handling
 /decl/memory_options/system
@@ -184,7 +185,7 @@
 	if(mind)
 		mind.ShowMemory(src)
 	else
-		to_chat(src, SPAN_WARNING("There is no mind to retrieve stored memories from."))
+		to_chat(src, SPAN_WARNING("Ничего не помню!"))
 
 /mob/verb/AddMemory(var/msg as message)
 	set name = "Add Note"
@@ -196,4 +197,4 @@
 		if(error)
 			to_chat(src, SPAN_WARNING(error))
 		else
-			to_chat(src, SPAN_NOTICE("Note added - View it with the 'Notes' verb"))
+			to_chat(src, SPAN_NOTICE("Запоминаю."))
