@@ -96,7 +96,7 @@
 			if(affected)
 				affected.implants += imp
 				imp.part = affected
-			to_chat(H, SPAN_DANGER("As a registered psionic, you are fitted with a psi-dampening control implant. Using psi-power while the implant is active will result in neural shocks and your violation being reported."))
+			to_chat(H, SPAN_DANGER("Как зарегистрированный псионик, вы снабжены имплантатом контроля пси-демпфирования. Использование пси-энергии при активном импланте приведет к шоку нервной системы."))
 
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit) . = outfit.equip(H, title, alt_title)
@@ -142,13 +142,13 @@
 	var/datum/money_account/M = create_account("[H.real_name]'s account", H.real_name, money_amount)
 	if(H.mind)
 		var/remembered_info = ""
-		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
-		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-		remembered_info += "<b>Your account funds are:</b> [GLOB.using_map.local_currency_name_short][M.money]<br>"
+		remembered_info += "<b>Номер аккаунта карты:</b> #[M.account_number]<br>"
+		remembered_info += "<b>Пинкод карты:</b> [M.remote_access_pin]<br>"
+		remembered_info += "<b>Как я помню на карте оставалось:</b> [GLOB.using_map.local_currency_name_short][M.money]<br>"
 
 		if(M.transaction_log.len)
 			var/datum/transaction/T = M.transaction_log[1]
-			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
+			remembered_info += "<b>Аккаунт был создан:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 		H.mind.initial_account = M
 
@@ -225,9 +225,9 @@
 	if(is_available(caller))
 		if(is_restricted(caller.prefs))
 			if(show_invalid_jobs)
-				return "<tr><td><a style='text-decoration: line-through' href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
+				return "<tr><td><a style='text-decoration: line-through' href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Активно: [get_active_count()])</td></tr>"
 		else
-			return "<tr><td><a href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
+			return "<tr><td><a href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Активно: [get_active_count()])</td></tr>"
 	return ""
 
 // Only players with the job assigned and AFK for less than 10 minutes count as active
@@ -363,25 +363,25 @@
 /datum/job/proc/get_unavailable_reasons(var/client/caller)
 	var/list/reasons = list()
 	if(jobban_isbanned(caller, title))
-		reasons["You are jobbanned."] = TRUE
+		reasons["У тебя блокировка на профессии."] = TRUE
 	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
-		reasons["You are semi-antagonist banned."] = TRUE
+		reasons["У тебя блокировка на дейтерантагонистов."] = TRUE
 	if(!player_old_enough(caller))
-		reasons["Your player age is too low."] = TRUE
+		reasons["Возраст персонажа низкий."] = TRUE
 	if(!is_position_available())
-		reasons["There are no positions left."] = TRUE
+		reasons["Работы не осталось."] = TRUE
 	if(!isnull(allowed_branches) && (!caller.prefs.branches[title] || !is_branch_allowed(caller.prefs.branches[title])))
-		reasons["Your branch of service does not allow it."] = TRUE
+		reasons["Ваша служба не разрешает."] = TRUE
 	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
-		reasons["Your rank choice does not allow it."] = TRUE
+		reasons["Ваш ранг не разрешает."] = TRUE
 	if (!is_species_whitelist_allowed(caller))
-		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
+		reasons["Ты должен получить вайтлист на [use_species_whitelist]."] = TRUE
 	var/datum/species/S = all_species[caller.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))
-			reasons["Your species choice does not allow it."] = TRUE
+			reasons["Ваша раса не позволяет."] = TRUE
 		if(!S.check_background(src, caller.prefs))
-			reasons["Your background choices do not allow it."] = TRUE
+			reasons["Ваша биография не позволяет."] = TRUE
 	if(LAZYLEN(reasons))
 		. = reasons
 
