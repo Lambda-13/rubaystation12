@@ -1,12 +1,12 @@
 /datum/language/skrell
 	name = LANGUAGE_SKRELLIAN
-	desc = "A melodic and complex language spoken by the Skrell of Qerrbalak. Some of the notes are inaudible to humans."
-	speech_verb = "warbles"
-	ask_verb = "warbles"
-	exclaim_verb = "warbles"
+	desc = "Мелодичный и сложный язык, на котором говорят скреллы Керрбалака. Некоторые ноты не слышны человеку."
+	speech_verb = "поёт"
+	ask_verb = "поёт"
+	exclaim_verb = "поёт"
 	colour = "skrell"
 	key = "k"
 	flags = WHITELISTED
-	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
+	syllables = list("кю","крр","хью","кью","вьюм","хю","вол","хрим","заоо","кь-юю","кию","кюо","зих","*","!")
 	shorthand = "SK"
 	has_written_form = TRUE

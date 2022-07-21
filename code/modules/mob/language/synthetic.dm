@@ -2,9 +2,9 @@
 	name = LANGUAGE_ROBOT_GLOBAL
 	desc = "Most human facilities support free-use communications protocols and routing hubs for synthetic use."
 	colour = "say_quote"
-	speech_verb = "states"
-	ask_verb = "queries"
-	exclaim_verb = "declares"
+	speech_verb = "константирует"
+	ask_verb = "запрашивает"
+	exclaim_verb = "оповещает"
 	key = "b"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
@@ -54,10 +54,10 @@
 
 /datum/language/binary/drone
 	name = LANGUAGE_DRONE_GLOBAL
-	desc = "A heavily encoded damage control coordination stream."
-	speech_verb = "transmits"
-	ask_verb = "transmits"
-	exclaim_verb = "transmits"
+	desc = "Сильно закодированный язык дронов."
+	speech_verb = "передаёт"
+	ask_verb = "передаёт"
+	exclaim_verb = "передаёт"
 	colour = "say_quote"
 	key = "d"
 	flags = RESTRICTED | HIVEMIND
@@ -66,14 +66,14 @@
 
 /datum/language/machine
 	name = LANGUAGE_EAL
-	desc = "An efficient language of encoded tones developed by synthetics and cyborgs."
-	speech_verb = "whistles"
-	ask_verb = "chirps"
-	exclaim_verb = "whistles loudly"
+	desc = "Эффективный язык кодированных тонов, разработанный синтетиками и киборгами."
+	speech_verb = "константирует"
+	ask_verb = "запрашивает"
+	exclaim_verb = "оповещает"
 	colour = "changeling"
 	key = "6"
 	flags = NO_STUTTER
-	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
+	syllables = list("бип", "бип", "бип", "бип", "бип", "буп", "буп", "буп", "боп", "боп", "ди", "ди", "ду", "бзз", "чсс", "жжж", "жуж", "бзз", "ксш", "ки", "вурр", "вах", "тззз")
 	space_chance = 10
 	shorthand = "EAL"
 
@@ -82,6 +82,5 @@
 
 /datum/language/machine/get_random_name()
 	if(prob(70))
-		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+		return "[pick(list("ПБУ","ХИУ","СИНА","АРМА","ОСИ"))]-[rand(100, 999)]"
 	return pick(GLOB.ai_names)
-

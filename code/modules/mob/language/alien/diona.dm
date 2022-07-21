@@ -1,6 +1,6 @@
 /datum/language/diona
 	name = LANGUAGE_ROOTLOCAL
-	desc = "A complex language known instinctively by Dionaea, 'spoken' by emitting modulated radio waves. This version uses high frequency waves for quick communication at short ranges."
+	desc = "Сложный язык, инстинктивно известный Dionaea, на котором «говорят», излучая модулированные радиоволны. Эта версия использует высокочастотные волны для быстрой связи на коротких дистанциях."
 	speech_verb = "creaks and rustles"
 	ask_verb = "creaks"
 	exclaim_verb = "rustles"
@@ -18,7 +18,7 @@
 
 /datum/language/diona/global
 	name = LANGUAGE_ROOTGLOBAL
-	desc = "A complex language known instinctively by Dionaea, 'spoken' by emitting modulated radio waves. This version uses low frequency waves for slow communication at long ranges."
+	desc = "Сложный язык, инстинктивно известный Dionaea, на котором «говорят», излучая модулированные радиоволны. В этой версии используются низкочастотные волны для медленной связи на больших расстояниях."
 	key = "w"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"

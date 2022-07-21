@@ -160,11 +160,11 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		return
 
 	if (prob(5))
-		H.custom_emote("wails!")
+		H.custom_emote("воет!")
 	else if (prob(5))
-		H.custom_emote("groans!")
+		H.custom_emote("рычит!")
 	if (H.restrained() && prob(8))
-		H.custom_emote("thrashes and writhes!")
+		H.custom_emote("корчится в агонии!")
 
 	if (H.lying)
 		walk(H, 0)
@@ -239,19 +239,19 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	desc = "A crude form of feral communication utilized by the shuffling horrors. The living only hear guttural wails of agony."
 	colour = "cult"
 	key = "a"
-	speech_verb = "growls"
-	exclaim_verb = "wails"
+	speech_verb = "рычит"
+	exclaim_verb = "вопит"
 	partial_understanding = list(
 		LANGUAGE_HUMAN_EURO = 30,
 		LANGUAGE_SPACER = 35
 	)
-	syllables = list("mhh..", "grr..", "nnh..")
+	syllables = list("мхх..", "грр..", "ннх..")
 	shorthand = "ZM"
 	hidden_from_codex = TRUE
 
 
 /datum/unarmed_attack/bite/sharp/zombie
-	attack_verb = list("slashed", "sunk their teeth into", "bit", "mauled")
+	attack_verb = list("царапает", "вонзает зубы", "кусает", "терзает")
 	damage = 3
 
 /datum/unarmed_attack/bite/sharp/zombie/is_usable(mob/living/carbon/human/user, mob/living/carbon/human/target, zone)
@@ -259,7 +259,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	if (!.)
 		return FALSE
 	if (!target || target.is_species(SPECIES_ZOMBIE))
-		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
+		to_chat(usr, SPAN_WARNING("Выглядят не очень аппетитно!"))
 		return FALSE
 	return TRUE
 
@@ -278,7 +278,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 /datum/reagent/zombie
 	name = "Liquid Corruption"
-	description = "A filthy, oily substance which slowly churns of its own accord."
+	description = "Грязное, маслянистое вещество, которое медленно взбивается само по себе."
 	taste_description = "decaying blood"
 	color = "#540000"
 	taste_mult = 5
@@ -371,7 +371,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	rejuvenate()
 	ChangeToHusk()
-	visible_message(SPAN_DANGER("\The [src]'s skin decays before your very eyes!"), SPAN_DANGER("Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift. Use Abilities -> Consume to infect and feed upon your prey."))
+	visible_message(SPAN_DANGER("Кожа \The [src] гниет!"), SPAN_DANGER("Все ваше тело созрело от боли, поскольку оно поглощается до плоти и костей. Ты... ходячий голод. Ты создан не только для мучений, но и для распространения этого дара. Используй Abilities -> Consume для распростронения подарка ещё живым друзьям."))
 	log_admin("[key_name(src)] has transformed into a zombie!")
 
 	Weaken(4)
@@ -412,7 +412,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	set category = "Abilities"
 
 	if (last_special > world.time)
-		to_chat(src, SPAN_WARNING("You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds."))
+		to_chat(src, SPAN_WARNING("Ещё не готов - надо подождать [round(last_special - world.time) / 10] секунд."))
 		return
 
 	var/mob/living/carbon/human/target
@@ -420,35 +420,35 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	for (var/mob/living/carbon/human/L in get_turf(src))
 		if (L != src && (L.lying || L.stat == DEAD))
 			if (L.is_species(SPECIES_ZOMBIE))
-				to_chat(src, SPAN_WARNING("\The [L] isn't fresh anymore!"))
+				to_chat(src, SPAN_WARNING("\The [L] сгнил!"))
 				continue
 			if (!(L.species.name in GLOB.zombie_species) || L.is_species(SPECIES_DIONA) || L.isSynthetic())
-				to_chat(src, SPAN_WARNING("You'd break your teeth on \the [L]!"))
+				to_chat(src, SPAN_WARNING("Кожа \the [L] слишком плотная!"))
 				continue
 			victims += L
 
 	if (!victims.len)
-		to_chat(src, SPAN_WARNING("No valid targets nearby!"))
+		to_chat(src, SPAN_WARNING("Живых нет рядом."))
 		return
 	if (client)
 		if (victims.len == 1) //No need to choose
 			target = victims[1]
 		else
-			target = input("Who would you like to consume?") as null | anything in victims
+			target = input("Кого бы вы хотели потреблять?") as null | anything in victims
 	else //NPCs
 		if (victims.len > 0)
 			target = victims[1]
 
 	if (!target)
-		to_chat(src, SPAN_WARNING("You aren't on top of a victim!"))
+		to_chat(src, SPAN_WARNING("Надо стоять над жертвой!"))
 		return
 	if (get_turf(src) != get_turf(target) || !(target.lying || target.stat == DEAD))
-		to_chat(src, SPAN_WARNING("You're no longer on top of \the [target]!"))
+		to_chat(src, SPAN_WARNING("Больше не стою над \the [target]!"))
 		return
 
 	last_special = world.time + 5 SECONDS
 
-	src.visible_message(SPAN_DANGER("\The [src] hunkers down over \the [target], tearing into their flesh."))
+	src.visible_message(SPAN_DANGER("\The [src] хватае \the [target], начиная пожирать."))
 	playsound(loc, 'sound/effects/bonebreak3.ogg', 20, 1)
 
 	target.adjustHalLoss(50)
@@ -462,16 +462,16 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		target.reagents.add_reagent(/datum/reagent/zombie, 35) //Just in case they haven't been infected already
 		if (target.getBruteLoss() > target.maxHealth * 1.5)
 			if (target.stat != DEAD)
-				to_chat(src,SPAN_WARNING("You've scraped \the [target] down to the bones already!."))
+				to_chat(src,SPAN_WARNING("Я соскоблил с \the [target] всю кожу до костей!."))
 				target.zombify()
 			else
-				to_chat(src,SPAN_DANGER("You shred and rip apart \the [target]'s remains!."))
+				to_chat(src,SPAN_DANGER("Я разрываю тело \the [target]!."))
 				target.gib()
 				playsound(loc, 'sound/effects/splat.ogg', 40, 1)
 			return
 
-		to_chat(target,SPAN_DANGER("\The [src] scrapes your flesh from your bones!"))
-		to_chat(src,SPAN_DANGER("You feed hungrily off \the [target]'s flesh."))
+		to_chat(target,SPAN_DANGER("\The [src] соскребает зубами мою кожу! Очень больно!"))
+		to_chat(src,SPAN_DANGER("Я жадно ем плоть \the [target]."))
 
 		if (target.is_species(SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
 			return
@@ -500,8 +500,8 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 
 /obj/item/reagent_containers/syringe/zombie
-	name = "Syringe (unknown serum)"
-	desc = "Contains a strange, crimson substance."
+	name = "шприц (unknown serum)"
+	desc = "Содержит странную жидкость."
 
 /obj/item/reagent_containers/syringe/zombie/Initialize()
 	..()

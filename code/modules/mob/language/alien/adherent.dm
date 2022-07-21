@@ -1,9 +1,9 @@
 /datum/language/adherent
 	name = LANGUAGE_ADHERENT
-	desc = "The mellifluous wind chime tones of the Vigil's formal shared language."
-	speech_verb = "chimes"
-	ask_verb = "rings"
-	exclaim_verb = "peals"
+	desc = "Сладострастные мелодии перезвонов ветра формального общего языка Вигрила."
+	speech_verb = "дзынькает"
+	ask_verb = "звенит"
+	exclaim_verb = "трезвонит"
 	colour = "adherent"
 	key = "p"
 	flags = WHITELISTED

@@ -1,9 +1,9 @@
 /datum/language/unathi
 	name = LANGUAGE_UNATHI_SINTA
-	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
-	speech_verb = "hisses"
-	ask_verb = "hisses"
-	exclaim_verb = "roars"
+	desc = "Общий язык могесов, состоящий из свистящего шипения и хрипов. На родном языке говорит Унати."
+	speech_verb = "шипит"
+	ask_verb = "шипит"
+	exclaim_verb = "рычит"
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
@@ -12,23 +12,23 @@
 		LANGUAGE_UNATHI_YEOSA = 20
 	)
 	syllables = list(
-		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",
-		"ha", "ah", "he", "eh", "hi", "ih", "ho", "oh", "hu", "uh", "hs", "sh",
-		"la", "al", "le", "el", "li", "il", "lo", "ol", "lu", "ul", "ls", "sl",
-		"ka", "ak", "ke", "ek", "ki", "ik", "ko", "ok", "ku", "uk", "ks", "sk",
-		"sa", "as", "se", "es", "si", "is", "so", "os", "su", "us", "ss", "ss",
-		"ra", "ar", "re", "er", "ri", "ir", "ro", "or", "ru", "ur", "rs", "sr",
-		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
+		"за", "аз", "зе", "эз", "зи", "из", "зо", "оз", "зу", "уз", "зз", "зз",
+		"ха", "а", "он", "а", "привет", "их", "хо", "о", "ху", "э", "чс", "ш",
+		"ла", "ал", "ле", "эль", "ли", "ил", "ло", "ол", "лу", "ул", "лс", "сл",
+		"ка", "ак", "ке", "эк", "ки", "ик", "ко", "ок", "ку", "ук", "кс", "ск",
+		"са", "как", "се", "эс", "си", "есть", "так", "ос", "су", "нас", "сс", "сс",
+		"ра", "ар", "ре", "эр", "ри", "ир", "ро", "ор", "ру", "ур", "рс", "ср",
+		"а", "а", "е", "е", "и", "и", "о", "о", "у", "у", "ы", "ы"
 	)
 	shorthand = "UT"
 	has_written_form = TRUE
 
 /datum/language/yeosa
 	name = LANGUAGE_UNATHI_YEOSA
-	desc = "A language of Moghes consisting of a combination of spoken word and gesticulation. While it is uncommonly spoken in the drier regions, it enjoys popular usage as the official tongue of the Yeosa clans."
-	speech_verb = "hisses"
-	ask_verb = "rattles"
-	exclaim_verb = "barks"
+	desc = "Язык могес, состоящий из комбинации устной речи и жестикуляции. Хотя на нем редко говорят в более засушливых регионах, он широко используется в качестве официального языка кланов Йоса."
+	speech_verb = "шипит"
+	ask_verb = "гремит"
+	exclaim_verb = "гавкает"
 	colour = "yeosa"
 	key = "h"
 	flags = WHITELISTED
@@ -37,14 +37,13 @@
 		LANGUAGE_UNATHI_SINTA = 20
 	)
 	syllables = list(
-		"azs","zis","zau","azua","skiu","zuakz","izo","aei","ki","kut","zo",
-		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",
-		"ha", "ah", "he", "eh", "hi", "ih", "ho", "oh", "hu", "uh", "hs", "sh",
-		"la", "al", "le", "el", "li", "il", "lo", "ol", "lu", "ul", "ls", "sl",
-		"ka", "ak", "ke", "ek", "ki", "ik", "ko", "ok", "ku", "uk", "ks", "sk",
-		"sa", "as", "se", "es", "si", "is", "so", "os", "su", "us", "ss", "ss",
-		"ra", "ar", "re", "er", "ri", "ir", "ro", "or", "ru", "ur", "rs", "sr",
-		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
+		"за", "аз", "зе", "эз", "зи", "из", "зо", "оз", "зу", "уз", "зз", "зз",
+		"ха", "а", "он", "а", "привет", "их", "хо", "о", "ху", "э", "чс", "ш",
+		"ла", "ал", "ле", "эль", "ли", "ил", "ло", "ол", "лу", "ул", "лс", "сл",
+		"ка", "ак", "ке", "эк", "ки", "ик", "ко", "ок", "ку", "ук", "кс", "ск",
+		"са", "как", "се", "эс", "си", "есть", "так", "ос", "су", "нас", "сс", "сс",
+		"ра", "ар", "ре", "эр", "ри", "ир", "ро", "ор", "ру", "ур", "рс", "ср",
+		"а", "а", "е", "е", "и", "и", "о", "о", "у", "у", "ы", "ы"
 	)
 	shorthand = "YU"
 	has_written_form = TRUE

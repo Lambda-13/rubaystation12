@@ -1,7 +1,7 @@
 /datum/language/ling
 	name = LANGUAGE_CHANGELING_GLOBAL
-	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
-	speech_verb = "says"
+	desc = "Хотя обычно они настороженно и подозрительно относятся друг к другу, генокрады могут общаться на расстоянии."
+	speech_verb = "говорит"
 	colour = "changeling"
 	key = "g"
 	flags = RESTRICTED | HIVEMIND
@@ -17,10 +17,10 @@
 
 /datum/language/corticalborer
 	name = LANGUAGE_BORER_GLOBAL
-	desc = "Cortical borers possess a strange link between their tiny minds."
-	speech_verb = "sings"
-	ask_verb = "sings"
-	exclaim_verb = "sings"
+	desc = "Кортикальные черви обладают странной связью между своими крошечными разумами.."
+	speech_verb = "напевает"
+	ask_verb = "напевает"
+	exclaim_verb = "напевает"
 	colour = "alien"
 	key = "z"
 	flags = RESTRICTED | HIVEMIND
@@ -40,7 +40,7 @@
 	if(B)
 		if(B.host)
 			if(B.host.nutrition < 50 || B.host.stat)
-				to_chat(speaker, SPAN_WARNING("Your host is too weak to relay your broadcast."))
+				to_chat(speaker, SPAN_WARNING("Подконтрольное тело слишком слабо."))
 				return FALSE
 			B.host.nutrition -= rand(1, 3)
 		speaker_mask = B.truename
@@ -48,15 +48,15 @@
 
 /datum/language/vox
 	name = LANGUAGE_VOX
-	desc = "The common tongue of the various Vox ships making up the Shoal. It sounds like chaotic shrieking to everyone else."
-	speech_verb = "shrieks"
-	ask_verb = "creels"
-	exclaim_verb = "SHRIEKS"
+	desc = "Общий язык различных кораблей воксов, составляющих Мелководье. Для всех остальных это звучит как хаотичный визг."
+	speech_verb = "вопит"
+	ask_verb = "каркает"
+	exclaim_verb = "ВИЗЖИТ"
 	colour = "vox"
 	key = "x"
 	flags = WHITELISTED
-	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
-	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
+	syllables = list("ти","ти","ти","хи","хи","ки","ки","ки","ки","ya","тa","хa","кa","ya","чхи","чхa","кaх", \
+	"СКРЕ","АХК","ЕХК","РАВК","КРА","ААА","ЕЕЕ","КИ","ИИ","КРИ","КА")
 	machine_understands = 0
 	shorthand = "Vox"
 	has_written_form = TRUE
@@ -67,7 +67,7 @@
 	var/mob/living/carbon/human/H = speaker
 	var/obj/item/organ/internal/hindtongue/tongue = H.internal_organs_by_name[BP_HINDTONGUE]
 	if(!istype(tongue) || !tongue.is_usable())
-		to_chat(speaker, SPAN_WARNING("You are not capable of speaking [name]!"))
+		to_chat(speaker, SPAN_WARNING("Не могу говорить на [name]!"))
 		return FALSE
 	return TRUE
 
@@ -76,10 +76,10 @@
 
 /datum/language/cultcommon
 	name = LANGUAGE_CULT
-	desc = "The chants of the occult, the incomprehensible."
-	speech_verb = "intones"
-	ask_verb = "intones"
-	exclaim_verb = "chants"
+	desc = "Оккультное, непостижимое."
+	speech_verb = "поёт"
+	ask_verb = "подпевает"
+	exclaim_verb = "вскрикивает"
 	colour = "cult"
 	key = "f"
 	flags = RESTRICTED
@@ -98,10 +98,10 @@
 
 /datum/language/cult
 	name = LANGUAGE_CULT_GLOBAL
-	desc = "The initiated can share their thoughts by means defying all reason."
-	speech_verb = "intones"
-	ask_verb = "intones"
-	exclaim_verb = "chants"
+	desc = "Посвященные могут делиться своими мыслями средствами вопреки всему разуму."
+	speech_verb = "поёт"
+	ask_verb = "подпевает"
+	exclaim_verb = "вскрикивает"
 	colour = "cult"
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
@@ -111,7 +111,7 @@
 /datum/language/alium
 	name = LANGUAGE_ALIUM
 	colour = "cult"
-	speech_verb = "hisses"
+	speech_verb = "шипит"
 	key = "c"
 	flags = RESTRICTED
 	syllables = list("qy","bok","mok","yok","dy","gly","ryl","byl","dok","forbici", "tarem", "n'ath", "reth", "sh'yro", "eth", "d'raggathnor","niii",
@@ -123,7 +123,7 @@
 	has_written_form = TRUE
 
 /datum/language/alium/New()
-	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
+	speech_verb = pick("шипит","ворчит","свистит","булькает","чирикает","визжит","грохочет","клацает")
 	..()
 
 /datum/language/alium/get_random_name()

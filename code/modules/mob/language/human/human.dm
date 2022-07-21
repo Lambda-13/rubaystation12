@@ -1,9 +1,9 @@
 //base human language
 /datum/language/human
 	name = "proto-sapien"
-	desc = "This is the human root language. If you have this, please tell a developer."
-	speech_verb = "says"
-	whisper_verb = "whispers"
+	desc = "Древний язык кодеров."
+	speech_verb = "говорит"
+	whisper_verb = "шепчет"
 	colour = "solcom"
 	flags = WHITELISTED
 	shorthand = "???"
