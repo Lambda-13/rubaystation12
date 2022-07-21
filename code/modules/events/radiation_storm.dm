@@ -14,7 +14,7 @@
 
 /datum/event/radiation_storm/get_skybox_image()
 	if(prob(75)) // Sometimes, give no skybox image, to avoid metagaming it
-		var/image/res = overlay_image('icons/skybox/radbox.dmi', "beam", null, RESET_COLOR)
+		var/image/res = overlay_image('lambda/icons/skybox/radbox.dmi', "beam", null, RESET_COLOR)
 		res.alpha = rand(40,80)
 		return res
 

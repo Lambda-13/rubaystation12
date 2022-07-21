@@ -40,7 +40,7 @@
 	return "Extensive artificial structures detected on the surface."
 
 /datum/exoplanet_theme/ruined_city/get_planet_image_extra()
-	return image('icons/skybox/planet.dmi', "ruins")
+	return image('lambda/icons/skybox/planet.dmi', "ruins")
 
 /datum/random_map/city
 	descriptor = "ruined city"

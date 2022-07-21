@@ -11,7 +11,7 @@
 		new /datum/random_map/automata/cave_system/mountains(null,TRANSITIONEDGE,TRANSITIONEDGE,zlevel,E.maxx-TRANSITIONEDGE,E.maxy-TRANSITIONEDGE,0,1,1, E.planetary_area, rock_color)
 
 /datum/exoplanet_theme/mountains/get_planet_image_extra()
-	var/image/res = image('icons/skybox/planet.dmi', "mountains")
+	var/image/res = image('lambda/icons/skybox/planet.dmi', "mountains")
 	res.color = rock_color
 	return res
 

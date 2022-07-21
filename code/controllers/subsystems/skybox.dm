@@ -5,11 +5,11 @@ SUBSYSTEM_DEF(skybox)
 	init_order = SS_INIT_SKYBOX
 	flags = SS_NO_FIRE
 	var/background_color
-	var/skybox_icon = 'icons/skybox/skybox.dmi' //Path to our background. Lets us use anything we damn well please. Skyboxes need to be 736x736
+	var/skybox_icon = 'lambda/icons/skybox/skybox.dmi' //Path to our background. Lets us use anything we damn well please. Skyboxes need to be 736x736
 	var/background_icon = "dyable"
 	var/use_stars = TRUE
 	var/use_overmap_details = TRUE
-	var/star_path = 'icons/skybox/skybox.dmi'
+	var/star_path = 'lambda/icons/skybox/skybox.dmi'
 	var/star_state = "stars"
 	var/list/skybox_cache = list()
 	var/list/space_appearance_cache
