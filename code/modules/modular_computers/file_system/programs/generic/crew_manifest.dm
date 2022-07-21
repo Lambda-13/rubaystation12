@@ -1,6 +1,6 @@
 /datum/computer_file/program/crew_manifest
 	filename = "crewmanifest"
-	filedesc = "Crew Manifest"
+	filedesc = "Список экипажа"
 	extended_desc = "This program allows access to the manifest of active crew."
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
@@ -12,7 +12,7 @@
 	category = PROG_OFFICE
 
 /datum/nano_module/crew_manifest
-	name = "Crew Manifest"
+	name = "Список экипажа"
 
 /datum/nano_module/crew_manifest/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()

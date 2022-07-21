@@ -34,7 +34,7 @@
 		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: [OOC?"#373737; color:white":"#DEF"]"]}
 	</style></head>
 	<table class="manifest" width='350px'>
-	<tr class='head'><th>Name</th><th>Position</th><th>Activity</th></tr>
+	<tr class='head'><th>Имя</th><th>Профессия</th><th>Статус</th></tr>
 	"}
 	// sort mobs
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
@@ -56,7 +56,7 @@
 				if(sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
 					active = 1
 					break
-			isactive[name] = active ? "Active" : "Inactive"
+			isactive[name] = active ? "Активен" : "Неактивен"
 		else
 			isactive[name] = CR.get_status()
 

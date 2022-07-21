@@ -13,7 +13,7 @@
 /datum/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
 		if("!")
-			return pick("exclaims","shouts","yells")
+			return pick("восклицает","кричит","орёт")
 		if("?")
 			return ask_verb
 	return speech_verb

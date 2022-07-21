@@ -26,8 +26,8 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/parrot
-	name = "parrot"
-	desc = "A large, colourful tropical bird native to Earth, known for its strong beak and ability to mimic speech."
+	name = "попугай"
+	desc = "Большая красочная тропическая птица, обитающая на Земле, известная своим сильным клювом и способностью имитировать речь."
 	icon = 'icons/mob/simple_animal/parrot.dmi'
 	icon_state = "parrot_fly"
 	icon_living = "parrot_fly"
@@ -35,15 +35,15 @@
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 
-	speak_emote = list("squawks","says","yells")
+	speak_emote = list("кричит","кудахчет","цокает")
 
 	natural_weapon = /obj/item/natural_weapon/beak
 	turns_per_move = 5
 	meat_type = /obj/item/reagent_containers/food/snacks/cracker
 
-	response_help  = "pets"
-	response_disarm = "gently moves aside"
-	response_harm   = "swats"
+	response_help  = "трётся"
+	response_disarm = "клюёт"
+	response_harm   = "царапает"
 	universal_speak = TRUE
 
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
@@ -140,11 +140,11 @@
 	user.set_machine(src)
 	if(user.stat) return
 
-	var/dat = 	"<div align='center'><b>Inventory of [name]</b></div><p>"
+	var/dat = 	"<div align='center'><b>Инвентарь [name]</b></div><p>"
 	if(ears)
-		dat +=	"<br><b>Headset:</b> [ears] (<a href='?src=\ref[src];remove_inv=ears'>Remove</a>)"
+		dat +=	"<br><b>Headset:</b> [ears] (<a href='?src=\ref[src];remove_inv=ears'>Снять</a>)"
 	else
-		dat +=	"<br><b>Headset:</b> <a href='?src=\ref[src];add_inv=ears'>Nothing</a>"
+		dat +=	"<br><b>Headset:</b> <a href='?src=\ref[src];add_inv=ears'>Ничего</a>"
 
 	show_browser(user, dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[real_name]")
@@ -164,28 +164,28 @@
 				if("ears")
 					if(ears)
 						if(available_channels.len)
-							src.say("[pick(available_channels)] BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
+							src.say("[pick(available_channels)] БВВВАК ВЕРНИ НАУШШШШНИК БВВВАК!")
 						else
-							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
+							src.say("БВВВАК ВЕРНИ НАУШШШШНИК БВВВАК!")
 						ears.dropInto(loc)
 						ears = null
 						for(var/possible_phrase in say_list.speak)
 							if(copytext(possible_phrase,1,3) in department_radio_keys)
 								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
 					else
-						to_chat(user, "<span class='warning'>There is nothing to remove from its [remove_from].</span>")
+						to_chat(user, "<span class='warning'>У [remove_from] нету ничего на ушах.</span>")
 			return TOPIC_HANDLED
 
 		//Adding things to inventory
 		if(href_list["add_inv"])
 			var/add_to = href_list["add_inv"]
 			if(!user.get_active_hand())
-				to_chat(user, "<span class='warning'>You have nothing in your hand to put on its [add_to].</span>")
+				to_chat(user, "<span class='warning'>У меня в руке ничего нет.</span>")
 				return TOPIC_HANDLED
 			switch(add_to)
 				if("ears")
 					if(ears)
-						to_chat(user, "<span class='warning'>It's already wearing something.</span>")
+						to_chat(user, "<span class='warning'>Похоже тут что-то уже есть.</span>")
 						return TOPIC_HANDLED
 					else
 						var/obj/item/item_to_add = usr.get_active_hand()
@@ -193,14 +193,14 @@
 							return TOPIC_HANDLED
 
 						if( !istype(item_to_add,  /obj/item/device/radio/headset) )
-							to_chat(user, "<span class='warning'>This object won't fit.</span>")
+							to_chat(user, "<span class='warning'>Предмет явно не по размеру.</span>")
 							return TOPIC_HANDLED
 						if(!user.unEquip(item_to_add, src))
 							return TOPIC_HANDLED
 						var/obj/item/device/radio/headset/headset_to_add = item_to_add
 
 						src.ears = headset_to_add
-						to_chat(user, "You fit the headset onto [src].")
+						to_chat(user, "Одеваю наушник на [src].")
 
 						available_channels.Cut()
 						for(var/ch in headset_to_add.channels)
@@ -219,6 +219,8 @@
 									available_channels.Add(":d")
 								if("Cargo")
 									available_channels.Add(":q")
+								else
+									available_channels.Add(":h")
 			return TOPIC_HANDLED
 
 	return ..()
@@ -371,7 +373,7 @@
 			//Search for item to steal
 			parrot_interest = search_for_item()
 			if(parrot_interest)
-				visible_emote("looks in [parrot_interest]'s direction and takes flight")
+				visible_emote("смотрит на [parrot_interest] после чего улетает")
 				parrot_state = PARROT_SWOOP | PARROT_STEAL
 				icon_state = "[icon_set]_fly"
 			return
@@ -393,7 +395,7 @@
 			if(AM)
 				if((isitem(AM) && can_pick_up(AM)) || isliving(AM))	//If stealable item
 					parrot_interest = AM
-					visible_emote("turns and flies towards [parrot_interest]")
+					visible_emote("пикирует в сторону [parrot_interest]")
 					parrot_state = PARROT_SWOOP | PARROT_STEAL
 					return
 				else	//Else it's a perch
@@ -435,7 +437,7 @@
 				if(!parrot_perch || parrot_interest.loc != parrot_perch.loc)
 					held_item = parrot_interest
 					parrot_interest.forceMove(src)
-					visible_message("[src] grabs the [held_item]!", "<span class='notice'>You grab the [held_item]!</span>", "You hear the sounds of wings flapping furiously.")
+					visible_message("[src] схватил [held_item]!", "<span class='notice'>Я схватил [held_item]!</span>", "Слышу звуки крыльев.")
 
 			parrot_interest = null
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
@@ -572,7 +574,7 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/give_up()
 	ai_holder.attackers = list()
 	ai_holder.lose_target()
-	visible_message("<span class='notice'>\The [src] seems to calm down.</span>")
+	visible_message("<span class='notice'>\The [src] успокаивается.</span>")
 	relax_chance -= impatience
 
 /*
@@ -587,7 +589,7 @@
 		return -1
 
 	if(held_item)
-		to_chat(src, "<span class='warning'>You are already holding the [held_item]</span>")
+		to_chat(src, "<span class='warning'>У меня в когтях [held_item]</span>")
 		return 1
 
 	for(var/obj/item/I in view(1,src))
@@ -600,10 +602,10 @@
 
 			held_item = I
 			I.forceMove(src)
-			visible_message("[src] grabs the [held_item]!", "<span class='notice'>You grab the [held_item]!</span>", "You hear the sounds of wings flapping furiously.")
+			visible_message("[src] grabs the [held_item]!", "<span class='notice'>Я схватил [held_item]!</span>", "Слышу звук взмаха крыльев.")
 			return held_item
 
-	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")
+	to_chat(src, "<span class='warning'>Тут ничего нет.</span>")
 	return 0
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_mob()
@@ -615,7 +617,7 @@
 		return -1
 
 	if(held_item)
-		to_chat(src, "<span class='warning'>You are already holding the [held_item]</span>")
+		to_chat(src, "<span class='warning'>У меня в когтях [held_item]</span>")
 		return 1
 
 	var/obj/item/stolen_item = null
@@ -629,10 +631,10 @@
 
 		if(stolen_item && C.unEquip(stolen_item, src))
 			held_item = stolen_item
-			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "<span class='warning'>You snag the [held_item] out of [C]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
+			visible_message("[src] выхватывает [held_item] из рук [C]!", "<span class='warning'>Успешно взял [held_item] из рук [C]!</span>", "Слышу как кто-то хлопает яростно крыльями.")
 			return held_item
 
-	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")
+	to_chat(src, "<span class='warning'>Никого нету рядом.</span>")
 	return 0
 
 /mob/living/simple_animal/hostile/retaliate/parrot/verb/drop_held_item_player()
@@ -656,7 +658,7 @@
 		return -1
 
 	if(!held_item)
-		to_chat(usr, "<span class='warning'>You have nothing to drop!</span>")
+		to_chat(usr, "<span class='warning'>В когтях ничего нет!</span>")
 		return 0
 
 	if(!drop_gently)
@@ -664,11 +666,11 @@
 			var/obj/item/grenade/G = held_item
 			G.dropInto(loc)
 			G.detonate()
-			to_chat(src, "You let go of the [held_item]!")
+			to_chat(src, "Отпускаю [held_item]!")
 			held_item = null
 			return 1
 
-	to_chat(src, "You drop the [held_item].")
+	to_chat(src, "Выронил [held_item].")
 
 	held_item.dropInto(loc)
 	held_item = null
@@ -689,15 +691,15 @@
 					forceMove(AM.loc)
 					icon_state = "[icon_set]_sit"
 					return
-	to_chat(src, "<span class='warning'>There is no perch nearby to sit on.</span>")
+	to_chat(src, "<span class='warning'>Некуда сесть.</span>")
 	return
 
 /*
  * Sub-types
  */
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly
-	name = "Poly"
-	desc = "Poly the Parrot. An expert on quantum cracker theory."
+	name = "Поли"
+	desc = "Попугай по имени Поли. Эксперт в квантовой крекерологии."
 
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly/New()
 	ears = new /obj/item/device/radio/headset/headset_eng(src)
@@ -709,7 +711,7 @@
 	if(stat)
 		return
 
-	var/verb = "says"
+	var/verb = "говорит"
 	if(speak_emote.len)
 		verb = pick(speak_emote)
 
@@ -738,14 +740,14 @@
 	..(message)
 
 
-/mob/living/simple_animal/hostile/retaliate/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+/mob/living/simple_animal/hostile/retaliate/parrot/hear_say(var/message, var/verb = "кудахчет", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	if(prob(50))
 		parrot_hear(message)
 	..()
 
 
 
-/mob/living/simple_animal/hostile/retaliate/parrot/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/living/simple_animal/hostile/retaliate/parrot/hear_radio(var/message, var/verb="кудахчет", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
 	if(prob(50) && available_channels.len)
 		parrot_hear("[pick(available_channels)] [message]")
 	..()

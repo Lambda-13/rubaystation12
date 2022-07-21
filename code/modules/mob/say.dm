@@ -66,9 +66,9 @@
 	var/verb = pick(speak_emote)
 	if(verb == "says") //a little bit of a hack, but we can't let speak_emote default to an empty list without breaking other things
 		if(ending == "!")
-			verb = pick("exclaims","shouts","yells")
+			verb = pick("восклицает","кричит","орёт")
 		else if(ending == "?")
-			verb ="asks"
+			verb ="спрашивает"
 	return verb
 
 /mob/proc/get_ear()

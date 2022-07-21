@@ -293,20 +293,20 @@
 	var/name = client.prefs.real_name
 
 	var/list/header = list("<html><meta charset='utf-8'><body><center>")
-	header += "<b>Welcome, [name].<br></b>"
-	header += "Round Duration: [roundduration2text()]<br>"
+	header += "<b>Привет, [name].<br></b>"
+	header += "Длительность раунда: [roundduration2text()]<br>"
 
 	if(evacuation_controller.has_evacuated())
-		header += "<font color='red'><b>\The [station_name()] has been evacuated.</b></font><br>"
+		header += "<font color='red'><b>Экипаж \The [station_name()] эвакуирован. [pick("Сейчас опасно на корабле","Вам может быть одиноко на судне", "Советую ждать новый раунд")].</b></font><br>"
 	else if(evacuation_controller.is_evacuating())
 		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "<font color='red'>\The [station_name()] is currently undergoing evacuation procedures.</font><br>"
+			header += "<font color='red'>Экипаж \The [station_name()] эвакуируется. [pick("Я думаю надо поспешить и эвакуироваться с другими","Можете подождать начало нового раунда в лобби", "Возможно сейчас не стоит заходить на корабль", "Не уверен что на корабле безопасно", "Возможно стоит подумать перед заходом в игру", "Повезёт если точка спавна ещё есть")].</font><br>"
 		else                                           // Crew transfer initiated
-			header += "<font color='red'>\The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
+			header += "<font color='red'>Экипаж \The [station_name()] готовится к блюспейс прыжку. [pick("Или гиперпрыжку..","Можете оценить что случилось за весь раунд на корабле", "Возможно на корабле опасно")].</font><br>"
 
 	var/list/dat = list()
-	dat += "Choose from the following open/valid positions:<br>"
-	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs.</a><br>"
+	dat += "Выберите открытую професию:<br>"
+	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Скрыть":"Показать"] недоступные профессии.</a><br>"
 	dat += "<table>"
 	dat += "<tr><td colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
 
@@ -324,7 +324,7 @@
 	if(LAZYLEN(job_summaries))
 		dat += job_summaries
 	else
-		dat += "<tr><td>No available positions.</td></tr>"
+		dat += "<tr><td>Работка кончилась!</td></tr>"
 	// END TORCH JOBS
 
 	// SUBMAP JOBS
@@ -345,12 +345,12 @@
 			if(LAZYLEN(job_summaries))
 				dat += job_summaries
 			else
-				dat += "No available positions."
+				dat += "Нету доступных профессий."
 	// END SUBMAP JOBS
 
 	dat += "</table></center>"
 	if(LAZYLEN(hidden_reasons))
-		var/list/additional_dat = list("<br><b>Some roles have been hidden from this list for the following reasons:</b><br>")
+		var/list/additional_dat = list("<br><b>Некоторые роли были скрыты из этого списка по следующим причинам:</b><br>")
 		for(var/raisin in hidden_reasons)
 			additional_dat += "[raisin]<br>"
 		additional_dat += "<br>"
@@ -420,7 +420,7 @@
 	var/dat = "<div align='center'>"
 	dat += html_crew_manifest(OOC = 1)
 	//show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
-	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
+	var/datum/browser/popup = new(src, "Список экипажа", "Список экипажа", 370, 420, src)
 	popup.set_content(dat)
 	popup.open()
 
@@ -434,11 +434,11 @@
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
 		if(show_alert)
-			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
+			to_chat(src, alert("Твоя раса, [client.prefs.species], недоступная для игры."))
 		return 0
 	if(!is_alien_whitelisted(src, S))
 		if(show_alert)
-			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
+			to_chat(src, alert("Тебе надо получить вайтлист для игры на [client.prefs.species]."))
 		return 0
 	return 1
 
@@ -459,10 +459,10 @@
 /mob/new_player/is_ready()
 	return ready && ..()
 
-/mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+/mob/new_player/hear_say(var/message, var/verb = "говорит", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	return
 
-/mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/new_player/hear_radio(var/message, var/verb="говорит", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
 	return
 
 /mob/new_player/show_message(msg, type, alt, alt_type)

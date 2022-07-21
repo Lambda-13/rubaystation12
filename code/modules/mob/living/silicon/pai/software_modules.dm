@@ -118,7 +118,7 @@
 
 
 /datum/pai_software/crew_manifest
-	name = "Crew Manifest"
+	name = "Список экипажа"
 	ram_cost = 5
 	id = "manifest"
 	toggle = FALSE
@@ -129,7 +129,7 @@
 	data["crew_manifest"] = html_crew_manifest()
 	ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 	if (!ui)
-		ui = new(user, user, id, "crew_manifest.tmpl", "Crew Manifest", 450, 600)
+		ui = new(user, user, id, "crew_manifest.tmpl", "Список экипажа", 450, 600)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

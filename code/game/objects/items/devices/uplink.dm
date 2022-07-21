@@ -11,13 +11,13 @@
 */
 
 /obj/item/device/uplink
-	name = "hidden uplink"
-	desc = "There is something wrong if you're examining this."
+	name = "скрытый узел связи"
+	desc = "Если ты видишь это - ты пидор."
 	var/active = 0
 	var/datum/uplink_category/category 	= 0		// The current category we are in
 	var/exploit_id								// Id of the current exploit record we are viewing
 
-	var/welcome = "Welcome, Operative"	// Welcoming menu message
+	var/welcome = "Добро пожаловать, Оперативник"	// Welcoming menu message
 	var/uses 							// Numbers of crystals
 	var/list/ItemsCategory				// List of categories with lists of items
 	var/list/ItemsReference				// List of references with an associated item
@@ -115,7 +115,7 @@
 	NANO UI FOR UPLINK WOOP WOOP
 */
 /obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.inventory_state)
-	var/title = "Remote Uplink"
+	var/title = "Дистанционный узел связи"
 	var/data[0]
 
 	data["welcome"] = welcome

@@ -54,6 +54,28 @@ var/global/list/department_radio_keys = list(
 	  ":ö" = "whisper",		".ö" = "whisper",
 	  ":å" = "Mercenary",	".å" = "Mercenary",
 	  ":é" = "Supply",		".é" = "Supply",
+
+	  //Я не знаю будет ли работать или нет
+	  //Попытка сделать для рускоговорящих
+	  ":к" = "right ear",	".к" = "right ear",
+	  ":д" = "left ear",	".д" = "left ear",
+	  ":ш" = "intercom",	".ш" = "intercom",
+	  ":р" = "department",	".р" = "department",
+	  ":с" = "Command",		".с" = "Command",
+	  ":т" = "Science",		".т" = "Science",
+	  ":ь" = "Medical",		".ь" = "Medical",
+	  ":у" = "Engineering",	".у" = "Engineering",
+	  ":ы" = "Security",	".ы" = "Security",
+	  ":ц" = "whisper",		".ц" = "whisper",
+	  ":е" = "Mercenary",	".е" = "Mercenary",
+	  ":г" = "Supply",		".г" = "Supply",
+	  ":ч" = "Raider",		".ч" = "Raider",
+	  ":м" = "Service",		".м" = "Service",
+	  ":з" = "AI Private",	".з" = "AI Private",
+	  ":я" = "Entertainment",".я" = "Entertainment",
+	  ":н" = "Exploration",		".н" = "Exploration",
+	  ":щ" = "Response Team",".щ" = "Response Team",
+	  ":о" = "Hailing", ".о" = "Hailing",
 )
 
 
@@ -105,16 +127,16 @@ var/global/list/channel_to_radio_key = new
 
 	if((MUTATION_HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
-		verb = pick("yells","roars","hollers")
+		verb = pick("кричит","орёт","надрывается")
 		message_data[3] = 0
 		. = 1
 	else if(slurring)
 		message = slur(message)
-		verb = pick("slobbers","slurs")
+		verb = pick("мычит","хрюкает")
 		. = 1
 	else if(stuttering)
 		message = NewStutter(message)
-		verb = pick("stammers","stutters")
+		verb = pick("заикается","запинаясь")
 		. = 1
 	else if(has_chem_effect(CE_SQUEAKY, 1))
 		message = "<font face = 'Comic Sans MS'>[message]</font>"
@@ -139,9 +161,9 @@ var/global/list/channel_to_radio_key = new
 
 /mob/living/proc/get_speech_ending(verb, var/ending)
 	if(ending=="!")
-		return pick("exclaims","shouts","yells")
+		return pick("восклицает","кричит","орёт")
 	if(ending=="?")
-		return "asks"
+		return "спрашивает"
 	return verb
 
 /mob/living/proc/format_say_message(var/message = null)
@@ -156,10 +178,10 @@ var/global/list/channel_to_radio_key = new
 
 	return html_encode(message)
 
-/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", whispering)
+/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="говорит", var/alt_name="", whispering)
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, "<span class='warning'>You cannot speak in IC (Muted).</span>")
+			to_chat(src, "<span class='warning'>У вас нет рта, мистер Андерсон.</span>")
 			return
 
 	if(stat)
@@ -198,7 +220,7 @@ var/global/list/channel_to_radio_key = new
 		return 1
 
 	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
-		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
+		to_chat(src, "<span class='danger'>Во рту затычка!</span>")
 		return
 
 	if (speaking)
@@ -246,7 +268,7 @@ var/global/list/channel_to_radio_key = new
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
 		if(!speaking || !(speaking.flags & NO_TALK_MSG))
-			src.visible_message(SPAN_NOTICE("\The [src] talks into \the [used_radios[1]]."), blind_message = SPAN_NOTICE("You hear someone talk into their headset."), range = 5, exclude_mobs = list(src))
+			src.visible_message(SPAN_NOTICE("\The [src] говорит в \the [used_radios[1]]."), blind_message = SPAN_NOTICE("Слышу, как кто-то говорит в гарнитуру."), range = 5, exclude_mobs = list(src))
 			if (speech_sound)
 				sound_vol *= 0.5
 
@@ -327,7 +349,7 @@ var/global/list/channel_to_radio_key = new
 	return 1
 
 
-/mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
+/mob/living/proc/say_signlang(var/message, var/verb="жестикулирует", var/datum/language/language)
 	for (var/mob/O in viewers(src, null))
 		O.hear_signlang(message, verb, language, src)
 	return 1
