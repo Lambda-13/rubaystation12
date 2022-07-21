@@ -173,7 +173,7 @@
 
 /datum/vote/proc/interface(mob/user)
 	. = list()
-	 += "<meta charset='utf-8'>
+	 += "<meta charset='utf-8'>"
 	if(mob_not_participating(user))
 		. += "<h2>Вы не можете участвовать в этом голосовании, если вы не в игре.</h2><br>"
 		return
