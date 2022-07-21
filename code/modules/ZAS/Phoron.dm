@@ -1,7 +1,7 @@
 var/global/image/contamination_overlay = image('lambda/icons/effects/contamination.dmi')
 
 /pl_control
-	var/PHORON_DMG = 3
+	var/PHORON_DMG = 1
 	var/PHORON_DMG_NAME = "Phoron Damage Amount"
 	var/PHORON_DMG_DESC = "Self Descriptive"
 
@@ -17,11 +17,11 @@ var/global/image/contamination_overlay = image('lambda/icons/effects/contaminati
 	var/GENETIC_CORRUPTION_NAME = "Genetic Corruption Chance"
 	var/GENETIC_CORRUPTION_DESC = "Chance of genetic corruption as well as toxic damage, X in 10,000."
 
-	var/SKIN_BURNS = 0
+	var/SKIN_BURNS = 1
 	var/SKIN_BURNS_DESC = "Phoron has an effect similar to mustard gas on the un-suited."
 	var/SKIN_BURNS_NAME = "Skin Burns"
 
-	var/EYE_BURNS = 1
+	var/EYE_BURNS = 0
 	var/EYE_BURNS_NAME = "Eye Burns"
 	var/EYE_BURNS_DESC = "Phoron burns the eyes of anyone not wearing eye protection."
 
