@@ -16,7 +16,7 @@
 
 /obj/effect/overmap/Initialize()
 	. = ..()
-	icon = pick['icons/obj/overmap.dmi','lambda/icons/obj/overmap.dmi']
+	icon = pick('icons/obj/overmap.dmi','lambda/icons/obj/overmap.dmi')
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 

@@ -18,7 +18,7 @@
 	name = "airlock brace"
 	desc = "A sturdy device that can be attached to an airlock to reinforce it and provide additional security."
 	w_class = ITEM_SIZE_LARGE
-	icon = 'icons/obj/lambda/icons/obj/airlock_machines.dmi'
+	icon = 'lambda/icons/obj/airlock_machines.dmi'
 	icon_state = "brace_open"
 	var/cur_health
 	var/max_health = 450

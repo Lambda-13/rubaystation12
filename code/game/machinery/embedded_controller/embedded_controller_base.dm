@@ -44,7 +44,7 @@
 	return TRUE
 
 /obj/machinery/embedded_controller/radio
-	icon = 'icons/obj/lambda/icons/obj/airlock_machines.dmi'
+	icon = 'lambda/icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_control_off"
 	power_channel = ENVIRON
 	density = FALSE
