@@ -1,6 +1,6 @@
 /obj/item/storage/messenger
-	name = "messenger bag"
-	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
+	name = "сумка почтальона"
+	desc = "Небольшая зелено-серая сумка-мессенджер с синим логотипом Corvid Couriers."
 	icon = 'icons/mob/simple_animal/crow.dmi'
 	icon_state = "messenger_bag"
 	storage_slots = 7
@@ -8,8 +8,8 @@
 	max_w_class = ITEM_SIZE_SMALL
 
 /mob/living/simple_animal/crow
-	name = "crow"
-	desc = "A large crow. Caw caw."
+	name = "ворона"
+	desc = "Большая ворона. Кар кар."
 	icon = 'icons/mob/simple_animal/crow.dmi'
 	icon_state = "crow"
 	icon_living = "crow"
