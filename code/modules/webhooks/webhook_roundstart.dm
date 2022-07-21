@@ -6,7 +6,7 @@
 	. = ..()
 	var/desc = ""
 	if(data && data["url"])
-		desc += "Войти: [data["url"]]"
+		desc += "Войти: byond://[world.internet_address]:[world.port]"
 	desc += "."
 	desc += "Режим: **[SSticker.mode ? SSticker.mode.name : "Секрет"]**."
 

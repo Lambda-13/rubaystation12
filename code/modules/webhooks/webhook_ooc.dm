@@ -6,6 +6,7 @@
 	var/oocsend = data && data["text"]
 	var/desc = replacetext(oocsend,"@","＠")
 	.["embeds"] = list(list(
-		"title" = desc,
-		"embeds" = null
+		"title" = null,
+		"description" = desc,
+		"color" = COLOR_WEBHOOK_DEFAULT
 	))

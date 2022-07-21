@@ -9,14 +9,14 @@
 
 		if(data["surviving_total"] > 0)
 
-			var/s_was =      "всего"
-			var/s_survivor = "выжило"
+			var/s_was =      "Всего выжило"
+			var/s_survivor = "игрок(а)"
 
 			if(data["surviving_total"] != 1)
-				s_was = "всего"
-				s_survivor = "выжило"
+				s_was = "Всего выжило"
+				s_survivor = "игрок(а)"
 
-			desc += "Тут [s_was] **[data["surviving_total"]] [s_survivor] ([data["escaped_total"]] эвакуировалось)** и **[data["ghosts"]] призраков.**"
+			desc += "[s_was] **[data["surviving_total"]] [s_survivor] ([data["escaped_total"]] эвакуировалось)** и **[data["ghosts"]] призраков.**"
 		else
 			desc += "всего **0 выжило** ([data["ghosts"]] призраков)."
 
