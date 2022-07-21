@@ -1,5 +1,5 @@
 /obj/item/device/scanner/xenobio
-	name = "сканер ксенобиолога"
+	name = "сканер ксеноорганизмов"
 	desc = "Лучший друг ксенобиолога и исследователей. Позволяет узнать чем дышит существо, что оно любит и не любит."
 	icon = 'lambda/icons/obj/xenolife_scanner.dmi'
 	icon_state = "xenobio"
@@ -35,7 +35,7 @@
 
 /proc/xenobio_scan_results(mob/target)
 	. = list()
-	. += "<meta charset='utf-8'>
+	. += "<meta charset='utf-8'>"
 	if(istype(target, /obj/structure/stasis_cage))
 		var/obj/structure/stasis_cage/cagie = target
 		target = cagie.contained

@@ -54,7 +54,7 @@
 	var/list/dat = list()
 
 	var/form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
-	dat += "<meta charset='utf-8'>
+	dat += "<meta charset='utf-8'>"
 	dat += "<h3>Анализ [form_title]</h3>"
 
 	dat += "<h2>Информация</h2>"
