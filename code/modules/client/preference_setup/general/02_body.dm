@@ -222,7 +222,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					if (BP_BRAIN) alt_organs += "Machine-interface [organ_name]"
 					else alt_organs += "Mechanically assisted [organ_name]"
 	if (!length(alt_organs))
-		alt_organs += "(No differences from baseline)"
+		alt_organs += "Все части тела обычные и не видоизменёные"
 	. += "<br />[alt_organs.Join(", ")]"
 	. = jointext(., null)
 
@@ -238,7 +238,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH
 
 	else if(href_list["gender"])
-		var/new_gender = input(user, "Choose your character's gender:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in mob_species.genders
+		var/new_gender = input(user, "Выберите пол:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in mob_species.genders
 		mob_species = all_species[pref.species]
 		if(new_gender && CanUseTopic(user) && (new_gender in mob_species.genders))
 			pref.gender = new_gender
@@ -247,7 +247,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["age"])
-		var/new_age = input(user, "Choose your character's age:\n([mob_species.min_age]-[mob_species.max_age])", CHARACTER_PREFERENCE_INPUT_TITLE, pref.age) as num|null
+		var/new_age = input(user, "Выберите возраст:\n([mob_species.min_age]-[mob_species.max_age])", CHARACTER_PREFERENCE_INPUT_TITLE, pref.age) as num|null
 		if(new_age && CanUseTopic(user))
 			pref.age = max(min(round(text2num(new_age)), mob_species.max_age), mob_species.min_age)
 			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// The age may invalidate skill loadouts
@@ -268,7 +268,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["blood_type"])
-		var/new_b_type = input(user, "Choose your character's blood-type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in valid_bloodtypes
+		var/new_b_type = input(user, "Выберите тип крови:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in valid_bloodtypes
 		if(new_b_type && CanUseTopic(user))
 			pref.b_type = new_b_type
 			return TOPIC_REFRESH
@@ -292,7 +292,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					continue
 			species_to_pick += species
 
-		var/choice = input("Select a species to play as.") as null|anything in species_to_pick
+		var/choice = input("Выберите расу для игры.") as null|anything in species_to_pick
 		if(!choice || !(choice in all_species))
 			return
 
@@ -328,7 +328,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["hair_color"])
 		if(!has_flag(mob_species, HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
-		var/new_hair = input(user, "Choose your character's hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.head_hair_color) as color|null
+		var/new_hair = input(user, "Выберите цвет волос:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.head_hair_color) as color|null
 		if(new_hair && has_flag(all_species[pref.species], HAS_HAIR_COLOR) && CanUseTopic(user))
 			pref.head_hair_color = new_hair
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -345,7 +345,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if (hair_index > 1 && valid_hairstyles[hair_index - 1])
 				new_h_style = valid_hairstyles[hair_index - 1]
 		else
-			new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.head_hair_style)  as null|anything in valid_hairstyles
+			new_h_style = input(user, "Выберите вид волос:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.head_hair_style)  as null|anything in valid_hairstyles
 
 		mob_species = all_species[pref.species]
 		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles()))
@@ -355,7 +355,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["facial_color"])
 		if(!has_flag(mob_species, HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
-		var/new_facial = input(user, "Choose your character's facial-hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.facial_hair_color) as color|null
+		var/new_facial = input(user, "Выберите цвет бороды/усов:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.facial_hair_color) as color|null
 		if(new_facial && has_flag(all_species[pref.species], HAS_HAIR_COLOR) && CanUseTopic(user))
 			pref.facial_hair_color = new_facial
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -363,7 +363,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["eye_color"])
 		if(!has_flag(mob_species, HAS_EYE_COLOR))
 			return TOPIC_NOACTION
-		var/new_eyes = input(user, "Choose your character's eye colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.eye_color) as color|null
+		var/new_eyes = input(user, "Выберите цвет глаз:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.eye_color) as color|null
 		if(new_eyes && has_flag(all_species[pref.species], HAS_EYE_COLOR) && CanUseTopic(user))
 			pref.eye_color = new_eyes
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -371,7 +371,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["base_skin"])
 		if(!has_flag(mob_species, HAS_BASE_SKIN_COLOURS))
 			return TOPIC_NOACTION
-		var/new_s_base = input(user, "Choose your character's base colour:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_species.base_skin_colours
+		var/new_s_base = input(user, "Выберите цвет тела:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_species.base_skin_colours
 		if(new_s_base && CanUseTopic(user))
 			pref.base_skin = new_s_base
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -379,7 +379,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["skin_tone"])
 		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
-		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_species.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
+		var/new_s_tone = input(user, "Выберите цвет кожи от самого светлого до самого тёмного: от 1 до [mob_species.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
 		mob_species = all_species[pref.species]
 		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
 			pref.skin_tone = 35 - max(min(round(new_s_tone), mob_species.max_skin_tone()), 1)
@@ -388,7 +388,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["skin_color"])
 		if(!has_flag(mob_species, HAS_SKIN_COLOR))
 			return TOPIC_NOACTION
-		var/new_skin = input(user, "Choose your character's skin colour: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.skin_color) as color|null
+		var/new_skin = input(user, "Выберите цвет кожи: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.skin_color) as color|null
 		if(new_skin && has_flag(all_species[pref.species], HAS_SKIN_COLOR) && CanUseTopic(user))
 			pref.skin_color = new_skin
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -405,7 +405,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if (hair_index > 1 && valid_facialhairstyles[hair_index - 1])
 				new_f_style = valid_facialhairstyles[hair_index - 1]
 		else
-			new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.facial_hair_style)  as null|anything in valid_facialhairstyles
+			new_f_style = input(user, "Выберите вид бороды/усов:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.facial_hair_style)  as null|anything in valid_facialhairstyles
 
 		mob_species = all_species[pref.species]
 		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(pref.gender)))
@@ -423,7 +423,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_bodytype() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
 				usable_markings -= M
 
-		var/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
+		var/new_marking = input(user, "Choose пометки на теле:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
 		if(new_marking && CanUseTopic(user))
 			pref.body_markings[new_marking] = "#000000" //New markings start black
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -435,7 +435,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["marking_color"])
 		var/M = href_list["marking_color"]
-		var/mark_color = input(user, "Choose the [M] color: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.body_markings[M]) as color|null
+		var/mark_color = input(user, "Выберите цвет [M]: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.body_markings[M]) as color|null
 		if(mark_color && CanUseTopic(user))
 			pref.body_markings[M] = "[mark_color]"
 			return TOPIC_REFRESH_UPDATE_PREVIEW
