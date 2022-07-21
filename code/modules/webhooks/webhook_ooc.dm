@@ -6,5 +6,7 @@
 	var/oocsend = data && data["text"]
 	var/desc = replacetext(oocsend,"@","＠")
 	.["embeds"] = list(list(
-		"content" = desc
+		"title" = desc,
+		"embeds" = null,
+		"attachments" = []
 	))

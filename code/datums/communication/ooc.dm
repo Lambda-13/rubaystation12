@@ -20,7 +20,7 @@
 /decl/communication_channel/ooc/do_communicate(var/client/C, var/message)
 	var/datum/admins/holder = C.holder
 	var/is_stealthed = C.is_stealthed()
-
+	SSwebhooks.send(WEBHOOK_OOC, list("text" = "OOC: [C.key]: [message]"))
 	var/ooc_style = "everyone"
 	if(holder && !is_stealthed)
 		ooc_style = "elevated"
@@ -33,8 +33,6 @@
 
 	var/can_badmin = !is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor))
 	var/ooc_color = C.prefs.ooccolor
-
-	SSwebhooks.send(WEBHOOK_OOC, list("text" = "OOC: [C.key]: [message]"))
 
 	for(var/client/target in GLOB.clients)
 		if(target.is_key_ignored(C.key)) // If we're ignored by this person, then do nothing.
