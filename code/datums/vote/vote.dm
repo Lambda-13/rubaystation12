@@ -173,16 +173,15 @@
 
 /datum/vote/proc/interface(mob/user)
 	. = list()
-	 += "<meta charset='utf-8'>"
 	if(mob_not_participating(user))
-		. += "<h2>Вы не можете участвовать в этом голосовании, если вы не в игре.</h2><br>"
+		. += "<meta charset='utf-8'><h2>Вы не можете участвовать в этом голосовании, если вы не в игре.</h2><br>"
 		return
 	if(question)
-		. += "<h2>Vote: '[question]'</h2>"
+		. += "<meta charset='utf-8'><h2>Голосование: '[question]'</h2>"
 	else
-		. += "<h2>Vote: [capitalize(name)]</h2>"
-	. += "Time Left: [time_remaining] s<hr>"
-	. += "<table width = '100%'><tr><th>Варианты</th><th>Голосаr</th>"
+		. += "<h2>Голосование: [capitalize(name)]</h2>"
+	. += "Осталось: [time_remaining] s<hr>"
+	. += "<table width = '100%'><tr><th>Варианты</th><th>Голоса</th>"
 	. += additional_header
 	. += "</tr>"
 
