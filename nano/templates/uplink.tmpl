@@ -1,5 +1,5 @@
 
-<!-- 
+<!--
 Title: Syndicate Uplink, uses some javascript to change nanoUI up a bit.
 Used In File(s): \code\game\objects\items\devices\uplinks.dm
  -->
@@ -11,10 +11,10 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 		<b>Functions</b>:
 	</div>
 	<div class="itemContent">
-		{{:helper.link('Request Items', 'gear', {'menu' : 0}, null, 'fixedLeftWider')}}
-		{{:helper.link('Exploitable Information', 'gear', {'menu' : 2}, null, 'fixedLeftWider')}}
-		{{:helper.link('Return', 'arrowreturn-1-w', {'return' : 1}, null, 'fixedLeft')}}
-		{{:helper.link('Close', 'gear', {'lock' : "1"}, null, 'fixedLeft')}}
+		{{:helper.link('Реквест предметов', 'gear', {'menu' : 0}, null, 'fixedLeftWider')}}
+		{{:helper.link('Эксплуатируемая информация', 'gear', {'menu' : 2}, null, 'fixedLeftWider')}}
+		{{:helper.link('Вернуться', 'arrowreturn-1-w', {'return' : 1}, null, 'fixedLeft')}}
+		{{:helper.link('Закрыть', 'gear', {'lock' : "1"}, null, 'fixedLeft')}}
 	</div>
 </div>
 <br>
@@ -22,7 +22,7 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 {{if data.menu == 0 || data.menu == 1}}
 	<div class="item">
 		<div class="itemLabel">
-			<b>Telecrystals</b>:
+			<b>Телекристалы</b>:
 		</div>
 		<div class="itemContent">
 			{{:data.crystals}}
@@ -32,10 +32,10 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 	{{if data.discount_amount < 100}}
 		<div class="item">
 			<div class="itemLabel">
-				<b>Currently discounted</b>:
+				<b>В настоящее время со скидкой</b>:
 			</div>
 			<div class="itemContent">
-				{{:data.discount_category}}<br>{{:data.discount_name}}<br>{{:data.discount_amount}}% off. Offer will expire at: {{:data.offer_expiry}}
+				{{:data.discount_category}}<br>{{:data.discount_name}}<br>{{:data.discount_amount}}%. Скидка действует до: {{:data.offer_expiry}}
 			</div>
 		</div>
 	{{/if}}
@@ -49,9 +49,9 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 		</div>
 	{{/for}}
 {{else data.menu == 1}}
-    <H2><span class="white">Request items:</span></H2>
-    <span class="white"><i>Each item costs a number of tele-crystals as indicated by the number following their name.</i></span>
-	
+    <H2><span class="white">Реквест предметов:</span></H2>
+    <span class="white"><i>Каждый предмет стоит определенное количество телекристаллов, указанное числом после их имени.</i></span>
+
 	{{for data.items}}
 		<div class="item">
 			{{:helper.link(value.name, 'gear', {'buy_item' : value.ref}, value.can_buy ? null : 'disabled')}} - <span class="white">{{:value.cost}}</span>
@@ -61,10 +61,10 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 		</div>
     {{/for}}
 {{else data.menu == 2}}
-    <H2><span class="white">Information Record List:</span></H2>
+    <H2><span class="white">Список информационных записей:</span></H2>
     <br>
     <div class="item">
-        Select a Record
+        Выберите запись
     </div>
     <br>
     {{for data.exploit_records}}
@@ -73,7 +73,7 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
         </div>
     {{/for}}
 {{else data.menu == 21}}
-    <H2><span class="white">Information Record:</span></H2>
+    <H2><span class="white">Информационная запись:</span></H2>
     <br>
     <div class="statusDisplayRecords">
         <div class="item">
