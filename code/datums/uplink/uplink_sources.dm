@@ -1,4 +1,4 @@
-#define NO_GUARANTEE_NO_EXTRA_COST_DESC(X) "Installs an uplink into " + X + " if, and only if, found on your person. Has no TC cost."
+#define NO_GUARANTEE_NO_EXTRA_COST_DESC(X) "Устанавливает аплинк в " + X + " только в том случае, если он есть у тебя."
 
 #define SETUP_FAILED TRUE
 
@@ -29,12 +29,12 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	var/datum/computer_file/program/uplink/program = new(pda_pass)
 	if(!P.hard_drive.save_file(program))
 		return SETUP_FAILED	//Not enough space or other issues.
-	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in TaxQuickly program to unlock its hidden features.</span>")
-	M.StoreMemory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).", /decl/memory_options/system)
+	to_chat(M, "<span class='notice'>Переносное реле телепортации объекта было установлено в вашем [P.name]. Просто введите код \"[pda_pass]\" в TaxQuickly для разблокировки узела связи.</span>")
+	M.StoreMemory("<B>Код узела связи (аплинка):</B> [pda_pass] ([P.name]).", /decl/memory_options/system)
 	T.program = program
 
 /decl/uplink_source/radio
-	name = "Radio"
+	name = "Радиогарнитура"
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a radio")
 
 /decl/uplink_source/radio/setup_uplink_source(mob/M, amount)
@@ -55,12 +55,12 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	var/obj/item/device/uplink/T = new(R, M.mind, amount)
 	R.hidden_uplink = T
 	R.traitor_frequency = freq
-	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features.</span>")
-	M.StoreMemory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).", /decl/memory_options/system)
+	to_chat(M, "<span class='notice'>Переносное реле телепортации объекта было установлено в вашем [R.name]. Просто наберите частоту [format_frequency(freq)] для разблокировки узела связи.</span>")
+	M.StoreMemory("<B>Частота:</B> [format_frequency(freq)] ([R.name]).", /decl/memory_options/system)
 
 /decl/uplink_source/implant
-	name = "Implant"
-	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
+	name = "Имплант"
+	desc = "Вживляет имплантат узела связи (аплинка) в вашу голову. Стоит 20% от первоначальной суммы ТС."
 
 /decl/uplink_source/implant/setup_uplink_source(mob/living/carbon/human/H, amount)
 	if(!istype(H))
@@ -79,21 +79,21 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	U.implanted(H) // This proc handles the installation feedback
 
 /decl/uplink_source/unit
-	name = "Uplink Unit"
-	desc = "Teleports an uplink unit to your location. Has 30% more TC."
+	name = "Устроиство"
+	desc = "Специальное устроиство будет находиться у вас в вещах. Имеет на 50% больше ТК."
 
 /decl/uplink_source/unit/setup_uplink_source(mob/M, amount)
-	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 1.3))
+	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 1.5))
 	put_on_mob(M, U, "\A [U]")
 
 /decl/uplink_source/telecrystals
-	name = "Telecrystals"
-	desc = "Get your telecrystals in pure form, without the means to trade them for goods, Gives 150% of initial TC amount"
+	name = "ТелеКристалы"
+	desc = "Вам даются ТелеКристалы в чистом виде. Дает 200% от начальной суммы ТС."
 
 /decl/uplink_source/telecrystals/setup_uplink_source(mob/M, amount)
-	amount = round(amount * 1.5)
+	amount = round(amount * 2.0)
 	var/obj/item/stack/telecrystal/TC = new(M, amount)
-	put_on_mob(M, TC, "[amount] telecrystal\s")
+	put_on_mob(M, TC, "[amount] телекристалов\s")
 
 /decl/uplink_source/proc/find_in_mob(var/mob/M, var/type)
 	for(var/item in M.get_equipped_items(TRUE))
@@ -106,12 +106,12 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 /decl/uplink_source/proc/put_on_mob(mob/M, atom/movable/AM, text)
 	var/obj/O = M.equip_to_storage(AM)
 	if(O)
-		to_chat(M, "<span class='notice'>[text] can be found in your [O.name].</span>")
+		to_chat(M, "<span class='notice'>[text] можно найти у вас в [O.name].</span>")
 	else if(M.put_in_hands(AM))
-		to_chat(M, "<span class='notice'>[text] appear in your hands.</span>")
+		to_chat(M, "<span class='notice'>[text] у вас в руке.</span>")
 	else
 		AM.dropInto(M.loc)
-		to_chat(M, "<span class='notice'>[text] appear at your location.</span>")
+		to_chat(M, "<span class='notice'>[text] должен быть около вас.</span>")
 
 /proc/setup_uplink_source(mob/M, amount = DEFAULT_TELECRYSTAL_AMOUNT)
 	if(!istype(M) || !M.mind)
@@ -131,7 +131,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 		if(US.setup_uplink_source(M, amount) != SETUP_FAILED)
 			return TRUE
 
-	to_chat(M, "<span class='warning'>Either by choice or circumstance you will be without an uplink.</span>")
+	to_chat(M, "<span class='warning'>Либо по выбору, либо по обстоятельствам вы останетесь без узела связи.</span>")
 	return FALSE
 
 #undef NO_GUARANTEE_NO_EXTRA_COST_DESC

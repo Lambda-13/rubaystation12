@@ -1,6 +1,6 @@
 /obj/item/stack/telecrystal
-	name = "telecrystal"
-	desc = "It seems to be pulsing with suspiciously enticing energies."
+	name = "телекристалы"
+	desc = "Кажется, что оно или они пульсирует подозрительно заманчивой энергией."
 	singular_name = "telecrystal"
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "telecrystal"
@@ -18,11 +18,11 @@
 			I.hidden_uplink.update_nano_data()
 			SSnano.update_uis(I.hidden_uplink)
 			use(amount)
-			to_chat(user, "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>")
+			to_chat(user, "<span class='notice'>Вставляю \the [src] в \the [I] и заряжаю узел связи.</span>")
 
 /obj/item/stack/telecrystal/attack_self(var/mob/user)
 	if(use(Ceil(DEFAULT_TELECRYSTAL_AMOUNT/20)))
-		user.visible_message("<span class='warning'>\The [user] crushes a crystal!</span>", "<span class='warning'>You crush \a [src]!</span>", "You hear the sound of a crystal breaking just before a sudden crack of electricity.")
+		user.visible_message("<span class='warning'>\The [user] ломает кристал!</span>", "<span class='warning'>Я раздавил \a [src]!</span>", "Слышу будто разбили стекло и внезапный электрический шум.")
 		var/turf/T = get_random_turf_in_range(user, 7, 3)
 		if(T)
 			user.phase_out(T, get_turf(user))

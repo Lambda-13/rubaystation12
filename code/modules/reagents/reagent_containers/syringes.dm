@@ -6,8 +6,8 @@
 #define SYRINGE_BROKEN 2
 
 /obj/item/reagent_containers/syringe
-	name = "syringe"
-	desc = "A syringe."
+	name = "шприц"
+	desc = "Обычный шприц."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "rg0"
 	icon_state = "rg"
@@ -354,8 +354,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /obj/item/reagent_containers/syringe/inaprovaline
-	name = "Syringe (inaprovaline)"
-	desc = "Contains inaprovaline - used to stabilize patients."
+	name = "шприц (inaprovaline)"
+	desc = "Содержит инапровалин - для стабилизации пациентов."
 
 /obj/item/reagent_containers/syringe/inaprovaline/New()
 	..()
@@ -364,8 +364,8 @@
 	update_icon()
 
 /obj/item/reagent_containers/syringe/antitoxin
-	name = "Syringe (anti-toxin)"
-	desc = "Contains anti-toxins."
+	name = "шприц (anti-toxin)"
+	desc = "Содержит антитоксин."
 
 /obj/item/reagent_containers/syringe/antitoxin/New()
 	..()
@@ -374,8 +374,8 @@
 	update_icon()
 
 /obj/item/reagent_containers/syringe/antiviral
-	name = "Syringe (spaceacillin)"
-	desc = "Contains antiviral agents."
+	name = "шприц (spaceacillin)"
+	desc = "Содержит антибиотик от вирусов."
 
 /obj/item/reagent_containers/syringe/antiviral/New()
 	..()
@@ -384,8 +384,8 @@
 	update_icon()
 
 /obj/item/reagent_containers/syringe/drugs
-	name = "Syringe (drugs)"
-	desc = "Contains aggressive drugs meant for torture."
+	name = "шприц (drugs)"
+	desc = "Содержит наркотическое вещество."
 
 /obj/item/reagent_containers/syringe/drugs/New()
 	..()
@@ -404,8 +404,8 @@
 	update_icon()
 
 /obj/item/reagent_containers/syringe/steroid
-	name = "Syringe (anabolic steroids)"
-	desc = "Contains drugs for muscle growth."
+	name = "шприц (anabolic steroids)"
+	desc = "Содержит коктеиль для увеличения мышечной массы."
 
 /obj/item/reagent_containers/syringe/steroid/New()
 	..()
