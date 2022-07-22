@@ -17,7 +17,6 @@
 				s_survivor = "игрок(а)"
 
 			desc += "[s_was] **[data["surviving_total"]] [s_survivor] ([data["escaped_total"]] эвакуировалось)** и **[data["ghosts"]] призраков.**"
-			desc += "[dronecount==0 ? "Всего [dronecount>1 ? "было" : "был"] [dronecount] [dronecount>1 ? "дронов" : "дрон"] в конце раунда." : ""]"
 		else
 			desc += "всего **0 выжило** ([data["ghosts"]] призраков)."
 
