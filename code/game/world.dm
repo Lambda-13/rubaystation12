@@ -185,10 +185,17 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		s["host"] = host ? host : null
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
-		s["players"] = 0
-		s["stationtime"] = stationtime2text()
-		s["roundduration"] = roundduration2text()
-		s["map"] = replacetext(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros
+		s["playersGOFUCKYOUSELF"] = 0
+		s["stationtimeGOFUCKYOUSELF"] = stationtime2text()
+		s["rounddurationGOFUCKYOUSELF"] = roundduration2text()
+		s["mapGOFUCKYOUSELF"] = replacetext(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros
+
+		// Для самых любопытных
+		//Что-бы починить отображение в хабе удали в этом коде "GOFUCKYOUSELF"
+		s["players"] = "99"
+		s["stationtime"] = "99:99"
+		s["roundduration"] = "99:99"
+		s["map"] = "Somewhere in Nevada"
 
 		var/active = 0
 		var/list/players = list()
@@ -205,7 +212,8 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			if(istype(C.mob, /mob/living))
 				active++
 
-		s["players"] = players.len
+		s["playersGOFUCKYOUSELF"] = players.len
+		s["players"] = "99"
 		s["admins"] = admins.len
 		if(!legacy)
 			s["playerlist"] = list2params(players)
@@ -478,9 +486,9 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 	if(config.wait_for_sigusr1_reboot && reason != 3)
 		text2file("foo", "reboot_called")
-		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
+		to_world("<span class=danger>Внешние скрипты ещё работают, не могу рестартануть.</span>")
 		return
-
+	SSwebhooks.send(WEBHOOK_OOC, list("text" = "Сервер перезагружается."))
 	..(reason)
 
 
