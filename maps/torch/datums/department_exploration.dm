@@ -31,10 +31,10 @@
 	return seeds > 0
 
 /datum/goal/department/plant_samples/update_strings()
-	description = "Scan at least [seeds] different plant\s native to exoplanets."
+	description = "Просканируйте [seeds] растений на экзопланетах."
 
 /datum/goal/department/plant_samples/get_summary_value()
-	return " ([GLOB.stat_flora_scanned] plant specie\s so far)"
+	return " (всего [GLOB.stat_flora_scanned] растений просканировано)"
 
 /datum/goal/department/plant_samples/check_success()
 	return GLOB.stat_flora_scanned >= seeds
@@ -55,10 +55,10 @@
 	return species > 0
 
 /datum/goal/department/fauna_samples/update_strings()
-	description = "Scan at least [species] different creature\s native to exoplanets."
+	description = "Просканируйте [species] существ на экзопланетах."
 
 /datum/goal/department/fauna_samples/get_summary_value()
-	return " ([GLOB.stat_fauna_scanned.len] xenofauna specie\s so far)"
+	return " (всего [GLOB.stat_fauna_scanned.len] существ просканировано)"
 
 /datum/goal/department/fauna_samples/check_success()
 	return GLOB.stat_fauna_scanned.len >= species
