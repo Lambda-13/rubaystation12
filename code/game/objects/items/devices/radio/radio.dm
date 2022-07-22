@@ -293,7 +293,7 @@
 		return
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
 	A.fully_replace_character_name(from)
-	talk_into(A, message, channel,"states")
+	talk_into(A, message, channel,"холодно сообщает")
 	qdel(A)
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
