@@ -100,10 +100,10 @@ var/global/datum/controller/master/Master = new
 	for(var/datum/controller/subsystem/ss in subsystems)
 		if (ss.flags & SS_NEEDS_SHUTDOWN)
 			var/time = Uptime()
-			report_progress("Shutting down [ss] subsystem...")
+			report_progress("#ПОДСИСТЕМА ОТКЛЮЧЕНА - [ss]...")
 			ss.Shutdown()
-			report_progress("[ss] shutdown in [(Uptime() - time)/10]s.")
-	report_progress("Shutdown complete.")
+			report_progress("#[ss] ОТКЛЮЧЕНИЕ ЧЕРЕЗ [(Uptime() - time)/10] СЕКУНД.")
+	report_progress("#ОТКЛЮЧЕНИЕ УСПЕШНО.")
 
 // Returns 1 if we created a new mc, 0 if we couldn't due to a recent restart,
 //	-1 if we encountered a runtime trying to recreate it
@@ -164,7 +164,7 @@ var/global/datum/controller/master/Master = new
 		total_run_times = Master.total_run_times
 		StartProcessing(10)
 	else
-		to_chat(world, "<span class='boldannounce'>The Master Controller is having some issues, we will need to re-initialize EVERYTHING</span>")
+		to_chat(world, "<span class='boldannounce'>#МАСТЕР-КОНТРОЛЛЕР ПОЙМАЛ БАГ - ЗАГРУЗКА ВСЕГО НАЧИНАЕТСЯ ЗАНОГО</span>")
 		Initialize(20, TRUE)
 
 
@@ -180,7 +180,7 @@ var/global/datum/controller/master/Master = new
 	if(init_sss)
 		init_subtypes(/datum/controller/subsystem, subsystems)
 
-	report_progress("Initializing subsystems...")
+	report_progress("#ЗАГРУЖАЮ ПОДСИСТЕМЫ")
 
 	initializing = TRUE
 
@@ -194,7 +194,7 @@ var/global/datum/controller/master/Master = new
 		SS.DoInitialize(Uptime())
 		CHECK_TICK
 	current_ticklimit = tick_limit_default
-	var/msg = "Initializations complete within [(Uptime() - start_uptime) / 10] second\s!"
+	var/msg = "#ЗАГРУЖЕНО - [(Uptime() - start_uptime) / 10] СЕКУНД"
 	report_progress(msg)
 	log_world(msg)
 
@@ -219,7 +219,7 @@ var/global/datum/controller/master/Master = new
 		old_runlevel = "NULL"
 
 	current_runlevel = log(2, new_runlevel) + 1
-	report_progress("MC: Runlevel changed from [old_runlevel] to [current_runlevel]")
+	report_progress("MC: УРОВЕНЬ ВЫПОЛНЕНИЕ ИЗМЕНЁН С [old_runlevel] НА [current_runlevel]")
 	if(current_runlevel < 1)
 		CRASH("Attempted to set invalid runlevel: [new_runlevel]")
 
@@ -228,17 +228,17 @@ var/global/datum/controller/master/Master = new
 	set waitfor = 0
 	if(delay)
 		sleep(delay)
-	report_progress("Master starting processing")
+	report_progress("МАСТЕР НАЧИНАЕТ ВЫПОЛНЕНИЕ")
 	var/rtn = Loop()
 	if (rtn > 0 || processing < 0)
 		return //this was suppose to happen.
 	//loop ended, restart the mc
 	log_game("MC crashed or runtimed, restarting")
-	message_admins("MC crashed or runtimed, restarting")
+	message_admins("Мастер контроллер упал от рантайма, рестарт")
 	var/rtn2 = Recreate_MC()
 	if (rtn2 <= 0)
 		log_game("Failed to recreate MC (Error code: [rtn2]), it's up to the failsafe now")
-		message_admins("Failed to recreate MC (Error code: [rtn2]), it's up to the failsafe now")
+		message_admins("Немогу пересоздать Мастер контроллер (Код ошибки: [rtn2]), теперь тут феилсейв")
 		Failsafe.defcon = 2
 
 // Main loop.
