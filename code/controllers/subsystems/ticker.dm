@@ -479,6 +479,7 @@ Helpers
 /datum/controller/subsystem/ticker/proc/notify_delay()
 	if(!delay_notified)
 		to_world("<span class='notice'><b>Конец раунда остановлен.</b></span>")
+		SSwebhooks.send(WEBHOOK_OOC, list("text" = "Конец раунда остановлен."))
 	delay_notified = 1
 
 /datum/controller/subsystem/ticker/proc/handle_tickets()
