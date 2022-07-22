@@ -95,7 +95,7 @@
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
 			stance_damage += 2
 			if(prob(10))
-				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
+				visible_message("[E.name] \The [src] [pick("дёргается", "двигается хаотично")] и искрит!")
 				var/datum/effect/effect/system/spark_spread/spark_system = new ()
 				spark_system.set_up(5, 0, src)
 				spark_system.attach(src)
@@ -146,7 +146,7 @@
 		if(!(lying || resting))
 			if(limb_pain)
 				emote("scream")
-			custom_emote(VISIBLE_MESSAGE, "collapses!")
+			custom_emote(VISIBLE_MESSAGE, "дёргается!")
 		Weaken(3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
