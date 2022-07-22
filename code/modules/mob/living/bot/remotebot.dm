@@ -94,12 +94,12 @@
 		hit(a)
 
 /obj/item/device/bot_controller
-	name = "remote control"
-	desc = "Used to control something remotely. Even has a tiny screen!"
-	icon_state = "forensic1"
+	name = "пульт управления"
+	desc = "Управляет чем-то. Тут есть экран!"
+	icon = 'lambda/icons/obj/items.dmi'
+	icon_state = "bot_controller"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	item_state = "electronic"
 	var/mob/living/bot/remotebot/bot
 
 /obj/item/device/bot_controller/attack_self(var/mob/user)
@@ -110,11 +110,11 @@
 	if(!(src in user) || !bot)
 		close_browser(user, "window=bot_controller")
 		return
-	var/dat = "<center><TT><b>Remote Control: [bot.name]</b></TT><br>"
-	dat += "Currently Holding: [bot.holding ? bot.holding.name : "Nothing"]<br><br>"
+	var/dat = "<center><meta charset='utf-8'><TT><b>Удалённый контроль: [bot.name]</b></TT><br>"
+	dat += "Инвентарь: [bot.holding ? bot.holding.name : "Ничего"]<br><br>"
 	var/is_looking = (user.client.eye == bot)
-	dat += "<a href='byond://?src=\ref[src];look=[is_looking];'>[is_looking ? "Stop" : "Start"] Looking</a><br>"
-	dat += "<a href='byond://?src=\ref[src];drop=1;'>Drop Item</a><br></center>"
+	dat += "<a href='byond://?src=\ref[src];look=[is_looking];'>[is_looking ? "Прекратить" : "Начать"] смотреть</a><br>"
+	dat += "<a href='byond://?src=\ref[src];drop=1;'>Положить предмет</a><br></center>"
 
 	show_browser(user, dat, "window=bot_controller")
 	onclose(user, "botcontroller")
@@ -132,10 +132,10 @@
 	if(href_list["look"])
 		if(href_list["look"] == "1")
 			usr.reset_view(usr)
-			usr.visible_message("\The [usr] looks up from \the [src]'s screen.")
+			usr.visible_message("\The [usr] смотрит в экран \the [src].")
 		else
 			usr.reset_view(bot)
-			usr.visible_message("\The [usr] looks intently on \the [src]'s screen.")
+			usr.visible_message("\The [usr] не смотрит в экран \the [src].")
 
 	src.interact(usr)
 
