@@ -1,5 +1,6 @@
 /datum/department/medbay
 	name = "Medbay"
+	name_ru_department = "Мед Отсек"
 	flag = MED
 	goals = list(
 		/datum/goal/department/medical_fatalities
@@ -13,10 +14,10 @@
 	..()
 
 /datum/goal/department/medical_fatalities/update_strings()
-	description = "Avoid having more than [max_fatalities] [max_fatalities == 1 ? "fatality" : "fatalities"] this shift."
+	description = "Не допустите смерть более [max_fatalities] [max_fatalities == 1 ? "члена" : "членов"] экипажа."
 
 /datum/goal/department/medical_fatalities/get_summary_value()
-	return " ([GLOB.crew_death_count] death\s so far)"
+	return " (всего [GLOB.crew_death_count] смертей)"
 
 /datum/goal/department/medical_fatalities/check_success()
 	return GLOB.crew_death_count <= max_fatalities

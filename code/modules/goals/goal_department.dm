@@ -1,5 +1,6 @@
 /datum/department
 	var/name
+	var/name_ru_department
 	var/flag
 	var/list/goals
 	var/min_goals = 1
