@@ -16,7 +16,7 @@
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
 
-	station_name  = "\improper СЭВ Факел"
+	station_name  = "\improper ГЭК Факел"
 	station_short = "\improper Факел"
 	dock_name     = "ТБД"
 	boss_name     = "Экспедиционное Коммандование"

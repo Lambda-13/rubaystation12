@@ -13,7 +13,7 @@
 /datum/map/torch/send_welcome()
 	var/obj/effect/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/effect/overmap/visitable/ship/torch)
 
-	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>СЭВ Факел</b> Показания датчика:</font><br>"
+	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>ГЭК Факел</b> Показания датчика:</font><br>"
 	welcome_text += "Отчет создан [stationdate2text()] в [stationtime2text()]</center><br /><br />"
 	welcome_text += "<hr>Текущая система:<br /><b>[torch ? system_name : "Неизвестно"]</b><br /><br>"
 
@@ -46,5 +46,5 @@
 
 		welcome_text += "<hr>"
 
-	post_comm_message("Показания датчика СЭВ Факел", welcome_text)
+	post_comm_message("Показания датчика ГЭК Факел", welcome_text)
 	minor_announcement.Announce(message = "Новое Обновление [GLOB.using_map.company_name] доступно на всех коммуникационных консолях.")
