@@ -1,6 +1,6 @@
 /obj/effect/overmap/visitable/ship/torch
-	name = "SEV Torch"
-	desc = "A frankensteined HNS Mako-class corvette, broadcasting SCGEC codes and the designation \"SEV Torch, HSC-4-13-X\"."
+	name = "ГЭК Факел"
+	desc = "Франкенштейновый корвет класса HNS Mako, передающий коды SCGEC и позывной \"ГЭК Факел, ХАС-4-13-X\"."
 	fore_dir = WEST
 	vessel_mass = 100000
 	burn_delay = 2 SECONDS
@@ -76,8 +76,8 @@
 	)
 
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle
-	name = "Charon"
-	desc = "An SSE-U11 long range shuttle, broadcasting SCGEC codes and the callsign \"Torch-2 Charon\"."
+	name = "Харон"
+	desc = "Шаттл дальнего действия SSE-U11, передающий коды SCGEC и позывной \"Факел-2 Харон\"."
 	shuttle = "Charon"
 	max_speed = 1/(2 SECONDS)
 	burn_delay = 1 SECONDS
@@ -87,8 +87,8 @@
 	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/overmap/visitable/ship/landable/aquila
-	name = "Aquila"
-	desc = "A PM-24 modular transport, broadcasting SCGEC codes and the callsign \"Torch-1 Aquila\"."
+	name = "Аквила"
+	desc = "Модульный шаттл ПМ-24, передающий коды SCGEC и позывной \"Факел-1 Аквила\"."
 	shuttle = "Aquila"
 	vessel_mass = 10000
 	max_speed = 1/(1 SECONDS)
@@ -97,8 +97,8 @@
 	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/overmap/visitable/ship/landable/guppy
-	name = "Guppy"
-	desc = "An SSE-U3 utility pod, broadcasting SCGEC codes and the callsign \"Torch-3 Guppy\"."
+	name = "Гуппи"
+	desc = "Служебный шаттл SSE-U3, передающий коды SCGEC и позывной \"Факел-3 Гуппи\"."
 	shuttle = "Guppy"
 	max_speed = 1/(3 SECONDS)
 	burn_delay = 2 SECONDS
@@ -108,16 +108,16 @@
 	vessel_size = SHIP_SIZE_TINY
 
 /obj/machinery/computer/shuttle_control/explore/aquila
-	name = "aquila control console"
+	name = "консоль управления шаттлом"
 	shuttle_tag = "Aquila"
 	req_access = list(access_aquila_helm)
 
 /obj/machinery/computer/shuttle_control/explore/exploration_shuttle
-	name = "shuttle control console"
+	name = "консоль управления шаттлом"
 	shuttle_tag = "Charon"
 	req_access = list(access_expedition_shuttle_helm)
 
 /obj/machinery/computer/shuttle_control/explore/guppy
-	name = "guppy control console"
+	name = "консоль управления шаттлом"
 	shuttle_tag = "Guppy"
 	req_access = list(access_guppy_helm)

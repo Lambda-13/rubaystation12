@@ -1,6 +1,6 @@
 /datum/map/torch
-	name = "\improper Torch"
-	full_name = "\improper SEV Torch"
+	name = "\improper Факел"
+	full_name = "\improper ГЭК Факел"
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 	config_path = "config/torch_config.txt"
