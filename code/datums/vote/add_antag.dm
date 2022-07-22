@@ -1,5 +1,5 @@
-#define CHOICE_RANDOM "Random"
-#define CHOICE_NONE "None"
+#define CHOICE_RANDOM "Рандом"
+#define CHOICE_NONE "Не надо"
 
 /datum/vote/add_antagonist
 	name = "add antagonist"
@@ -55,7 +55,7 @@
 			// the buffer will already have half an hour added to it, so we'll give it one more
 			transfer_controller.timerbuffer += config.vote_autotransfer_interval
 	else
-		to_world("<b>No antags were added.</b>")
+		to_world("<b>Сегодня без антагонистов.</b>")
 		if(automatic)
 			SSvote.queued_auto_vote = /datum/vote/transfer
 

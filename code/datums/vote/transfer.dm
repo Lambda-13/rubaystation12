@@ -1,10 +1,10 @@
-#define CHOICE_TRANSFER "Initiate crew transfer"
-#define CHOICE_EXTEND "Extend the round ([config.vote_autotransfer_interval / 600] minutes)"
-#define CHOICE_ADD_ANTAG "Add antagonist"
+#define CHOICE_TRANSFER "Заканчиваем"
+#define CHOICE_EXTEND "Продлить раунд (сделующее голосование будет через [config.vote_autotransfer_interval / 600] минут)"
+#define CHOICE_ADD_ANTAG "Добавить антагониста"
 
 /datum/vote/transfer
 	name = "transfer"
-	question = "End the shift?"
+	question = "Заканчиваем смену?"
 
 /datum/vote/transfer/can_run(mob/creator, automatic)
 	if(!(. = ..()))
@@ -17,10 +17,10 @@
 		return //Mods bypass further checks.
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	if (!automatic && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
-		to_chat(creator, "The current alert status is too high to call for a crew transfer!")
+		to_chat(creator, "Текущий статус тревоги слишком высок, чтобы закончить смену так!")
 		return FALSE
 	if(GAME_STATE <= RUNLEVEL_SETUP)
-		to_chat(creator, "The crew transfer button has been disabled!")
+		to_chat(creator, "Зачем? Я не хочу!")
 		return FALSE
 
 /datum/vote/transfer/setup_vote(mob/creator, automatic)
@@ -62,7 +62,7 @@
 		return !isliving(user) || ismouse(user) || isdrone(user) || user.stat == DEAD
 
 /datum/vote/transfer/check_toggle()
-	return config.allow_vote_restart ? "Allowed" : "Disallowed"
+	return config.allow_vote_restart ? "Включено" : "Выключено"
 
 /datum/vote/transfer/toggle(mob/user)
 	if(isadmin(user))

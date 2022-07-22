@@ -1,5 +1,5 @@
-#define CHOICE_RESTART "Restart round"
-#define CHOICE_CONTINUE "Continue playing"
+#define CHOICE_RESTART "Рестарт"
+#define CHOICE_CONTINUE "Продолжаем"
 
 /datum/vote/restart
 	name = "restart"

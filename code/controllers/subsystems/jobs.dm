@@ -534,10 +534,10 @@ SUBSYSTEM_DEF(jobs)
 			W.buckled_mob = H
 			W.add_fingerprint(H)
 
-	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
+	to_chat(H, "<font size = 3><B>Я [alt_title ? alt_title : rank]. [job.total_positions == 1 ? "" : "Иронично"].</B></font>")
 
 	if(job.supervisors)
-		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+		to_chat(H, "<b>Как [alt_title ? alt_title : rank] я должен подчиняться [job.supervisors]. Special circumstances may change this.</b>")
 
 	to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
 

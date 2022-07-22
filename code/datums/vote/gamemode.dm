@@ -1,6 +1,6 @@
 /datum/vote/gamemode
 	name = "game mode"
-	additional_header = "<th>Required Players / Antags</th>"
+	additional_header = "<th>Требуемые игроки/антаги</th>"
 	win_x = 500
 	win_y = 800
 	result_length = 3
@@ -14,7 +14,7 @@
 
 /datum/vote/gamemode/Process()
 	if(GAME_STATE >= RUNLEVEL_GAME)
-		to_world("<b>Voting aborted due to game start.</b>")
+		to_world("<b>Начало раунда остановлено до конца голосования.</b>")
 		return VOTE_PROCESS_ABORT
 	return ..()
 
@@ -52,7 +52,7 @@
 /datum/vote/gamemode/report_result()
 	if(!SSticker.round_progressing) //Unpause any holds. If the vote failed, SSticker is responsible for fielding the result.
 		SSticker.round_progressing = 1
-		to_world("<font color='red'><b>The round will start soon.</b></font>")
+		to_world("<font color='red'><b>Раунд скоро начнётся.</b></font>")
 	if(..())
 		SSticker.gamemode_vote_results = list() //This signals to SSticker that the vote is over but there were no winners.
 		return 1
@@ -65,7 +65,7 @@
 	SSticker.gamemode_vote_results = result.Copy()
 
 /datum/vote/gamemode/check_toggle()
-	return config.allow_vote_mode ? "Allowed" : "Disallowed"
+	return config.allow_vote_mode ? "Включено" : "Выключено"
 
 /datum/vote/gamemode/toggle(mob/user)
 	if(isadmin(user))
