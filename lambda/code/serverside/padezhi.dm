@@ -11,7 +11,7 @@
 
 /client/proc/fuck_pie()
 	set name = "Test Name Sklonenie"
-	set category = "Особенное"
+	set category = "Debug"
 	var/pizdos = input(usr, "ВВЕДИТЕ ХУЙ", "" , "") as text|null
 	if(pizdos)
 		to_chat(src, "Начальное слово: [pizdos]")
