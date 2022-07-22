@@ -404,7 +404,7 @@ var/global/floorIsLava = 0
 	var/datum/feed_network/torch_network = news_network[1] //temp change until the UI can be updated to support switching networks.
 
 	var/dat
-	dat = text("<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
+	dat = text("<HEAD><meta charset='utf-8'><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
 
 	switch(admincaster_screen)
 		if(0)

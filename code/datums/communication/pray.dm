@@ -9,7 +9,6 @@
 	var/image/cross = image('icons/obj/storage.dmi',"bible")
 	for(var/m in GLOB.player_list)
 		var/mob/M = m
-		SSwebhooks.send(WEBHOOK_AHELP, list("text" = "PRAY: [key_name(communicator, 1)]: [message]"))
 		if(!M.client)
 			continue
 		if(M.client.holder && M.client.get_preference_value(/datum/client_preference/staff/show_chat_prayers) == GLOB.PREF_SHOW)
