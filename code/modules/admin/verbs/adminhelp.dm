@@ -134,7 +134,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
 
-	if(admin_number_present <= 0 || admin_number_afk !== 0)
+	if(admin_number_present <= 0 || admin_number_afk > 0)
 		SSwebhooks.send(WEBHOOK_AHELP, list("text" = "ЛС Админам от [usr]: [html_decode(original_msg)] - !![admin_number_afk ? "Все админы АФК ([admin_number_afk])" : "Нет админов онлайн"]!!"))
 	else
 		SSwebhooks.send(WEBHOOK_AHELP, list("text" = "ЛС Админам от [usr]: [html_decode(original_msg)]"))
