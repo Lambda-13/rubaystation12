@@ -211,7 +211,7 @@
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
 	else if(landing.get_fluid_depth() >= FLUID_DEEP)
-		visible_message(SPAN_NOTICE("\The [src] falls into the water!"), SPAN_NOTICE("What a splash!"))
+		visible_message(SPAN_NOTICE("\The [src] falls into the water!"), SPAN_NOTICE("Что за всплеск!"))
 		playsound(src,  'sound/effects/watersplash.ogg', 30, TRUE)
 		return 1
 	else
@@ -219,14 +219,16 @@
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	if(istype(landing, /turf/simulated/open))
-		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
+		visible_message("\The [src] falls through \the [landing]!", "Вы слышите свист воздуха.")
 	else
-		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
+		visible_message("\The [src] slams into \the [landing]!", "Вы слышите, как что-то ударяется о палубу.")
+		playsound(src,  'lambda/sound/effects/bodyfall.ogg', 30, TRUE)
 		if(fall_damage())
 			for(var/mob/living/M in landing.contents)
 				if(M == src)
 					continue
-				visible_message("\The [src] hits \the [M.name]!")
+				visible_message("\The [src] падает на \the [M.name]!")
+
 				M.take_overall_damage(fall_damage())
 
 /atom/movable/proc/fall_damage()
