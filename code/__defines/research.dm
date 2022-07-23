@@ -16,4 +16,4 @@
 #define MECHFAB       FLAG(2)  //Mechfab
 #define CHASSIS       FLAG(3)  //For protolathe, but differently
 
-#define T_BOARD(name)	"circuit board (" + (name) + ")"
+#define T_BOARD(name)	"плата (" + (name) + ")"

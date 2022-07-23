@@ -112,12 +112,12 @@
 		. = TOPIC_REFRESH
 
 /obj/item/stock_parts/circuitboard/cryopodcontrol
-	name = "Circuit board (Cryogenic Oversight Console)"
+	name = "плата (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
 	origin_tech = list(TECH_DATA = 3)
 
 /obj/item/stock_parts/circuitboard/robotstoragecontrol
-	name = "Circuit board (Robotic Storage Console)"
+	name = "плата (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = list(TECH_DATA = 3)
 
@@ -133,7 +133,7 @@
 
 //Cryopods themselves.
 /obj/machinery/cryopod
-	name = "cryogenic freezer"
+	name = "криогенная камера"
 	desc = "A man-sized pod for entering suspended animation."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
@@ -143,10 +143,10 @@
 
 	var/base_icon_state = "body_scanner_0"
 	var/occupied_icon_state = "body_scanner_1"
-	var/on_store_message = "has entered long-term storage."
-	var/on_store_visible_message = "hums and hisses as it moves $occupant$ into storage." // $occupant$ is automatically converted to the occupant's name
-	var/on_store_name = "Cryogenic Oversight"
-	var/on_enter_occupant_message = "You feel cool air surround you. You go numb as your senses turn inward."
+	var/on_store_message = "уходит в глубойкий сон в криогенное хранилище."
+	var/on_store_visible_message = "отправляет $occupant$ в криогенное хранилище." // $occupant$ is automatically converted to the occupant's name
+	var/on_store_name = "Криогенный Автономный Надзор"
+	var/on_enter_occupant_message = "Засыпаю. Похоже надолго. Не чувствую ничего..."
 	var/allow_occupant_types = list(/mob/living/carbon/human)
 	var/disallow_occupant_types = list()
 
@@ -178,23 +178,23 @@
 	)
 
 /obj/machinery/cryopod/robot
-	name = "robotic storage unit"
-	desc = "A storage unit for robots."
+	name = "хранилище роботов"
+	desc = "Для тех кто не из плоти. Позволяет уйти спать."
 	icon = 'icons/obj/robot_storage.dmi'
 	icon_state = "pod_0"
 	base_icon_state = "pod_0"
 	occupied_icon_state = "pod_1"
-	on_store_message = "has entered robotic storage."
-	on_store_name = "Robotic Storage Oversight"
-	on_enter_occupant_message = "The storage unit broadcasts a sleep signal to you. Your systems start to shut down, and you enter low-power mode."
+	on_store_message = "отправлен в хранилище."
+	on_store_name = "Роботизированый Автономный Надзор"
+	on_enter_occupant_message = "Системы отключаются. Переходят в режим ожидания. Засыпаю..."
 	allow_occupant_types = list(/mob/living/silicon/robot)
 	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
 	applies_stasis = 0
 
 /obj/machinery/cryopod/lifepod
-	name = "life pod"
-	desc = "A man-sized pod for entering suspended animation. Dubbed 'cryocoffin' by more cynical spacers, it is pretty barebone, counting on stasis system to keep the victim alive rather than packing extended supply of food or air. Can be ordered with symbols of common religious denominations to be used in space funerals too."
-	on_store_name = "Life Pod Oversight"
+	name = "спасательная капсула"
+	desc = "Капсула размером с человека для входа в анабиоз. Названный более циничными космонавтами «криогроб», он довольно скуден, рассчитывая на систему стазиса, чтобы сохранить жизнь существу, а не на то, чтобы упаковать расширенный запас еды или воздуха. Можно заказать с символикой распространенных религиозных конфессий для использования и на космических похоронах."
+	on_store_name = "Система Спасательной Капсулы"
 	time_till_despawn = 20 MINUTES
 	icon_state = "redpod0"
 	base_icon_state = "redpod0"
@@ -380,7 +380,7 @@
 		// them win or lose based on cryo is silly so we remove the objective.
 		if(O.target == occupant.mind)
 			if(O.owner && O.owner.current)
-				to_chat(O.owner.current, "<span class='warning'>You get the feeling your target is no longer within your reach...</span>")
+				to_chat(O.owner.current, "<span class='warning'>Вы чувствуете, что ваша цель больше не находится в пределах вашей досягаемости...</span>")
 			qdel(O)
 
 	//Handle job slot/tater cleanup.
@@ -430,24 +430,24 @@
 
 /obj/machinery/cryopod/proc/attempt_enter(mob/target, mob/user)
 	if (!user.IsAdvancedToolUser())
-		to_chat(user, SPAN_WARNING("You're too simple to understand how to do that."))
+		to_chat(user, SPAN_WARNING("Я слишком глуп что-бы воспользоваться этим!"))
 		return
 	if (user.incapacitated() || !user.Adjacent(src))
-		to_chat(user, SPAN_WARNING("You're in no position to do that."))
+		to_chat(user, SPAN_WARNING("Я не хочу спать - вдруг я <b>нужен</b>."))
 		return
 	if (!user.Adjacent(target))
-		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		to_chat(user, SPAN_WARNING("\The [target] далеко."))
 		return
 	if (user != target  && target.client)
-		var/response = alert(target, "Enter the [src]?", null, "Yes", "No")
-		if (response != "Yes")
-			to_chat(user, SPAN_WARNING("\The [target] refuses."))
+		var/response = alert(target, "Войти в [skloname(src, VINITELNI, "female")]?", null, "Да", "Нет")
+		if (response != "Да")
+			to_chat(user, SPAN_WARNING("\The [target] отказывается принимать."))
 			return
 	if (user.incapacitated() || !user.Adjacent(src))
-		to_chat(user, SPAN_WARNING("You're in no position to do that."))
+		to_chat(user, SPAN_WARNING("Я не хочу спать - вдруг я <b>нужен</b>."))
 		return
 	if (!user.Adjacent(target))
-		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		to_chat(user, SPAN_WARNING("\The [target] далеко."))
 		return
 	add_fingerprint(user)
 	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -455,7 +455,7 @@
 	if (QDELETED(target))
 		return
 	if (!user.Adjacent(target))
-		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		to_chat(user, SPAN_WARNING("\The [target] далеко."))
 		return
 	set_occupant(target)
 	if (user != target)
@@ -467,10 +467,10 @@
 	if(!check_occupant_allowed(target))
 		return
 	if(occupant)
-		to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
+		to_chat(user, "<span class='notice'>\The [src] занят.</span>")
 		return
 
-	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
+	user.visible_message("<span class='notice'>\The [user] начинает ложить \the [target] в \the [skloname(src, VINITELNI, "female")].</span>", "<span class='notice'>Начинаю ложить \the [target] в \the [skloname(src, VINITELNI, "female")].</span>")
 	attempt_enter(target, user)
 
 /obj/machinery/cryopod/attackby(var/obj/item/G as obj, var/mob/user as mob)
@@ -478,7 +478,7 @@
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
 		if(occupant)
-			to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
+			to_chat(user, "<span class='notice'>\The [src] занят.</span>")
 			return
 
 		if(!ismob(grab.affecting))

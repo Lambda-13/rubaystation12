@@ -168,7 +168,7 @@
 
 
 
-/obj/item/drone_loot_board/name = "circuit board (drone systems)"
+/obj/item/drone_loot_board/name = "плата (drone systems)"
 
 /obj/item/drone_loot_board/desc = "A damaged piece of circuitry that was once part of a combat drone."
 
