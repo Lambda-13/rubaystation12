@@ -6,9 +6,9 @@
 	if (!check_rights(R_FUN)) return
 
 	var/announce_in_discord = FALSE
-	alert(src, "Сообщаем игрокам в дискорд что ты ставишь новую карту?", "", "Да", "Нет")
-		if ("Да")
-			announce_in_discord == TRUE
+	var/cum = alert(src, "Сообщаем игрокам в дискорд что ты ставишь новую карту?", "Мяу", "Да", "Нет")
+	if (cum == "Да")
+		announce_in_discord = TRUE
 
 	var/map = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in SSmapping.map_templates
 	if(!map)
@@ -31,7 +31,7 @@
 		if(template.load(T, centered = TRUE))
 			log_and_message_admins("has placed a map template [log_name].")
 			to_chat(usr, "Successfully placed map template [log_name].")
-			if (announce_in_discord = TRUE)
+			if (announce_in_discord == TRUE)
 				SSwebhooks.send(WEBHOOK_OOC, list("text" = "Внимание: В секторе обнаружен '[log_name]'"))
 		else
 			log_and_message_admins("has failed to place a map template [log_name].")
@@ -50,9 +50,9 @@
 		return
 
 	var/announce_in_discord = FALSE
-	alert(src, "Сообщаем игрокам в дискорд что ты ставишь новую карту?", "", "Да", "Нет")
-		if ("Да")
-			announce_in_discord == TRUE
+	var/cum = alert(src, "Сообщаем игрокам в дискорд что ты ставишь новую карту?", "Мяу", "Да", "Нет")
+	if (cum == "Да")
+		announce_in_discord = TRUE
 
 	var/map = input(usr, "Choose a Map Template to place on a new zlevel","Place Map Template") as null|anything in SSmapping.map_templates
 	if(!map)
@@ -73,7 +73,7 @@
 	if (new_z_centre)
 		log_and_message_admins("has placed a map template [log_name].")
 		to_chat(usr, "Successfully place map template [log_name].")
-		if (announce_in_discord = TRUE)
+		if (announce_in_discord == TRUE)
 			SSwebhooks.send(WEBHOOK_OOC, list("text" = "Внимание: В секторе обнаружен '[log_name]'"))
 	else
 		log_and_message_admins("has failed to place a map template [log_name].")
