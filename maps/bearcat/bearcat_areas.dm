@@ -6,11 +6,19 @@
 	name = "Crew Compartements"
 	icon_state = "crew_quarters"
 
-/area/ship/torch_extra/crew/hallway/port
-	name = "Crew Hallway - Port"
+/area/hallway/torch_extra
+	name = "Коридор"
+	icon_state = "crew_quarters"
 
-/area/ship/torch_extra/crew/hallway/starboard
-	name = "Crew Hallway - Starboard"
+/area/hallway/torch_extra/hallway
+	name = "Коридор - 2 этаж"
+	icon_state = "crew_quarters"
+
+/area/hallway/torch_extra/crew/hallway/port
+	name = "Коридор - Левый борт"
+
+/area/hallway/torch_extra/crew/hallway/starboard
+	name = "Коридор - Правый борт"
 
 /area/ship/torch_extra/crew/kitchen
 	name = "Galley"
@@ -97,7 +105,7 @@
 	icon_state = "amaint"
 	req_access = list(access_bearcat)
 
-/area/ship/torch_extra/maintenance/hallway
+/area/hallway/torch_extra/maintenance
 	name = "Maintenance Corridors"
 
 /area/ship/torch_extra/maintenance/lower
@@ -143,7 +151,7 @@
 /area/ship/torch_extra/maintenance/engine/starboard
 	name = "Starboard Thruster"
 
-/area/ship/torch_extra/command/hallway
+/area/hallway/torch_extra/command
 	name = "Command Deck"
 	icon_state = "centcom"
 	req_access = list(access_bearcat)
