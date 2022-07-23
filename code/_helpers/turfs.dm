@@ -93,10 +93,10 @@
 		return "The spawn location doesn't seem to exist. Please contact an admin via adminhelp if this error persists."
 
 	if(istype(T, /turf/space)) // Space tiles
-		return "Spawn location is open to space."
+		return "Локация спавна в космосе."
 	var/datum/gas_mixture/air = T.return_air()
 	if(!air)
-		return "Spawn location lacks atmosphere."
+		return "Локация спавна без атмосферы."
 	return get_atmosphere_issues(air, 1)
 
 /proc/IsTurfAtmosSafe(var/turf/T)

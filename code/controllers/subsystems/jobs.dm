@@ -166,10 +166,10 @@ SUBSYSTEM_DEF(jobs)
 	var/radlevel = SSradiation.get_rads_at_turf(spawn_turf)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus || radlevel > 0)
-		var/reply = alert(spawner, "Warning. Your selected spawn location seems to have unfavorable conditions. \
-		You may die shortly after spawning. \
-		Spawn anyway? More information: [airstatus] Radiation: [radlevel] IU/s", "Atmosphere warning", "Abort", "Spawn anyway")
-		if(reply == "Abort")
+		var/reply = alert(spawner, "Внимание. На месте появления опасность. \
+		Ты буквально умрёшь через минуту. \
+		Заходим в игру? Подробности: [airstatus] Радиация: [radlevel] IU/s", "Всё пошло по пизде", "Тогда не надо", "ПОГНАЛИ НАХУЙ")
+		if(reply == "Тогда не надо")
 			return FALSE
 		else
 			// Let the staff know, in case the person complains about dying due to this later. They've been warned.
