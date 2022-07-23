@@ -49,11 +49,13 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_formal_name(formal_name)
 	set_job(H ? GetAssignment(H) : "Unset")
 	var/gender_term = "Unset"
+	var/gender_term_ru = "Неизвестно"
 	if(H)
 		var/datum/gender/G = gender_datums[H.get_sex()]
 		if(G)
 			gender_term = gender2text(G.formal_term)
-	set_sex(gender_term)
+			gender_term_ru = gender2text(G.formal_term_ru)
+	set_sex(ender_term_ru)
 	set_age(H ? H.age : 30)
 	set_status(GLOB.default_physical_status)
 	set_species(H ? H.get_species() : SPECIES_HUMAN)
@@ -245,7 +247,7 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 	. |= "Unset"
 	for(var/thing in gender_datums)
 		var/datum/gender/G = gender_datums[thing]
-		. |= gender2text(G.formal_term)
+		. |= gender2text(G.formal_term_ru)
 
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()

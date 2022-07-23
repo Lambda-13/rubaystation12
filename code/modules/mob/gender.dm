@@ -12,6 +12,7 @@ var/global/list/gender_datums = list()
 /datum/gender
 	var/key
 	var/formal_term
+	var/formal_term_ru
 
 	var/He   = "They"
 	var/he   = "they"
@@ -26,9 +27,11 @@ var/global/list/gender_datums = list()
 /datum/gender/plural
 	key  = PLURAL
 	formal_term = "other"
+	formal_term_ru = "оно"
 
 /datum/gender/male
 	key  = MALE
+	formal_term_ru = "он"
 
 	He   = "He"
 	he   = "he"
@@ -42,6 +45,7 @@ var/global/list/gender_datums = list()
 
 /datum/gender/female
 	key  = FEMALE
+	formal_term_ru = "она"
 
 	He   = "She"
 	he   = "she"
@@ -56,6 +60,7 @@ var/global/list/gender_datums = list()
 /datum/gender/neuter
 	key = NEUTER
 	formal_term = "other"
+	formal_term_ru = "оно"
 
 	He   = "It"
 	he   = "it"

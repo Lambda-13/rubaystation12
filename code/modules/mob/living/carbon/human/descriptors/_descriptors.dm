@@ -45,7 +45,7 @@
 	return "[my_gender.He] [my_gender.is]"
 
 /datum/mob_descriptor/proc/get_first_person_message_start()
-	return "You are"
+	return "Я"
 
 /datum/mob_descriptor/proc/get_standalone_value_descriptor(var/check_value)
 	if(isnull(check_value))
