@@ -152,7 +152,7 @@
 	sort_string = "HAACD"
 
 /datum/design/circuit/guestpass
-	name = "консоль гостевых пропусков
+	name = "консоль гостевых пропусков"
 	id = "guestpass"
 	build_path = /obj/item/stock_parts/circuitboard/guestpass
 	sort_string = "HAACE"
